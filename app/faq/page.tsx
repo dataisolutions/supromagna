@@ -50,6 +50,7 @@ export default function FaqPage() {
         subtitle="Tutto quello che ti serve sapere prima di salire in tavola. Se manca qualcosa, ci trovi su WhatsApp."
         variant="alba"
         seed={5}
+        photo="/media/alba-5.jpg"
       />
       <Section>
         <Container className="max-w-3xl">

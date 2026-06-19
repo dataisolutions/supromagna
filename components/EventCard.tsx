@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { SupEvent } from "@/lib/events";
 import { categoryBySlug } from "@/lib/events";
-import { SceneImage, sceneForCategory } from "@/components/SceneImage";
+import { Photo } from "@/components/Photo";
 import { StatusBadge, cn } from "@/components/ui";
 import { Icon } from "@/components/icons";
 
-export function EventCard({ event, seed = 1 }: { event: SupEvent; seed?: number }) {
+export function EventCard({ event }: { event: SupEvent; seed?: number }) {
   const cat = categoryBySlug(event.category);
   return (
     <Link
@@ -13,10 +13,11 @@ export function EventCard({ event, seed = 1 }: { event: SupEvent; seed?: number 
       className="group flex flex-col overflow-hidden rounded-[var(--radius-card)] bg-white ring-1 ring-navy/8 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
-        <SceneImage
-          variant={sceneForCategory(event.category)}
-          seed={seed}
-          className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+        <Photo
+          src={event.photo}
+          alt={`${event.title} — ${cat?.name}`}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute left-3 top-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy backdrop-blur">

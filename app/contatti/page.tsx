@@ -21,6 +21,7 @@ export default function ContattiPage() {
         subtitle="Per info, prenotazioni o semplici curiosità: il modo più veloce è WhatsApp. Ti rispondiamo davvero."
         variant="aperisup"
         seed={9}
+        photo="/media/alba-7.jpg"
       />
 
       <Section>
@@ -68,7 +69,7 @@ export default function ContattiPage() {
                 </span>
                 <span>
                   <span className="block font-semibold text-navy">Instagram</span>
-                  <span className="text-sm text-navy/60">@supromagna · foto e prossimi eventi</span>
+                  <span className="text-sm text-navy/60">{site.instagramHandle} · foto e prossimi eventi</span>
                 </span>
               </a>
               <div className="flex items-center gap-4 rounded-2xl bg-sand/50 p-5 ring-1 ring-navy/8">

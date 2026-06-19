@@ -52,6 +52,7 @@ export default async function CategoryPage({
         subtitle={cat.intro}
         variant={sceneForCategory(cat.slug)}
         seed={6}
+        photo={cat.photo}
       />
 
       <Section>

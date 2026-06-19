@@ -30,6 +30,12 @@ export function Header() {
     };
   }, [open]);
 
+  // Sopra l'hero (non scrollato e drawer chiuso) il testo va in bianco.
+  const onDark = !scrolled && !open;
+  const navLink = onDark
+    ? "text-white/90 hover:bg-white/10 hover:text-white"
+    : "text-navy/80 hover:bg-navy/5 hover:text-navy";
+
   return (
     <header
       className={cn(
@@ -40,13 +46,16 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-6">
-        <Logo />
+        <Logo light={onDark} />
 
         <nav className="hidden items-center gap-1 md:flex">
           <div className="group relative">
             <Link
               href="/eventi-sup"
-              className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-navy/5 hover:text-navy"
+              className={cn(
+                "flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                navLink,
+              )}
             >
               Eventi in SUP
               <Icon.ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
@@ -75,8 +84,8 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:bg-navy/5",
-                pathname === item.href ? "text-coral" : "text-navy/80 hover:text-navy",
+                "rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                pathname === item.href ? (onDark ? "text-sun" : "text-coral") : navLink,
               )}
             >
               {item.label}
@@ -96,7 +105,10 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Chiudi menu" : "Apri menu"}
             aria-expanded={open}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-navy ring-1 ring-navy/10 md:hidden"
+            className={cn(
+              "inline-flex h-10 w-10 items-center justify-center rounded-full ring-1 transition-colors md:hidden",
+              onDark ? "bg-white/15 text-white ring-white/30 backdrop-blur" : "bg-white text-navy ring-navy/10",
+            )}
           >
             {open ? <Icon.Close /> : <Icon.Menu />}
           </button>

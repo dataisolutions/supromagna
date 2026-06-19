@@ -23,6 +23,7 @@ export default function EventiPage() {
         subtitle="Albe, notti di stelle, yoga sull'acqua e brindisi al tramonto. Scegli l'esperienza, lascia i tuoi dati e ti scriviamo su WhatsApp."
         variant="aperisup"
         seed={4}
+        photo="/media/alba-1.jpg"
       />
       <Section>
         <Container>

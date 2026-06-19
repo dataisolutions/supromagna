@@ -36,6 +36,7 @@ export default function AziendePage() {
         subtitle="Attività guidate, accessibili e personalizzabili per team building, incentive, eventi aziendali e gruppi privati. Anche per chi non ha mai fatto SUP."
         variant="aperisup"
         seed={8}
+        photo="/media/alba-7.jpg"
       />
 
       <Section>

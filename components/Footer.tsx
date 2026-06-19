@@ -6,12 +6,12 @@ import { Icon } from "@/components/icons";
 
 export function Footer() {
   return (
-    <footer className="mt-8 border-t border-navy/8 bg-cream-deep">
-      <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-6">
+    <footer className="mt-8 bg-navy text-white/80">
+      <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
           <div>
-            <Logo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-navy/65">
+            <Logo light />
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/65">
               {site.tagline} Esperienze, albe e lezioni in SUP sulla Riviera Romagnola — anche se
               parti da zero.
             </p>
@@ -26,13 +26,13 @@ export function Footer() {
           </div>
 
           <nav aria-label="Eventi">
-            <p className="eyebrow text-teal">Eventi</p>
+            <p className="eyebrow text-sun">Eventi</p>
             <ul className="mt-4 space-y-2.5">
               {categories.map((c) => (
                 <li key={c.slug}>
                   <Link
                     href={`/eventi-sup/${c.slug}`}
-                    className="text-sm text-navy/70 transition-colors hover:text-coral"
+                    className="text-sm text-white/70 transition-colors hover:text-sun"
                   >
                     {c.name}
                   </Link>
@@ -42,20 +42,20 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Sito">
-            <p className="eyebrow text-teal">Esplora</p>
+            <p className="eyebrow text-sun">Esplora</p>
             <ul className="mt-4 space-y-2.5">
               {mainNav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-navy/70 transition-colors hover:text-coral"
+                    className="text-sm text-white/70 transition-colors hover:text-sun"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/contatti" className="text-sm text-navy/70 transition-colors hover:text-coral">
+                <Link href="/contatti" className="text-sm text-white/70 transition-colors hover:text-sun">
                   Contatti
                 </Link>
               </li>
@@ -63,32 +63,32 @@ export function Footer() {
           </nav>
 
           <div>
-            <p className="eyebrow text-teal">Resta in contatto</p>
-            <ul className="mt-4 space-y-3 text-sm text-navy/70">
+            <p className="eyebrow text-sun">Resta in contatto</p>
+            <ul className="mt-4 space-y-3 text-sm text-white/70">
               <li className="flex items-center gap-2">
                 <Icon.Pin className="h-4 w-4 text-coral" /> {site.baseLocation}
               </li>
               <li>
-                <a href={`mailto:${site.email}`} className="flex items-center gap-2 hover:text-coral">
+                <a href={`mailto:${site.email}`} className="flex items-center gap-2 hover:text-sun">
                   <Icon.Mail className="h-4 w-4 text-coral" /> {site.email}
                 </a>
               </li>
               <li>
-                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-coral">
-                  <Icon.Camera className="h-4 w-4 text-coral" /> @supromagna
+                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-sun">
+                  <Icon.Camera className="h-4 w-4 text-coral" /> {site.instagramHandle}
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-navy/8 pt-6 text-xs text-navy/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name} — {site.shortName}. Tutti i diritti riservati.
           </p>
           <p className="flex flex-wrap gap-x-4 gap-y-1">
-            <Link href="/privacy" className="hover:text-coral">Privacy</Link>
-            <Link href="/faq" className="hover:text-coral">FAQ</Link>
+            <Link href="/privacy" className="hover:text-sun">Privacy</Link>
+            <Link href="/faq" className="hover:text-sun">FAQ</Link>
             <span>P.IVA da inserire</span>
           </p>
         </div>

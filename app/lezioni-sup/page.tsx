@@ -43,6 +43,7 @@ export default function LezioniPage() {
         subtitle="Lezioni individuali e di gruppo con istruttori certificati. Per principianti che vogliono sicurezza in acqua e per chi vuole migliorare la tecnica."
         variant="yoga"
         seed={3}
+        photo="/media/alba-3.jpg"
       />
 
       <Section>

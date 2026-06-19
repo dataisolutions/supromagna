@@ -22,7 +22,7 @@
   --color-foreground: var(--color-navy);
 
   /* Tipografia */
-  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-display: var(--font-baloo), ui-rounded, "Segoe UI", system-ui, sans-serif;
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
   /* Raggi */

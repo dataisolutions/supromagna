@@ -18,11 +18,13 @@ export const site = {
     "Esperienze in SUP sulla Riviera Romagnola: albe in mare, uscite sotto le stelle, yoga e aperitivi galleggianti. Eventi guidati, adatti anche a chi parte da zero.",
 
   // Da confermare col cliente — placeholder operativi
-  whatsappNumber: "393000000000", // formato internazionale senza "+", senza spazi
-  email: "ciao@supromagna.com",
-  instagram: "https://instagram.com/supromagna",
-  founderName: "Elia Venturi", // ⚠️ confermare "Lia" vs "Elia"
+  whatsappNumber: "393000000000", // ⚠️ placeholder — inserire il numero WhatsApp ufficiale
+  email: "ciao@supromagna.com", // ⚠️ confermare email ufficiale
+  instagram: "https://instagram.com/functionalsuptribe",
+  instagramHandle: "@functionalsuptribe",
+  founderName: "Elia Venturi", // confermato dai materiali ufficiali (post "Diventa istruttore con Elia Venturi")
   baseLocation: "Cesenatico, Riviera Romagnola",
+  partners: ["Adriatico 62", "Stazione del Mare", "Bagno Kamoke"],
 };
 
 /** Costruisce un link WhatsApp wa.me con messaggio precompilato. */

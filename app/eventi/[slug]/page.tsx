@@ -8,7 +8,7 @@ import {
 } from "@/lib/events";
 import { site, whatsappLink } from "@/lib/site";
 import { Container, Button, StatusBadge } from "@/components/ui";
-import { SceneImage, sceneForCategory } from "@/components/SceneImage";
+import { Photo } from "@/components/Photo";
 import { Icon } from "@/components/icons";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { BookingForm } from "@/components/BookingForm";
@@ -101,8 +101,8 @@ export default async function EventPage({
       {/* ===== Above the fold ===== */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <SceneImage variant={sceneForCategory(event.category)} seed={9} className="h-full w-full" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/45 via-navy/30 to-cream" />
+          <Photo src={event.photo} alt={event.title} priority sizes="100vw" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/65 via-navy/45 to-cream" />
         </div>
         <Container className="relative pb-10 pt-14 sm:pb-16 sm:pt-20">
           <div className="flex flex-wrap items-center gap-2">

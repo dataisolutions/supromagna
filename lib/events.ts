@@ -26,6 +26,7 @@ export interface Category {
   intro: string; // paragrafo introduttivo pagina categoria
   emoji: string;
   filterLabel: string; // etichetta chip nel listing
+  photo: string; // foto reale per la pagina categoria
 }
 
 export interface TimelineStep {
@@ -59,6 +60,7 @@ export interface SupEvent {
   locationName: string;
   locationAddress: string;
   googleMapsUrl: string;
+  photo: string; // foto reale dell'evento
   descriptionShort: string;
   experienceStory: string;
   difficulty: string;
@@ -90,6 +92,7 @@ export const categories: Category[] = [
       "Esci con la tavola quando il cielo è ancora scuro e guardi il sole salire dall'acqua, in silenzio, col gruppo. È l'esperienza che ci ha fatti innamorare del mare di Romagna — e quella da cui partono quasi tutti.",
     emoji: "🌅",
     filterLabel: "Alba",
+    photo: "/media/alba-1.jpg",
   },
   {
     slug: "astro-sup",
@@ -100,6 +103,7 @@ export const categories: Category[] = [
       "Quando cala il buio l'Adriatico diventa silenzioso e profondo. Usciamo con luci e guida, alziamo lo sguardo e ci godiamo il cielo lontano dalle luci della costa. Notti di stelle cadenti comprese.",
     emoji: "✨",
     filterLabel: "Notturni",
+    photo: "/media/alba-6.jpg",
   },
   {
     slug: "yoga-sup",
@@ -110,6 +114,7 @@ export const categories: Category[] = [
       "Una pratica dolce sulla tavola, cullati dal mare. Niente performance: solo respiro, equilibrio e la libertà di ridere quando perdi la posa. Adatta a tutti i livelli, istruttori certificati al tuo fianco.",
     emoji: "🧘",
     filterLabel: "Yoga / Pilates",
+    photo: "/media/alba-3.jpg",
   },
   {
     slug: "aperisup",
@@ -120,6 +125,7 @@ export const categories: Category[] = [
       "L'uscita più leggera e social: si pagaia verso il tramonto, ci si ferma e si brinda. Perfetta per gruppi di amici, coppie e per chi vuole provare il SUP senza prendersi troppo sul serio.",
     emoji: "🍹",
     filterLabel: "Aperitivi",
+    photo: "/media/alba-7.jpg",
   },
   {
     slug: "eventi-speciali",
@@ -130,6 +136,7 @@ export const categories: Category[] = [
       "Lune piene, festival, collaborazioni e ricorrenze: gli eventi speciali nascono per una data sola e di solito vanno sold out in fretta. Tieni d'occhio questa pagina (e Instagram).",
     emoji: "🎉",
     filterLabel: "Speciali",
+    photo: "/media/alba-4.jpg",
   },
 ];
 
@@ -165,9 +172,10 @@ export const events: SupEvent[] = [
     startTime: "05:00",
     sunriseTime: "05:34",
     endTime: "06:30",
-    locationName: "Bagno Adriatico",
+    locationName: "Adriatico 62",
     locationAddress: "Cesenatico (FC)",
     googleMapsUrl: "https://maps.google.com/?q=Cesenatico",
+    photo: "/media/alba-1.jpg",
     descriptionShort:
       "La prima alba dell'estate, dall'acqua. Briefing, uscita guidata e il sole che sale dal mare mentre il resto della Riviera dorme.",
     experienceStory:
@@ -187,7 +195,7 @@ export const events: SupEvent[] = [
     ],
     breakfastStatus: "opzionale",
     breakfastDescription:
-      "Dopo l'uscita puoi fermarti per la colazione al Bagno Adriatico: cornetto, caffè e spremuta. Da aggiungere in fase di prenotazione (a partire da 6€).",
+      "Dopo l'uscita puoi fermarti per la colazione all'Adriatico 62: cornetto, caffè e spremuta. Da aggiungere in fase di prenotazione (a partire da 6€).",
     tableOptions: [
       { name: "Tavola singola", forWho: "Per chi vuole la propria tavola e un po' di autonomia.", price: "35€" },
       { name: "Tavola doppia", forWho: "Per coppie o per chi preferisce condividere l'esperienza.", price: "60€ in due" },
@@ -231,6 +239,7 @@ export const events: SupEvent[] = [
     locationName: "Bagno Adriatico",
     locationAddress: "Cesenatico (FC)",
     googleMapsUrl: "https://maps.google.com/?q=Cesenatico",
+    photo: "/media/alba-5.jpg",
     descriptionShort:
       "L'alba di metà estate, con il mare caldo e la luce lunga. Stessa magia, acqua ancora più dolce.",
     experienceStory:
@@ -291,6 +300,7 @@ export const events: SupEvent[] = [
     locationName: "Spiaggia di Ponente",
     locationAddress: "Cesenatico (FC)",
     googleMapsUrl: "https://maps.google.com/?q=Cesenatico+Ponente",
+    photo: "/media/alba-6.jpg",
     descriptionShort:
       "Pagaia sotto le stelle cadenti nella notte più magica dell'estate. Tavole con luce, mare nero, cielo aperto.",
     experienceStory:
@@ -349,6 +359,7 @@ export const events: SupEvent[] = [
     locationName: "Bagno Milano",
     locationAddress: "Rimini (RN)",
     googleMapsUrl: "https://maps.google.com/?q=Rimini+spiaggia",
+    photo: "/media/alba-3.jpg",
     descriptionShort:
       "Pratica yoga dolce sulla tavola, cullata dal mare calmo del mattino. Respiro, equilibrio e un sorriso quando cadi.",
     experienceStory:
@@ -406,6 +417,7 @@ export const events: SupEvent[] = [
     locationName: "Bagno Tiki",
     locationAddress: "Milano Marittima (RA)",
     googleMapsUrl: "https://maps.google.com/?q=Milano+Marittima",
+    photo: "/media/alba-7.jpg",
     descriptionShort:
       "Si pagaia verso il tramonto, ci si ferma e si brinda sull'acqua. L'uscita più social dell'estate.",
     experienceStory:
@@ -463,6 +475,7 @@ export const events: SupEvent[] = [
     locationName: "Spiaggia di Levante",
     locationAddress: "Cesenatico (FC)",
     googleMapsUrl: "https://maps.google.com/?q=Cesenatico+Levante",
+    photo: "/media/alba-2.jpg",
     descriptionShort:
       "Un'unica data per pagaiare sotto la luna piena di fine estate, con la sua scia d'argento sull'acqua.",
     experienceStory:

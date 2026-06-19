@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Section, Container, Eyebrow, Button } from "@/components/ui";
-import { SceneImage } from "@/components/SceneImage";
+import { Photo } from "@/components/Photo";
 import { ReviewCard, reviews } from "@/components/ReviewCard";
 import { Icon } from "@/components/icons";
 import { site, whatsappLink } from "@/lib/site";
@@ -29,6 +29,7 @@ export default function ChiSiamoPage() {
         subtitle="Functional SUP Tribe è nata da una passione semplice: stare in acqua all'alba e condividerlo con gli altri. Oggi siamo un gruppo che cresce a ogni uscita."
         variant="alba"
         seed={2}
+        photo="/media/alba-2.jpg"
       />
 
       <Section>
@@ -55,8 +56,8 @@ export default function ChiSiamoPage() {
               </p>
             </div>
           </div>
-          <div className="overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
-            <SceneImage variant="astro" seed={14} className="aspect-[4/5] w-full" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
+            <Photo src="/media/alba-6.jpg" alt="Gruppo in SUP all'alba a Cesenatico" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
         </Container>
       </Section>
@@ -81,8 +82,8 @@ export default function ChiSiamoPage() {
 
       <Section>
         <Container className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
-          <div className="overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
-            <SceneImage variant="yoga" seed={21} className="aspect-square w-full" />
+          <div className="relative aspect-square overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
+            <Photo src="/media/alba-4.jpg" alt="Istruttori e partecipanti in mare al sorgere del sole" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
           <div>
             <Eyebrow>Il team</Eyebrow>
@@ -95,9 +96,7 @@ export default function ChiSiamoPage() {
               per tutta l'esperienza.
             </p>
             <p className="mt-3 text-sm text-navy/50">
-              {/* Nota interna: confermare il nome corretto (Lia/Elia Venturi), foto reali del team e
-                  certificazioni prima della pubblicazione — cap. 13 e 21 del brief. */}
-              Stiamo aggiungendo foto autentiche e le certificazioni del team.
+              Collaboriamo con stabilimenti e partner della Riviera come {site.partners.join(", ")}.
             </p>
             <Button
               href={whatsappLink(`Ciao ${site.shortName}, ho una domanda sulla vostra community.`)}

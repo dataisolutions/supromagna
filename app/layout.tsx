@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Baloo_2, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/BottomNav";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const baloo = Baloo_2({
+  variable: "--font-baloo",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -70,7 +69,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="it" className={`${fraunces.variable} ${jakarta.variable} h-full`}>
+    <html lang="it" className={`${baloo.variable} ${jakarta.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-cream text-navy">
         <script
           type="application/ld+json"

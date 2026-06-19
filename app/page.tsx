@@ -11,7 +11,7 @@ import { EventCard } from "@/components/EventCard";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ReviewCard, reviews } from "@/components/ReviewCard";
 import { FAQAccordion } from "@/components/FAQAccordion";
-import { SceneImage, sceneForCategory } from "@/components/SceneImage";
+import { Photo } from "@/components/Photo";
 import { Icon } from "@/components/icons";
 
 const whyItems = [
@@ -44,8 +44,11 @@ export default function HomePage() {
     <>
       {/* ===== Sezione 1 — Hero con prossimo evento ===== */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 sky-gradient" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/10 via-transparent to-cream" aria-hidden="true" />
+        <div className="absolute inset-0">
+          <Photo src="/media/alba-1.jpg" alt="" priority sizes="100vw" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-navy/75 via-navy/45 to-coral/35" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream" aria-hidden="true" />
         <Container className="relative grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="animate-[rise_0.9s_ease]">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/85 px-3.5 py-1.5 text-xs font-semibold text-navy backdrop-blur">
@@ -55,7 +58,7 @@ export default function HomePage() {
             <h1 className="mt-5 font-display text-[2.6rem] font-semibold leading-[1.04] text-white drop-shadow-sm sm:text-6xl">
               Vivi la Romagna
               <br />
-              <span className="italic text-sun">dal mare.</span>
+              <span className="text-sun">dal mare.</span>
             </h1>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-white/90">
               Albe, stelle e momenti speciali in SUP sulla Riviera Romagnola. Esperienze guidate,
@@ -78,7 +81,7 @@ export default function HomePage() {
           <div className="animate-[rise_1.1s_ease]">
             <div className="overflow-hidden rounded-[var(--radius-card)] bg-white shadow-[var(--shadow-lift)]">
               <div className="relative aspect-[16/11]">
-                <SceneImage variant={sceneForCategory(featured.category)} seed={7} className="h-full w-full" />
+                <Photo src={featured.photo} alt={featured.title} sizes="(max-width: 1024px) 100vw, 45vw" />
                 <div className="absolute left-4 top-4 flex gap-2">
                   <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy backdrop-blur">
                     {featCat?.emoji} {featCat?.name}
@@ -163,8 +166,8 @@ export default function HomePage() {
       {/* ===== Sezione 4 — Cos'è Functional SUP Tribe ===== */}
       <Section>
         <Container className="grid items-center gap-10 lg:grid-cols-2">
-          <div className="relative overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
-            <SceneImage variant="alba" seed={11} className="aspect-[4/3] w-full" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lift)]">
+            <Photo src="/media/alba-4.jpg" alt="Alba in SUP sulla Riviera Romagnola" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
           <div>
             <Eyebrow>Chi siamo</Eyebrow>
