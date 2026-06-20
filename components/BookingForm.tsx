@@ -33,6 +33,7 @@ export function BookingForm({
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [meta, setMeta] = useState({ page: "", utmSource: "", utmCampaign: "" });
+  const [numPeople, setNumPeople] = useState(1);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -119,10 +120,19 @@ export function BookingForm({
 
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Quanti siete?" htmlFor="people" icon={<Icon.Users className="h-4 w-4 text-coral" />}>
-            <input id="people" name="people" type="number" min={1} max={20} defaultValue={1} className={inputCls} />
+            <input
+              id="people"
+              name="people"
+              type="number"
+              min={1}
+              max={10}
+              value={numPeople}
+              onChange={(e) => setNumPeople(Math.min(10, Math.max(1, Number(e.target.value))))}
+              className={inputCls}
+            />
           </Field>
           <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />}>
-            <input id="tables" name="tables" type="number" min={1} max={20} placeholder="Decidiamo insieme" className={inputCls} />
+            <input id="tables" name="tables" type="number" min={1} max={numPeople} placeholder="Decidiamo insieme" className={inputCls} />
           </Field>
         </div>
 
