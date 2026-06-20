@@ -54,6 +54,17 @@
   to { transform: translateX(-50%); }
 }
 
+/* Pulse d'attenzione sottile per la CTA del banner (solo transform, GPU). */
+@keyframes pulseScale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-pulse-scale {
+  animation: pulseScale 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
