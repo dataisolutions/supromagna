@@ -38,18 +38,18 @@ export function BottomNav() {
       {showBanner && (
         <Link
           href={`/eventi/${event.slug}#prenota`}
-          className="flex items-stretch overflow-hidden bg-[#eaf2fa] text-navy shadow-[0_-8px_24px_-14px_rgba(7,59,76,0.35)]"
+          className="flex items-stretch overflow-hidden bg-navy text-white shadow-[0_-8px_24px_-14px_rgba(7,59,76,0.45)]"
           aria-label={`Prossima alba ${shortDate} — prenota ora`}
         >
-          <span className="flex min-w-0 flex-1 flex-col justify-center bg-gradient-to-r from-[#e8f1fa] via-[#f5f1ea] to-[#fdeede] py-2.5 pl-4 pr-3">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-teal">
+          <span className="flex min-w-0 flex-1 flex-col justify-center bg-navy py-2.5 pl-4 pr-3">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-sun">
               Prossima alba
             </span>
-            <span className="truncate font-display text-[15px] font-bold leading-tight text-navy">
+            <span className="truncate font-display text-[15px] font-bold leading-tight text-white">
               {shortDate}
             </span>
           </span>
-          <span className="flex shrink-0 items-center bg-navy px-5 font-semibold text-white">
+          <span className="flex shrink-0 items-center bg-coral px-5 font-semibold text-white">
             <span className="inline-block animate-pulse-scale">Prenota ora</span>
           </span>
         </Link>
