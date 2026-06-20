@@ -60,6 +60,7 @@ export function BookingForm({
     const phone = String(data.get("phone") ?? "");
     const email = String(data.get("email") ?? "");
     const people = String(data.get("people") ?? "1");
+    const tables = String(data.get("tables") ?? "");
     const table = String(data.get("table") ?? "");
     const notes = String(data.get("notes") ?? "");
 
@@ -71,6 +72,7 @@ export function BookingForm({
       `Telefono: ${phone}`,
       email && `Email: ${email}`,
       `Partecipanti: ${people}`,
+      tables && `Tavole: ${tables}`,
       table && `Preferenza tavola: ${table}`,
       notes && `Note: ${notes}`,
     ].filter(Boolean);
@@ -119,22 +121,26 @@ export function BookingForm({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Quanti siete?" htmlFor="people">
+          <Field label="Quanti siete?" htmlFor="people" icon={<Icon.Users className="h-4 w-4 text-coral" />}>
             <input id="people" name="people" type="number" min={1} max={20} defaultValue={1} className={inputCls} />
           </Field>
-          {tableOptions && tableOptions.length > 0 && (
-            <Field label="Preferenza tavola" htmlFor="table" optional>
-              <select id="table" name="table" className={inputCls} defaultValue="">
-                <option value="">Decidiamo insieme</option>
-                {tableOptions.map((t) => (
-                  <option key={t.name} value={t.name}>
-                    {t.name}
-                  </option>
-                ))}
-              </select>
-            </Field>
-          )}
+          <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />} optional>
+            <input id="tables" name="tables" type="number" min={1} max={20} placeholder="Decidiamo insieme" className={inputCls} />
+          </Field>
         </div>
+
+        {tableOptions && tableOptions.length > 0 && (
+          <Field label="Preferenza tavola" htmlFor="table" icon={<Icon.Board className="h-4 w-4 text-coral" />} optional>
+            <select id="table" name="table" className={inputCls} defaultValue="">
+              <option value="">Decidiamo insieme</option>
+              {tableOptions.map((t) => (
+                <option key={t.name} value={t.name}>
+                  {t.name}
+                </option>
+              ))}
+            </select>
+          </Field>
+        )}
 
         <Field label="Note" htmlFor="notes" optional>
           <textarea
@@ -179,16 +185,19 @@ function Field({
   label,
   htmlFor,
   optional,
+  icon,
   children,
 }: {
   label: string;
   htmlFor: string;
   optional?: boolean;
+  icon?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <div>
       <label htmlFor={htmlFor} className="mb-1.5 flex items-center gap-1.5 text-sm font-medium text-navy">
+        {icon}
         {label}
         {optional && <span className="text-xs font-normal text-navy/40">(facoltativo)</span>}
       </label>

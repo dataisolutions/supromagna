@@ -30,19 +30,15 @@ export function Header() {
     };
   }, [open]);
 
-  // Sopra l'hero (non scrollato e drawer chiuso) il testo va in bianco.
-  const onDark = !scrolled && !open;
-  const navLink = onDark
-    ? "text-white/90 hover:bg-white/10 hover:text-white"
-    : "text-navy/80 hover:bg-navy/5 hover:text-navy";
+  // Header sempre in versione chiara con elementi scuri (navy), per leggibilità.
+  const onDark: boolean = false;
+  const navLink = "text-navy/80 hover:bg-navy/5 hover:text-navy";
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-cream/85 backdrop-blur-md shadow-[0_1px_0_rgba(7,59,76,0.06)]"
-          : "bg-transparent",
+        "sticky top-0 z-50 bg-cream/90 backdrop-blur-md transition-shadow duration-300",
+        scrolled ? "shadow-[0_2px_12px_-6px_rgba(7,59,76,0.2)]" : "shadow-[0_1px_0_rgba(7,59,76,0.06)]",
       )}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-6">

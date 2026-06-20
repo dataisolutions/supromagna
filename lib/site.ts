@@ -18,7 +18,7 @@ export const site = {
     "Esperienze in SUP sulla Riviera Romagnola: albe in mare, uscite sotto le stelle, yoga e aperitivi galleggianti. Eventi guidati, adatti anche a chi parte da zero.",
 
   // Da confermare col cliente — placeholder operativi
-  whatsappNumber: "393000000000", // ⚠️ placeholder — inserire il numero WhatsApp ufficiale
+  whatsappNumber: "393921154499", // numero WhatsApp ufficiale
   email: "ciao@supromagna.com", // ⚠️ confermare email ufficiale
   instagram: "https://instagram.com/functionalsuptribe",
   instagramHandle: "@functionalsuptribe",
