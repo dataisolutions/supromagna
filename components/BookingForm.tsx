@@ -28,7 +28,6 @@ export function BookingForm({
   eventTitle,
   eventDate,
   eventSlug,
-  tableOptions,
   className,
 }: BookingFormProps) {
   const router = useRouter();
@@ -61,7 +60,6 @@ export function BookingForm({
     const email = String(data.get("email") ?? "");
     const people = String(data.get("people") ?? "1");
     const tables = String(data.get("tables") ?? "");
-    const table = String(data.get("table") ?? "");
     const notes = String(data.get("notes") ?? "");
 
     const lines = [
@@ -73,7 +71,6 @@ export function BookingForm({
       email && `Email: ${email}`,
       `Partecipanti: ${people}`,
       tables && `Tavole: ${tables}`,
-      table && `Preferenza tavola: ${table}`,
       notes && `Note: ${notes}`,
     ].filter(Boolean);
 
@@ -124,23 +121,10 @@ export function BookingForm({
           <Field label="Quanti siete?" htmlFor="people" icon={<Icon.Users className="h-4 w-4 text-coral" />}>
             <input id="people" name="people" type="number" min={1} max={20} defaultValue={1} className={inputCls} />
           </Field>
-          <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />} optional>
+          <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />}>
             <input id="tables" name="tables" type="number" min={1} max={20} placeholder="Decidiamo insieme" className={inputCls} />
           </Field>
         </div>
-
-        {tableOptions && tableOptions.length > 0 && (
-          <Field label="Preferenza tavola" htmlFor="table" icon={<Icon.Board className="h-4 w-4 text-coral" />} optional>
-            <select id="table" name="table" className={inputCls} defaultValue="">
-              <option value="">Decidiamo insieme</option>
-              {tableOptions.map((t) => (
-                <option key={t.name} value={t.name}>
-                  {t.name}
-                </option>
-              ))}
-            </select>
-          </Field>
-        )}
 
         <Field label="Note" htmlFor="notes" optional>
           <textarea
