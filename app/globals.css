@@ -59,6 +59,14 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Testi leggermente più grandi su mobile per dare più risalto.
+   Scala in modo proporzionale tipografia e spaziature (rem). */
+@media (max-width: 639.98px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-navy);
