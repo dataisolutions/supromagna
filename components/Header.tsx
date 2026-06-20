@@ -35,6 +35,7 @@ export function Header() {
   const navLink = "text-navy/80 hover:bg-navy/5 hover:text-navy";
 
   return (
+    <>
     <header
       className={cn(
         "sticky top-0 z-50 bg-cream/90 backdrop-blur-md transition-shadow duration-300",
@@ -110,11 +111,12 @@ export function Header() {
           </button>
         </div>
       </div>
+    </header>
 
-      {/* Drawer mobile */}
+      {/* Drawer mobile — fuori dall'header per non essere ancorato al backdrop-filter */}
       {open && (
-        <div className="fixed inset-0 top-[64px] z-40 md:hidden">
-          <div className="h-full overflow-y-auto bg-cream px-5 pb-24 pt-4 animate-[rise_0.3s_ease]">
+        <div className="fixed inset-x-0 bottom-0 top-[64px] z-[60] md:hidden">
+          <div className="h-full overflow-y-auto bg-cream px-5 pb-28 pt-4 animate-[rise_0.3s_ease]">
             <p className="eyebrow text-teal mb-2">Eventi in SUP</p>
             <div className="grid grid-cols-1 gap-2">
               {categories.map((c) => (
@@ -154,6 +156,6 @@ export function Header() {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }
