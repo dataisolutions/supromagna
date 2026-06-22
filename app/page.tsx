@@ -65,11 +65,11 @@ export default function HomePage() {
               adatte anche a chi non è mai salito su una tavola.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button href={whatsappLink(heroMsg)} external variant="primary" size="lg">
-                <Icon.Whatsapp /> Ottieni info su WhatsApp
+              <Button href="#prossimi-eventi" variant="primary" size="lg">
+                Vedi eventi <Icon.ArrowRight className="h-4 w-4" />
               </Button>
-              <Button href={`/eventi/${featured.slug}`} variant="secondary" size="lg">
-                Scopri i dettagli
+              <Button href={whatsappLink(heroMsg)} external variant="secondary" size="lg">
+                <Icon.Whatsapp /> Ottieni info su WhatsApp
               </Button>
             </div>
             <p className="mt-5 flex items-center gap-2 text-sm text-white/80">
@@ -108,7 +108,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Sezione 2 — Prossimi eventi ===== */}
-      <Section>
+      <Section id="prossimi-eventi">
         <Container>
           <div className="flex items-end justify-between gap-4">
             <div>
