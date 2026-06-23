@@ -25,7 +25,9 @@ export default function ContattiPage() {
       />
 
       <Section>
-        <Container className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+        <Container className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-start">
+          <BookingForm variant="contatti" className="lg:sticky lg:top-24" />
+
           <div>
             <Eyebrow>Come raggiungerci</Eyebrow>
             <h2 className="mt-2 font-display text-3xl font-semibold text-navy sm:text-4xl">
@@ -83,8 +85,6 @@ export default function ContattiPage() {
               </div>
             </div>
           </div>
-
-          <BookingForm variant="contatti" className="lg:sticky lg:top-24" />
         </Container>
       </Section>
     </>
