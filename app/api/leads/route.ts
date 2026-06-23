@@ -136,14 +136,6 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = (await response.json().catch(() => null)) as { ok?: unknown } | null;
-    if (result?.ok !== true) {
-      console.error("Make non ha confermato il salvataggio del lead.");
-      return Response.json(
-        { error: "Non siamo riusciti a confermare i dati. Riprova tra poco." },
-        { status: 502, headers },
-      );
-    }
   } catch (error) {
     console.error("Errore di connessione a Make.", error instanceof Error ? error.message : "unknown");
     return Response.json(
