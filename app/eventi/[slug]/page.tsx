@@ -6,7 +6,7 @@ import {
   categoryBySlug,
   upcomingEvents,
 } from "@/lib/events";
-import { site, whatsappLink } from "@/lib/site";
+import { site } from "@/lib/site";
 import { Container, Button, StatusBadge } from "@/components/ui";
 import { Photo } from "@/components/Photo";
 import { Icon } from "@/components/icons";
@@ -50,8 +50,6 @@ export default async function EventPage({
 
   const cat = categoryBySlug(event.category);
   const others = upcomingEvents().filter((e) => e.slug !== event.slug).slice(0, 3);
-  const waMsg = `Ciao ${site.shortName}, vorrei informazioni per "${event.title}" (${event.dateLabel}).`;
-
   const quickFacts = [
     { icon: Icon.Calendar, label: "Data", value: event.dateLabel },
     { icon: Icon.Clock, label: "Ritrovo", value: event.meetingTime },
@@ -125,9 +123,6 @@ export default async function EventPage({
           <div className="mt-6 flex flex-wrap gap-3">
             <Button href="#prenota" variant="primary" size="lg">
               Prenota questo evento
-            </Button>
-            <Button href={whatsappLink(waMsg)} external variant="whatsapp" size="lg">
-              <Icon.Whatsapp /> Info su WhatsApp
             </Button>
           </div>
         </Container>
@@ -285,18 +280,15 @@ export default async function EventPage({
             Vuoi partecipare a {event.title}?
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-white/90">
-            Lascia i tuoi dati e ti mandiamo tutte le informazioni su WhatsApp per completare la prenotazione.
+            Lascia i tuoi dati, poi completa l'acquisto sulla pagina di pagamento sicura Stripe.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Button href="#prenota" variant="secondary" size="lg">Compila il modulo</Button>
-            <Button href={whatsappLink(waMsg)} external variant="whatsapp" size="lg">
-              <Icon.Whatsapp /> Scrivici ora
-            </Button>
           </div>
         </Container>
       </section>
 
-      <StickyCTA priceFrom={event.priceFrom} whatsappMessage={waMsg} />
+      <StickyCTA priceFrom={event.priceFrom} />
     </>
   );
 }

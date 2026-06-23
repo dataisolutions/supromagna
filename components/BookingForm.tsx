@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { site, whatsappLink } from "@/lib/site";
 import { Icon } from "@/components/icons";
@@ -18,7 +18,7 @@ interface BookingFormProps {
 }
 
 const labels: Record<Variant, { submit: string; intro: string }> = {
-  event: { submit: "Invia e apri WhatsApp", intro: "Lascia i tuoi dati: ti scriviamo su WhatsApp con tutte le info per confermare il posto." },
+  event: { submit: "Continua al pagamento", intro: "Inserisci i tuoi dati: registriamo la richiesta e ti portiamo al pagamento sicuro su Stripe." },
   lezioni: { submit: "Richiedi la tua lezione", intro: "Raccontaci il tuo livello e quando vorresti: ti rispondiamo su WhatsApp con una proposta." },
   contatti: { submit: "Invia richiesta", intro: "Scrivici cosa ti interessa: ti rispondiamo su WhatsApp il prima possibile." },
 };
@@ -32,10 +32,13 @@ export function BookingForm({
 }: BookingFormProps) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [meta, setMeta] = useState({ page: "", utmSource: "", utmCampaign: "" });
   const [numPeople, setNumPeople] = useState(1);
+  const startedAt = useRef(0);
 
   useEffect(() => {
+    startedAt.current = Date.now();
     const params = new URLSearchParams(window.location.search);
     setMeta({
       page: window.location.pathname,
@@ -50,9 +53,10 @@ export function BookingForm({
     return "Scrivici";
   }, [variant]);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
+    setSubmitError("");
     const form = e.currentTarget;
     const data = new FormData(form);
 
@@ -62,6 +66,40 @@ export function BookingForm({
     const people = String(data.get("people") ?? "1");
     const tables = String(data.get("tables") ?? "");
     const notes = String(data.get("notes") ?? "");
+
+    if (variant === "event") {
+      try {
+        const response = await fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            phone,
+            email,
+            people: Number(people),
+            tables: Number(tables),
+            notes,
+            eventSlug,
+            page: meta.page,
+            utmSource: meta.utmSource,
+            utmCampaign: meta.utmCampaign,
+            consent: data.get("consent") === "yes",
+            website: data.get("website"),
+            startedAt: startedAt.current,
+          }),
+        });
+        const result = (await response.json()) as { checkoutUrl?: string; error?: string };
+        if (!response.ok || !result.checkoutUrl) {
+          throw new Error(result.error || "Non siamo riusciti a registrare la richiesta.");
+        }
+        window.location.assign(result.checkoutUrl);
+        return;
+      } catch (error) {
+        setSubmitError(error instanceof Error ? error.message : "Connessione non riuscita. Riprova.");
+        setSubmitting(false);
+        return;
+      }
+    }
 
     const lines = [
       eventTitle
@@ -103,6 +141,10 @@ export function BookingForm({
       <input type="hidden" name="page" value={meta.page} />
       <input type="hidden" name="utm_source" value={meta.utmSource} />
       <input type="hidden" name="utm_campaign" value={meta.utmCampaign} />
+      <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Sito web</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
 
       <div className="mt-5 grid gap-4">
         <Field label={variant === "contatti" ? "Nome e cognome" : "Il tuo nome"} htmlFor="name">
@@ -147,7 +189,7 @@ export function BookingForm({
         </Field>
 
         <label className="flex items-start gap-2.5 text-sm text-navy/65">
-          <input type="checkbox" required className="mt-0.5 h-4 w-4 accent-[var(--color-coral)]" />
+          <input name="consent" value="yes" type="checkbox" required className="mt-0.5 h-4 w-4 accent-[var(--color-coral)]" />
           <span>
             Ho letto e accetto la{" "}
             <a href="/privacy" className="font-medium text-teal underline underline-offset-2">
@@ -158,15 +200,26 @@ export function BookingForm({
         </label>
       </div>
 
+      {submitError && (
+        <p role="alert" className="mt-4 rounded-xl bg-coral/10 px-4 py-3 text-sm font-medium text-coral-deep">
+          {submitError}
+        </p>
+      )}
+
       <button
         type="submit"
         disabled={submitting}
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-4 text-base font-semibold text-white shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:brightness-95 disabled:opacity-70"
+        className={cn(
+          "mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold text-white shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:brightness-95 disabled:cursor-wait disabled:opacity-70",
+          variant === "event" ? "bg-coral" : "bg-[#25D366]",
+        )}
       >
-        <Icon.Whatsapp /> {submit}
+        {variant === "event" ? <Icon.ArrowRight /> : <Icon.Whatsapp />} {submitting ? "Invio in corso…" : submit}
       </button>
       <p className="mt-3 text-center text-xs text-navy/45">
-        Nessun pagamento ora. Confermiamo tutto insieme su WhatsApp.
+        {variant === "event"
+          ? "Il pagamento avviene sulla pagina sicura di Stripe."
+          : "Nessun pagamento ora. Confermiamo tutto insieme su WhatsApp."}
       </p>
     </form>
   );

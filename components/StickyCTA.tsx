@@ -1,15 +1,10 @@
 "use client";
 
-import { whatsappLink } from "@/lib/site";
-import { Icon } from "@/components/icons";
-
 /** Barra CTA sticky in basso, solo mobile, per le pagine evento. */
 export function StickyCTA({
   priceFrom,
-  whatsappMessage,
 }: {
   priceFrom?: string;
-  whatsappMessage: string;
 }) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-navy/8 bg-cream/95 px-4 py-3 backdrop-blur-md md:hidden">
@@ -24,18 +19,9 @@ export function StickyCTA({
         </div>
         <a
           href="#prenota"
-          className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-coral px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-coral)]"
+          className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-coral px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-coral)] transition-transform active:scale-[0.98]"
         >
           Prenota ora
-        </a>
-        <a
-          href={whatsappLink(whatsappMessage)}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Scrivici su WhatsApp"
-          className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white"
-        >
-          <Icon.Whatsapp />
         </a>
       </div>
     </div>

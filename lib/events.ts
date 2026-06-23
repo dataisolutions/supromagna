@@ -156,7 +156,7 @@ const ALBA_FAQ: FaqItem[] = [
   { q: "La colazione è inclusa?", a: "Dipende dall'evento: trovi lo stato (inclusa / opzionale / non inclusa) nella scheda qui sopra." },
   { q: "Posso venire con bambini?", a: "Sì, su tavola con un adulto e su valutazione dell'età. Scrivici su WhatsApp e troviamo la soluzione giusta." },
   { q: "Cosa succede se piove o il mare è mosso?", a: "Se le condizioni non sono sicure rimandiamo o annulliamo e ti avvisiamo su WhatsApp. La tua prenotazione resta valida per la nuova data." },
-  { q: "Come funziona la prenotazione?", a: "Lasci i tuoi dati nel form, ti scriviamo su WhatsApp con tutte le info e confermiamo insieme il posto. Nessun pagamento online richiesto per l'MVP." },
+  { q: "Come funziona la prenotazione?", a: "Lasci i tuoi dati nel form e prosegui sulla pagina di pagamento sicura Stripe. Il posto viene confermato dopo il completamento dell'acquisto." },
 ];
 
 export const events: SupEvent[] = [
@@ -223,7 +223,7 @@ export const events: SupEvent[] = [
     weatherPolicy: STD_WEATHER,
     seoTitle: "Alba in SUP — 21 Giugno a Cesenatico",
     seoDescription:
-      "Partecipa all'Alba in SUP a Cesenatico: uscita guidata in mare, briefing iniziale, tavola disponibile e info pratiche per prenotare su WhatsApp.",
+      "Partecipa all'Alba in SUP a Cesenatico: uscita guidata in mare, briefing iniziale, tavola disponibile e acquisto online sicuro.",
   },
   {
     title: "Alba in SUP — 19 Luglio",
@@ -284,7 +284,7 @@ export const events: SupEvent[] = [
     weatherPolicy: STD_WEATHER,
     seoTitle: "Alba in SUP — 19 Luglio a Cesenatico",
     seoDescription:
-      "Alba in SUP a Cesenatico il 19 luglio 2026: uscita guidata all'alba, tavola inclusa su richiesta, adatta ai principianti. Prenota su WhatsApp.",
+      "Alba in SUP a Cesenatico il 19 luglio 2026: uscita guidata all'alba, tavola inclusa su richiesta, adatta ai principianti. Acquista online.",
   },
   {
     title: "AstroSUP — Notte di San Lorenzo",
@@ -344,7 +344,7 @@ export const events: SupEvent[] = [
     weatherPolicy: STD_WEATHER,
     seoTitle: "AstroSUP Notte di San Lorenzo a Cesenatico",
     seoDescription:
-      "SUP notturno nella notte di San Lorenzo a Cesenatico: tavole con luce, uscita guidata e stelle cadenti dal mare. Posti limitati, prenota su WhatsApp.",
+      "SUP notturno nella notte di San Lorenzo a Cesenatico: tavole con luce, uscita guidata e stelle cadenti dal mare. Posti limitati, acquisto online.",
   },
   {
     title: "Yoga in SUP all'alba",
@@ -402,7 +402,7 @@ export const events: SupEvent[] = [
     weatherPolicy: STD_WEATHER,
     seoTitle: "Yoga in SUP all'alba a Rimini",
     seoDescription:
-      "Yoga in SUP all'alba a Rimini: pratica dolce sulla tavola, mare calmo, istruttrice certificata. Adatta a tutti i livelli. Prenota su WhatsApp.",
+      "Yoga in SUP all'alba a Rimini: pratica dolce sulla tavola, mare calmo, istruttrice certificata. Adatta a tutti i livelli. Acquista online.",
   },
   {
     title: "AperiSUP al tramonto",
@@ -460,7 +460,7 @@ export const events: SupEvent[] = [
     weatherPolicy: STD_WEATHER,
     seoTitle: "AperiSUP al tramonto a Milano Marittima",
     seoDescription:
-      "AperiSUP al tramonto a Milano Marittima: uscita in SUP, brindisi sull'acqua e gruppo. Adatto a tutti, ideale per gruppi di amici. Prenota su WhatsApp.",
+      "AperiSUP al tramonto a Milano Marittima: uscita in SUP, brindisi sull'acqua e gruppo. Adatto a tutti, ideale per gruppi di amici. Acquisto online.",
   },
   {
     title: "Luna Piena in SUP — Evento speciale",
@@ -517,7 +517,7 @@ export const events: SupEvent[] = [
     weatherPolicy: STD_WEATHER,
     seoTitle: "Luna Piena in SUP a Cesenatico — Evento speciale",
     seoDescription:
-      "Evento speciale: SUP sotto la luna piena a Cesenatico il 29 agosto 2026. Data unica, gruppo ristretto, tavole con luce. Prenota in anticipo su WhatsApp.",
+      "Evento speciale: SUP sotto la luna piena a Cesenatico il 29 agosto 2026. Data unica, gruppo ristretto, tavole con luce. Acquista online in anticipo.",
   },
 ];
 
