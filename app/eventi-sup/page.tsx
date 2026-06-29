@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { visibleEvents } from "@/lib/events";
+import { nextEvents } from "@/lib/events";
 import { PageHero } from "@/components/PageHero";
 import { Section, Container } from "@/components/ui";
 import { EventListing } from "@/components/EventListing";
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default function EventiPage() {
-  // Solo eventi non ancora passati, ordinati per data crescente.
-  const ordered = visibleEvents();
+  // Solo i prossimi 3 eventi dalla data odierna, ordinati per data crescente.
+  const ordered = nextEvents(3);
 
   return (
     <>

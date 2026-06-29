@@ -188,13 +188,20 @@ export default async function EventPage({
 
           {event.breakfastStatus !== "non inclusa" && event.breakfastDescription && (
             <Block title="La colazione">
-              <div className="flex items-start gap-4 rounded-2xl bg-sand/50 p-5 ring-1 ring-navy/8">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-coral">
-                  <Icon.Coffee className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="font-semibold text-navy">Colazione {event.breakfastStatus}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-navy/70">{event.breakfastDescription}</p>
+              <div className="overflow-hidden rounded-2xl bg-sand/50 ring-1 ring-navy/8">
+                {event.breakfastImage && (
+                  <div className="relative aspect-[16/10]">
+                    <Photo src={event.breakfastImage} alt={`Colazione di ${event.title}`} sizes="(max-width: 1024px) 100vw, 55vw" />
+                  </div>
+                )}
+                <div className="flex items-start gap-4 p-5">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-coral">
+                    <Icon.Coffee className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-navy">Colazione {event.breakfastStatus}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-navy/70">{event.breakfastDescription}</p>
+                  </div>
                 </div>
               </div>
             </Block>

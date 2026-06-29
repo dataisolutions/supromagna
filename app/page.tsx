@@ -2,7 +2,7 @@ import Link from "next/link";
 import { whatsappLink, site } from "@/lib/site";
 import {
   categories,
-  upcomingEvents,
+  nextEvents,
   featuredEvent,
   categoryBySlug,
 } from "@/lib/events";
@@ -34,9 +34,8 @@ const homeFaq = [
 export default function HomePage() {
   const featured = featuredEvent();
   const featCat = categoryBySlug(featured.category);
-  const next = upcomingEvents()
-    .filter((e) => e.slug !== featured.slug)
-    .slice(0, 3);
+  // Mostriamo in totale i prossimi 3 eventi: l'evidenza + gli altri 2 nella griglia.
+  const next = nextEvents(3).filter((e) => e.slug !== featured.slug);
 
   const heroMsg = `Ciao ${site.shortName}, vorrei informazioni per "${featured.title}" (${featured.dateLabel}).`;
 
