@@ -25,22 +25,36 @@ export function BottomNav() {
   const pathname = usePathname();
   const event = nextAlba();
   const [sectionVisible, setSectionVisible] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
 
   // Pagine in cui il banner non serve: contesto già "prenotazione" o thank you.
   const hiddenByRoute =
     pathname.startsWith("/eventi/") || pathname.startsWith("/grazie");
 
   useEffect(() => {
-    // Nascondi anche quando #prossimi-eventi entra nel viewport (home page).
-    const target = document.getElementById("prossimi-eventi");
-    if (!target) { setSectionVisible(false); return; }
+    // #prossimi-eventi (home) nasconde il banner; #prenota (form) nasconde tutta la barra.
+    const section = document.getElementById("prossimi-eventi");
+    const form = document.getElementById("prenota");
+    if (!section) setSectionVisible(false);
+    if (!form) setFormVisible(false);
+    if (!section && !form) return;
+
     const observer = new IntersectionObserver(
-      ([entry]) => setSectionVisible(entry.isIntersecting),
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.target.id === "prossimi-eventi") setSectionVisible(entry.isIntersecting);
+          if (entry.target.id === "prenota") setFormVisible(entry.isIntersecting);
+        }
+      },
       { threshold: 0.1 },
     );
-    observer.observe(target);
+    if (section) observer.observe(section);
+    if (form) observer.observe(form);
     return () => observer.disconnect();
   }, [pathname]);
+
+  // Quando il form di prenotazione è in vista, nascondi l'intera barra (nav + banner).
+  if (formVisible) return null;
 
   const showBanner = !!event && !hiddenByRoute && !sectionVisible;
 
