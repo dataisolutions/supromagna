@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
+import Stripe from "stripe";
 import { eventBySlug } from "@/lib/events";
 
 export const runtime = "nodejs";
@@ -89,9 +90,11 @@ export async function POST(request: Request) {
 
   const webhookUrl = process.env.MAKE_WEBHOOK_URL;
   const webhookApiKey = process.env.MAKE_WEBHOOK_API_KEY;
-  const checkoutUrl = process.env.STRIPE_EVENT_PAYMENT_URL;
+  const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+  const stripePriceId = process.env.STRIPE_PRICE_ID;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  if (!webhookUrl || !webhookApiKey || !checkoutUrl) {
+  if (!webhookUrl || !stripeSecretKey || !stripePriceId || !baseUrl) {
     console.error("Lead API non configurata: mancano variabili ambiente server-side.");
     return Response.json(
       { error: "Prenotazione temporaneamente non disponibile. Riprova più tardi." },
@@ -99,14 +102,16 @@ export async function POST(request: Request) {
     );
   }
 
+  const leadId = randomUUID();
+
+  // Chiama Make webhook (fire-and-forget tollerante: non blocca il checkout se fallisce)
   try {
-    const leadId = randomUUID();
+    const makeHeaders: Record<string, string> = { "Content-Type": "application/json" };
+    if (webhookApiKey) makeHeaders["x-make-apikey"] = webhookApiKey;
+
     const response = await fetch(webhookUrl, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-make-apikey": webhookApiKey,
-      },
+      headers: makeHeaders,
       body: JSON.stringify({
         leadId,
         name: validation.data.name,
@@ -130,16 +135,37 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       console.error("Make ha rifiutato il lead.", { status: response.status });
-      return Response.json(
-        { error: "Non siamo riusciti a registrare i dati. Riprova tra poco." },
-        { status: 502, headers },
-      );
     }
-
   } catch (error) {
     console.error("Errore di connessione a Make.", error instanceof Error ? error.message : "unknown");
+  }
+
+  // Crea sessione Stripe con quantità = numero di tavole
+  let checkoutUrl: string;
+  try {
+    const stripe = new Stripe(stripeSecretKey);
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: [{ price: stripePriceId, quantity: validation.data.tables }],
+      ...(validation.data.email ? { customer_email: validation.data.email } : {}),
+      success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}${validation.data.page}`,
+      metadata: {
+        leadId,
+        name: validation.data.name,
+        phone: validation.data.phone,
+        eventSlug: validation.data.eventSlug,
+        tables: String(validation.data.tables),
+        people: String(validation.data.people),
+      },
+    });
+
+    if (!session.url) throw new Error("Stripe non ha restituito un URL di checkout.");
+    checkoutUrl = session.url;
+  } catch (error) {
+    console.error("Errore Stripe.", error instanceof Error ? error.message : "unknown");
     return Response.json(
-      { error: "Non siamo riusciti a registrare i dati. Riprova tra poco." },
+      { error: "Non siamo riusciti ad avviare il pagamento. Riprova tra poco." },
       { status: 502, headers },
     );
   }
