@@ -25,12 +25,12 @@ export function BottomNav() {
   const pathname = usePathname();
   const event = nextAlba();
   const [sectionVisible, setSectionVisible] = useState(false);
-  const [hasPrenotaOnPage, setHasPrenotaOnPage] = useState(false);
+
+  // Pagine in cui il banner non serve: contesto già "prenotazione" o thank you.
+  const hiddenByRoute =
+    pathname.startsWith("/eventi/") || pathname.startsWith("/grazie");
 
   useEffect(() => {
-    // Se la pagina ha un #prenota, nascondi sempre il banner (siamo già in contesto prenotazione).
-    setHasPrenotaOnPage(!!document.getElementById("prenota"));
-
     // Nascondi anche quando #prossimi-eventi entra nel viewport (home page).
     const target = document.getElementById("prossimi-eventi");
     if (!target) { setSectionVisible(false); return; }
@@ -42,11 +42,7 @@ export function BottomNav() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  const showBanner =
-    !!event &&
-    !hasPrenotaOnPage &&
-    !pathname.startsWith("/grazie") &&
-    !sectionVisible;
+  const showBanner = !!event && !hiddenByRoute && !sectionVisible;
 
   // Data compatta senza anno: "Domenica 21 giugno 2026" -> "domenica 21 giugno"
   const shortDate = event
