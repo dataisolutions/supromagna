@@ -155,8 +155,8 @@ export function BookingForm({
           <Field label="Telefono / WhatsApp" htmlFor="phone">
             <input id="phone" name="phone" required type="tel" autoComplete="tel" placeholder="+39 ..." className={inputCls} />
           </Field>
-          <Field label="Email" htmlFor="email" optional>
-            <input id="email" name="email" type="email" autoComplete="email" placeholder="tu@email.it" className={inputCls} />
+          <Field label="Email" htmlFor="email">
+            <input id="email" name="email" required type="email" autoComplete="email" placeholder="tu@email.it" className={inputCls} />
           </Field>
         </div>
 
@@ -230,7 +230,7 @@ export function BookingForm({
 }
 
 const inputCls =
-  "w-full rounded-xl border border-navy/12 bg-cream/60 px-4 py-3 text-[15px] text-navy placeholder:text-navy/35 transition-colors focus:border-teal focus:bg-white focus:outline-none";
+  "w-full rounded-xl border border-navy/12 bg-cream/60 px-4 py-3 text-base text-navy placeholder:text-navy/35 transition-colors focus:border-teal focus:bg-white focus:outline-none";
 
 function Field({
   label,

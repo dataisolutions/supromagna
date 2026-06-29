@@ -17,9 +17,9 @@ export default async function GraziePage({
   const { event } = await searchParams;
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative flex min-h-screen flex-col overflow-hidden">
       <div className="absolute inset-0 sky-gradient-soft" aria-hidden="true" />
-      <Container className="relative flex min-h-[70vh] flex-col items-center justify-center py-20 text-center">
+      <Container className="relative flex flex-1 flex-col items-center justify-center py-20 text-center">
         <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-coral shadow-[var(--shadow-lift)] animate-[rise_0.6s_ease]">
           <Icon.Check className="h-10 w-10" />
         </span>
