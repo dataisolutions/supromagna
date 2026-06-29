@@ -4,8 +4,7 @@ import Link from "next/link";
 import {
   categories,
   categoryBySlug,
-  eventsByCategory,
-  type CategorySlug,
+  nextEvents,
 } from "@/lib/events";
 import { PageHero } from "@/components/PageHero";
 import { Section, Container } from "@/components/ui";
@@ -41,7 +40,8 @@ export default async function CategoryPage({
   const cat = categoryBySlug(category);
   if (!cat) notFound();
 
-  const list = eventsByCategory(cat.slug as CategorySlug);
+  // Solo gli eventi di questa categoria che rientrano nei prossimi 3 globali.
+  const list = nextEvents(3).filter((e) => e.category === cat.slug);
 
   return (
     <>

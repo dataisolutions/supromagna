@@ -4,7 +4,7 @@ import {
   events,
   eventBySlug,
   categoryBySlug,
-  upcomingEvents,
+  nextEvents,
 } from "@/lib/events";
 import { site } from "@/lib/site";
 import { Container, Button, StatusBadge } from "@/components/ui";
@@ -49,7 +49,7 @@ export default async function EventPage({
   if (!event) notFound();
 
   const cat = categoryBySlug(event.category);
-  const others = upcomingEvents().filter((e) => e.slug !== event.slug).slice(0, 3);
+  const others = nextEvents(3).filter((e) => e.slug !== event.slug);
   const quickFacts = [
     { icon: Icon.Calendar, label: "Data", value: event.dateLabel },
     { icon: Icon.Clock, label: "Ritrovo", value: event.meetingTime },
