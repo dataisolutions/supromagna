@@ -63,7 +63,7 @@ export function NotifyForm({ categoryName }: { categoryName: string }) {
         <Icon.Whatsapp /> Avvisami
       </button>
       <p className="text-center text-xs text-navy/45">
-        Ti scriviamo su WhatsApp appena apriamo le prenotazioni.
+        Ti scriviamo su WhatsApp con tutte le informazioni.
       </p>
     </form>
   );

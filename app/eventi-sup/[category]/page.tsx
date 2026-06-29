@@ -80,10 +80,9 @@ export default async function CategoryPage({
             </div>
           ) : (
             <div className="rounded-[var(--radius-card)] bg-white p-10 text-center ring-1 ring-navy/8">
-              <p className="font-display text-2xl text-navy">Nuove date in arrivo</p>
+              <p className="font-display text-2xl text-navy">Vuoi partecipare a {cat.name}?</p>
               <p className="mx-auto mt-2 max-w-md text-navy/60">
-                Stiamo definendo il calendario di {cat.name}. Lascia i tuoi dati: ti avvisiamo
-                appena apriamo le prenotazioni.
+                Lascia i tuoi contatti: ti inviamo date, prezzi e tutto quello che ti serve per prenotare.
               </p>
               <NotifyForm categoryName={cat.name} />
             </div>

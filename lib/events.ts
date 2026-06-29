@@ -43,6 +43,7 @@ export interface TableOption {
 export interface FaqItem {
   q: string;
   a: string;
+  link?: { text: string; href: string };
 }
 
 export interface SupEvent {
@@ -151,7 +152,7 @@ const STD_WEATHER =
 const ALBA_FAQ: FaqItem[] = [
   { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 4.30. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge intorno alle 5.30). L'evento finisce verso le 7.15/7.30." },
   { q: "Dove ci troviamo esattamente?", a: "Il punto di ritrovo è indicato con link a Google Maps nella scheda evento. Ti mandiamo anche la posizione esatta su WhatsApp il giorno prima." },
-  { q: "Non ho mai usato un SUP, posso partecipare?", a: "Certo! Prima di entrare in acqua facciamo un briefing e ti insegniamo le basi. Gli istruttori ti seguono per tutta l'uscita: la maggior parte dei partecipanti è alla prima volta." },
+  { q: "Non ho mai usato un SUP, posso partecipare?", a: "È caldamente consigliato avere un minimo di dimestichezza con il SUP. Se non hai mai provato puoi prenotare una lezione con noi prima dell'evento. In ogni caso facciamo sempre un briefing prima di entrare in acqua e gli istruttori ti seguono per tutta l'uscita.", link: { text: "Prenota una lezione →", href: "/lezioni" } },
   { q: "Devo saper nuotare?", a: "Sì, è importante saper nuotare e sentirsi a proprio agio in mare. Indossi sempre una cintura di galleggiamento." },
   { q: "Quanto costa e la tavola è inclusa?", a: "Noleggio tavola: 35€ singola (1 persona), 45€ doppia (2 persone). Se hai la tua tavola: 15€ singola, 25€ doppia. La colazione è sempre compresa." },
   { q: "La colazione è inclusa?", a: "Sì, la colazione è compresa: al rientro ci fermiamo insieme con dolci, focacce, frutta fresca, caffè e succhi." },

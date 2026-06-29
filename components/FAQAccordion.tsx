@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { FaqItem } from "@/lib/events";
 import { Icon } from "@/components/icons";
 import { cn } from "@/components/ui";
@@ -35,7 +36,14 @@ export function FAQAccordion({ items, defaultOpen = 0 }: { items: FaqItem[]; def
               )}
             >
               <div className="overflow-hidden">
-                <p className="px-5 pb-5 text-[15px] leading-relaxed text-navy/70">{item.a}</p>
+                <p className="px-5 pb-5 text-[15px] leading-relaxed text-navy/70">
+                  {item.a}
+                  {item.link && (
+                    <Link href={item.link.href} className="mt-2 block font-medium text-teal hover:underline">
+                      {item.link.text}
+                    </Link>
+                  )}
+                </p>
               </div>
             </div>
           </div>
