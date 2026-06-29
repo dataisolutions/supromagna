@@ -146,7 +146,7 @@ export async function POST(request: Request) {
     const stripe = new Stripe(stripeSecretKey);
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      line_items: [{ price: stripePriceId, quantity: validation.data.tables }],
+      line_items: [{ price: stripePriceId, quantity: validation.data.people }],
       ...(validation.data.email ? { customer_email: validation.data.email } : {}),
       success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}${validation.data.page}`,
@@ -206,11 +206,11 @@ function validateLead(body: LeadPayload):
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { ok: false, error: "Inserisci un indirizzo email valido." };
   }
-  if (!Number.isInteger(people) || people < 1 || people > 100) {
-    return { ok: false, error: "Inserisci un numero di partecipanti valido." };
+  if (!Number.isInteger(people) || people < 1 || people > 10) {
+    return { ok: false, error: "Il numero di partecipanti deve essere compreso tra 1 e 10." };
   }
-  if (!Number.isInteger(tables) || tables < 1 || tables > people) {
-    return { ok: false, error: "Il numero di tavole non può superare il numero di partecipanti." };
+  if (!Number.isInteger(tables) || tables < 1 || tables > 50) {
+    return { ok: false, error: "Inserisci un numero di tavole valido." };
   }
   if (!eventSlug || !page.startsWith("/eventi/") || body.consent !== true) {
     return { ok: false, error: "Controlla i dati e accetta la privacy policy." };

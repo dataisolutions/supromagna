@@ -167,10 +167,11 @@ export function BookingForm({
               name="people"
               type="number"
               min={1}
+              max={10}
               value={numPeople}
               onChange={(e) => setNumPeople(e.target.value)}
               onBlur={(e) => {
-                const n = Math.max(1, parseInt(e.target.value, 10) || 1);
+                const n = Math.min(10, Math.max(1, parseInt(e.target.value, 10) || 1));
                 setNumPeople(String(n));
               }}
               className={inputCls}
