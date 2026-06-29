@@ -523,26 +523,49 @@ export const events: SupEvent[] = [
 
 /* ---------- Helper di accesso ---------- */
 
+/** Data odierna in fuso Europe/Rome, formato ISO YYYY-MM-DD. */
+export function todayISO(): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Rome",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+}
+
+/** True se l'evento non è ancora passato (data >= oggi). */
+export function isUpcoming(e: SupEvent): boolean {
+  return e.date >= todayISO();
+}
+
 export function eventBySlug(slug: string): SupEvent | undefined {
   return events.find((e) => e.slug === slug);
 }
 
+/** Eventi di una categoria non ancora passati, ordinati per data crescente. */
 export function eventsByCategory(slug: CategorySlug): SupEvent[] {
-  return events.filter((e) => e.category === slug);
+  return events
+    .filter((e) => e.category === slug && isUpcoming(e))
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/** Tutti gli eventi non ancora passati, ordinati per data crescente. */
+export function visibleEvents(): SupEvent[] {
+  return events.filter(isUpcoming).sort((a, b) => a.date.localeCompare(b.date));
 }
 
 const ACTIVE_STATUSES: EventStatus[] = ["In programma", "Posti limitati", "In arrivo"];
 
-/** Eventi attivi ordinati per data crescente. */
+/** Eventi attivi e non passati, ordinati per data crescente. */
 export function upcomingEvents(): SupEvent[] {
   return [...events]
-    .filter((e) => ACTIVE_STATUSES.includes(e.status))
+    .filter((e) => ACTIVE_STATUSES.includes(e.status) && isUpcoming(e))
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-/** Evento in evidenza per la home: il featured, altrimenti il primo in calendario. */
+/** Evento in evidenza per la home: il prossimo per data. */
 export function featuredEvent(): SupEvent {
-  return events.find((e) => e.featured) ?? upcomingEvents()[0] ?? events[0];
+  return upcomingEvents()[0] ?? visibleEvents()[0] ?? events[0];
 }
 
 export function statusTone(status: EventStatus): "live" | "warn" | "muted" {
