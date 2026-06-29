@@ -206,11 +206,11 @@ function validateLead(body: LeadPayload):
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { ok: false, error: "Inserisci un indirizzo email valido." };
   }
-  if (!Number.isInteger(people) || people < 1 || people > 10) {
-    return { ok: false, error: "Il numero di partecipanti deve essere compreso tra 1 e 10." };
+  if (!Number.isInteger(people) || people < 1 || people > 100) {
+    return { ok: false, error: "Inserisci un numero di partecipanti valido." };
   }
   if (!Number.isInteger(tables) || tables < 1 || tables > people) {
-    return { ok: false, error: "Il numero di tavole deve essere compreso tra 1 e il numero di partecipanti." };
+    return { ok: false, error: "Il numero di tavole non può superare il numero di partecipanti." };
   }
   if (!eventSlug || !page.startsWith("/eventi/") || body.consent !== true) {
     return { ok: false, error: "Controlla i dati e accetta la privacy policy." };

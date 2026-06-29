@@ -167,18 +167,17 @@ export function BookingForm({
               name="people"
               type="number"
               min={1}
-              max={10}
               value={numPeople}
               onChange={(e) => setNumPeople(e.target.value)}
               onBlur={(e) => {
-                const n = Math.min(10, Math.max(1, parseInt(e.target.value, 10) || 1));
+                const n = Math.max(1, parseInt(e.target.value, 10) || 1);
                 setNumPeople(String(n));
               }}
               className={inputCls}
             />
           </Field>
           <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />}>
-            <input id="tables" name="tables" type="number" min={1} max={parseInt(numPeople, 10) || 10} placeholder="Decidiamo insieme" className={inputCls} />
+            <input id="tables" name="tables" type="number" min={1} placeholder="Decidiamo insieme" className={inputCls} />
           </Field>
         </div>
 

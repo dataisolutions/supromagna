@@ -240,7 +240,7 @@ function albaEvent(input: {
     breakfastImage: "/media/colazione.jpg",
     tableOptions: ALBA_TABLE_OPTIONS,
     whatToBring: ALBA_WHAT_TO_BRING,
-    priceFrom: "15€",
+    priceFrom: "35€",
     capacityNote: "Prenotazione obbligatoria fino a esaurimento posti. Gli orari possono variare in base al numero di partecipanti.",
     timeline: ALBA_TIMELINE,
     faq: ALBA_FAQ,
@@ -273,8 +273,8 @@ export const events: SupEvent[] = [
     startTime: "21:00",
     endTime: "23:00",
     locationName: "Polo Est Village",
-    locationAddress: "Lido di Savio (RA)",
-    googleMapsUrl: "https://maps.google.com/?q=Polo+Est+Village+Lido+di+Savio",
+    locationAddress: "Bellaria-Igea Marina (RN)",
+    googleMapsUrl: "https://maps.google.com/?q=Polo+Est+Village+Bellaria+Igea+Marina",
     photo: "/media/astrosup.jpg",
     descriptionShort:
       "Una notturna in SUP guidata da un astrofilo: dal pianeta Venere alle costellazioni, fino al passaggio della Stazione Spaziale. Mare piatto e cielo stellato.",
@@ -302,7 +302,7 @@ export const events: SupEvent[] = [
       "Ciabatte",
       "Acqua",
     ],
-    priceFrom: "15€",
+    priceFrom: "35€",
     capacityNote: "Prenotazione obbligatoria fino a esaurimento posti.",
     timeline: [
       { time: "20:30", label: "Ritrovo a Polo Est Village" },
@@ -317,7 +317,7 @@ export const events: SupEvent[] = [
     weatherPolicy: STD_WEATHER,
     seoTitle: "AstroSUP a Polo Est Village — SUP notturno con astrofilo",
     seoDescription:
-      "SUP in notturna a Lido di Savio guidato dall'astrofilo Emanuele Cambiotti: dal pianeta Venere alle costellazioni, passaggio della Stazione Spaziale e deep sky col binocolo. Posti limitati.",
+      "SUP in notturna a Bellaria-Igea Marina guidato dall'astrofilo Emanuele Cambiotti: dal pianeta Venere alle costellazioni, passaggio della Stazione Spaziale e deep sky col binocolo. Posti limitati.",
   },
   albaEvent({
     title: "Alba in SUP — 11 Luglio",
