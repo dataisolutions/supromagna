@@ -140,14 +140,24 @@ export async function POST(request: Request) {
     console.error("Errore di connessione a Make.", error instanceof Error ? error.message : "unknown");
   }
 
-  // Crea sessione Stripe con quantità = numero di tavole
+  // Crea sessione Stripe con quantità = numero di persone
   let checkoutUrl: string;
   try {
     const stripe = new Stripe(stripeSecretKey);
+
+    // Crea un Customer con i dati del form: Stripe pre-compila nome, email e telefono
+    const customer = await stripe.customers.create({
+      name: validation.data.name,
+      ...(validation.data.email ? { email: validation.data.email } : {}),
+      phone: validation.data.phone,
+      metadata: { leadId },
+    });
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      customer: customer.id,
+      phone_number_collection: { enabled: true },
       line_items: [{ price: stripePriceId, quantity: validation.data.people }],
-      ...(validation.data.email ? { customer_email: validation.data.email } : {}),
       success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}${validation.data.page}`,
       metadata: {
