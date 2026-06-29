@@ -153,11 +153,30 @@ export async function POST(request: Request) {
       metadata: { leadId },
     });
 
+    // Recupera prezzo/valuta dal Price ID (unica fonte di verità per l'importo),
+    // ma mostra al cliente il nome dell'evento nel checkout.
+    const price = await stripe.prices.retrieve(stripePriceId);
+    if (price.unit_amount == null) {
+      throw new Error("Il prezzo Stripe non ha un importo fisso.");
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer: customer.id,
       phone_number_collection: { enabled: true },
-      line_items: [{ price: stripePriceId, quantity: validation.data.people }],
+      line_items: [
+        {
+          price_data: {
+            currency: price.currency,
+            unit_amount: price.unit_amount,
+            product_data: {
+              name: event.title,
+              description: `${event.dateLabel} · ${event.locationName} — quota a persona`,
+            },
+          },
+          quantity: validation.data.people,
+        },
+      ],
       success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}${validation.data.page}`,
       metadata: {
