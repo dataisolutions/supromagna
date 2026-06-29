@@ -212,6 +212,9 @@ function validateLead(body: LeadPayload):
   if (!Number.isInteger(tables) || tables < 1 || tables > 50) {
     return { ok: false, error: "Inserisci un numero di tavole valido." };
   }
+  if (tables > people) {
+    return { ok: false, error: "Il numero di tavole non può superare il numero di partecipanti." };
+  }
   if (!eventSlug || !page.startsWith("/eventi/") || body.consent !== true) {
     return { ok: false, error: "Controlla i dati e accetta la privacy policy." };
   }

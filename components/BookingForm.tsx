@@ -35,6 +35,7 @@ export function BookingForm({
   const [submitError, setSubmitError] = useState("");
   const [meta, setMeta] = useState({ page: "", utmSource: "", utmCampaign: "" });
   const [numPeople, setNumPeople] = useState<string>("1");
+  const [tablesError, setTablesError] = useState("");
   const startedAt = useRef(0);
 
   useEffect(() => {
@@ -179,7 +180,26 @@ export function BookingForm({
           </Field>
           {variant === "event" && (
             <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />}>
-              <input id="tables" name="tables" type="number" min={1} placeholder="Decidiamo insieme" className={inputCls} />
+              <input
+                id="tables"
+                name="tables"
+                type="number"
+                min={1}
+                max={Number(numPeople) || 10}
+                placeholder="Decidiamo insieme"
+                className={cn(inputCls, tablesError && "border-coral")}
+                onBlur={(e) => {
+                  const t = parseInt(e.target.value, 10);
+                  const p = parseInt(numPeople, 10) || 1;
+                  if (e.target.value && t > p) {
+                    setTablesError(`Max ${p} tavol${p === 1 ? "a" : "e"} per ${p} participant${p === 1 ? "e" : "i"}`);
+                  } else {
+                    setTablesError("");
+                  }
+                }}
+                onChange={() => setTablesError("")}
+              />
+              {tablesError && <p className="mt-1 text-xs text-coral-deep">{tablesError}</p>}
             </Field>
           )}
         </div>
