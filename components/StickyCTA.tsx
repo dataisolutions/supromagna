@@ -1,11 +1,29 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 /** Barra CTA sticky in basso, solo mobile, per le pagine evento. */
 export function StickyCTA({
   priceFrom,
 }: {
   priceFrom?: string;
 }) {
+  const [formVisible, setFormVisible] = useState(false);
+
+  // Nasconde la barra quando il form #prenota entra nel viewport.
+  useEffect(() => {
+    const el = document.getElementById("prenota");
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setFormVisible(entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  if (formVisible) return null;
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-navy/8 bg-cream/95 px-4 py-3 backdrop-blur-md md:hidden">
       <div className="mx-auto flex max-w-md items-center gap-3 pb-[env(safe-area-inset-bottom)]">
