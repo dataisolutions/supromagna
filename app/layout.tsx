@@ -43,8 +43,19 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "Sup Romagna — Eventi, Albe e Lezioni in SUP",
     description: site.description,
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Alba in SUP sulla Riviera Romagnola",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.jpg"],
+  },
   alternates: { canonical: site.url },
   robots: { index: true, follow: true },
 };
