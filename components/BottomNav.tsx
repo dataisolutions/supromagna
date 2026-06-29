@@ -24,26 +24,29 @@ function nextAlba() {
 export function BottomNav() {
   const pathname = usePathname();
   const event = nextAlba();
-  const [prenotaVisible, setPrenotaVisible] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(false);
+  const [hasPrenotaOnPage, setHasPrenotaOnPage] = useState(false);
 
-  // Nasconde il banner quando la sezione #prenota è visibile a schermo.
   useEffect(() => {
-    const el = document.getElementById("prenota");
-    if (!el) return;
+    // Se la pagina ha un #prenota, nascondi sempre il banner (siamo già in contesto prenotazione).
+    setHasPrenotaOnPage(!!document.getElementById("prenota"));
+
+    // Nascondi anche quando #prossimi-eventi entra nel viewport (home page).
+    const target = document.getElementById("prossimi-eventi");
+    if (!target) { setSectionVisible(false); return; }
     const observer = new IntersectionObserver(
-      ([entry]) => setPrenotaVisible(entry.isIntersecting),
+      ([entry]) => setSectionVisible(entry.isIntersecting),
       { threshold: 0.1 },
     );
-    observer.observe(el);
+    observer.observe(target);
     return () => observer.disconnect();
   }, [pathname]);
 
-  // Il banner non serve dove c'è già una CTA sticky, sulla thank you page, o quando #prenota è visibile.
   const showBanner =
     !!event &&
-    !pathname.startsWith("/eventi/") &&
+    !hasPrenotaOnPage &&
     !pathname.startsWith("/grazie") &&
-    !prenotaVisible;
+    !sectionVisible;
 
   // Data compatta senza anno: "Domenica 21 giugno 2026" -> "domenica 21 giugno"
   const shortDate = event
