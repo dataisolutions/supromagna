@@ -8,11 +8,10 @@ import {
   type CategorySlug,
 } from "@/lib/events";
 import { PageHero } from "@/components/PageHero";
-import { Section, Container, Button } from "@/components/ui";
+import { Section, Container } from "@/components/ui";
 import { EventCard } from "@/components/EventCard";
 import { sceneForCategory } from "@/components/SceneImage";
-import { Icon } from "@/components/icons";
-import { whatsappLink, site } from "@/lib/site";
+import { NotifyForm } from "@/components/NotifyForm";
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
@@ -83,17 +82,10 @@ export default async function CategoryPage({
             <div className="rounded-[var(--radius-card)] bg-white p-10 text-center ring-1 ring-navy/8">
               <p className="font-display text-2xl text-navy">Nuove date in arrivo</p>
               <p className="mx-auto mt-2 max-w-md text-navy/60">
-                Stiamo definendo il calendario di {cat.name}. Scrivici su WhatsApp: ti avvisiamo
+                Stiamo definendo il calendario di {cat.name}. Lascia i tuoi dati: ti avvisiamo
                 appena apriamo le prenotazioni.
               </p>
-              <Button
-                href={whatsappLink(`Ciao ${site.shortName}, vorrei essere avvisato/a per gli eventi "${cat.name}".`)}
-                external
-                variant="whatsapp"
-                className="mt-6"
-              >
-                <Icon.Whatsapp /> Avvisami su WhatsApp
-              </Button>
+              <NotifyForm categoryName={cat.name} />
             </div>
           )}
         </Container>
