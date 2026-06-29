@@ -34,7 +34,7 @@ export function BookingForm({
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [meta, setMeta] = useState({ page: "", utmSource: "", utmCampaign: "" });
-  const [numPeople, setNumPeople] = useState(1);
+  const [numPeople, setNumPeople] = useState<string>("1");
   const startedAt = useRef(0);
 
   useEffect(() => {
@@ -169,12 +169,16 @@ export function BookingForm({
               min={1}
               max={10}
               value={numPeople}
-              onChange={(e) => setNumPeople(Math.min(10, Math.max(1, Number(e.target.value))))}
+              onChange={(e) => setNumPeople(e.target.value)}
+              onBlur={(e) => {
+                const n = Math.min(10, Math.max(1, parseInt(e.target.value, 10) || 1));
+                setNumPeople(String(n));
+              }}
               className={inputCls}
             />
           </Field>
           <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />}>
-            <input id="tables" name="tables" type="number" min={1} max={numPeople} placeholder="Decidiamo insieme" className={inputCls} />
+            <input id="tables" name="tables" type="number" min={1} max={parseInt(numPeople, 10) || 10} placeholder="Decidiamo insieme" className={inputCls} />
           </Field>
         </div>
 
