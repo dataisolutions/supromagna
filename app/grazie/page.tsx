@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Stripe from "stripe";
 import { Container, Button } from "@/components/ui";
 import { Icon } from "@/components/icons";
 import { site } from "@/lib/site";
+import { eventBySlug } from "@/lib/events";
 import { PurchaseTracking, type PurchaseData } from "@/components/PurchaseTracking";
 
 export const metadata: Metadata = {
@@ -11,45 +11,44 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+type GrazieParams = {
+  event?: string;
+  session_id?: string;
+  ev?: string;
+  p?: string;
+  val?: string;
+  src?: string;
+};
+
 /**
- * Recupera la sessione Stripe e, solo se il pagamento è confermato, prepara i
- * dati per l'evento conversione. In caso di errore (chiave, permessi, sessione
- * inesistente) ritorna null senza bloccare la pagina.
+ * Costruisce i dati conversione dai parametri URL (passati dalla success_url di
+ * Stripe). Nessuna chiamata a Stripe: si arriva qui solo dopo pagamento riuscito.
  */
-async function getPurchase(sessionId?: string): Promise<PurchaseData | null> {
-  if (!sessionId) return null;
-  const secret = process.env.STRIPE_SECRET_KEY;
-  if (!secret) return null;
-  try {
-    const stripe = new Stripe(secret);
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-    if (session.payment_status !== "paid") return null;
-    const m = session.metadata ?? {};
-    const people = Number(m.people);
-    return {
-      transactionId: typeof session.payment_intent === "string" ? session.payment_intent : session.id,
-      value: (session.amount_total ?? 0) / 100,
-      currency: (session.currency ?? "eur").toUpperCase(),
-      eventTitle: m.eventTitle || undefined,
-      eventSlug: m.eventSlug || undefined,
-      people: Number.isFinite(people) ? people : undefined,
-      source: m.source || undefined,
-    };
-  } catch (error) {
-    console.error("Grazie: sessione Stripe non recuperabile.", error instanceof Error ? error.message : "unknown");
-    return null;
-  }
+function buildPurchase(params: GrazieParams): PurchaseData | null {
+  if (!params.session_id) return null;
+  const people = Number(params.p);
+  const value = Number(params.val);
+  const event = params.ev ? eventBySlug(params.ev) : undefined;
+  return {
+    transactionId: params.session_id,
+    value: Number.isFinite(value) ? value : 0,
+    currency: "EUR",
+    eventTitle: event?.title,
+    eventSlug: params.ev || undefined,
+    people: Number.isFinite(people) ? people : undefined,
+    source: params.src || undefined,
+  };
 }
 
 export default async function GraziePage({
   searchParams,
 }: {
-  searchParams: Promise<{ event?: string; session_id?: string }>;
+  searchParams: Promise<GrazieParams>;
 }) {
-  const { event, session_id } = await searchParams;
-  const purchase = await getPurchase(session_id);
-  // Nome evento da mostrare: dal pagamento confermato, o dal parametro (flusso WhatsApp).
-  const eventName = purchase?.eventTitle ?? event;
+  const params = await searchParams;
+  const purchase = buildPurchase(params);
+  // Nome evento da mostrare: dalla conversione (slug), o dal parametro (flusso WhatsApp).
+  const eventName = purchase?.eventTitle ?? params.event;
 
   return (
     <section className="relative flex min-h-[calc(100vh+8rem)] flex-col overflow-hidden">

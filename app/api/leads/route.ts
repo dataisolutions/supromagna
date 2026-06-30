@@ -9,6 +9,9 @@ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1_000;
 const RATE_LIMIT_MAX = 5;
 const MIN_FORM_FILL_MS = 1_500;
 const ACTIVE_STATUSES = new Set(["In programma", "Posti limitati", "In arrivo"]);
+// Prezzo a persona (€), solo per calcolare il valore conversione passato a /grazie.
+// Tieni allineato al prezzo del prodotto Stripe; override via env se cambia.
+const PRICE_PER_PERSON = Number(process.env.STRIPE_PRICE_PER_PERSON ?? "5");
 
 type RateEntry = { count: number; resetAt: number };
 
@@ -175,12 +178,21 @@ export async function POST(request: Request) {
       source: validation.data.source || "diretto",
     };
 
+    // Dati conversione passati a /grazie via URL: evitano di rileggere la sessione
+    // da Stripe per tracciare l'evento purchase (evento, persone, valore, provenienza).
+    const conversionParams = new URLSearchParams({
+      ev: event.slug,
+      p: String(validation.data.people),
+      val: (validation.data.people * PRICE_PER_PERSON).toFixed(2),
+      src: validation.data.source || "diretto",
+    });
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer: customer.id,
       phone_number_collection: { enabled: true },
       line_items: [{ price: stripePriceId, quantity: validation.data.people }],
-      success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}&${conversionParams.toString()}`,
       cancel_url: `${baseUrl}${validation.data.page}`,
       metadata,
       payment_intent_data: {
