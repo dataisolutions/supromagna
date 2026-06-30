@@ -161,18 +161,15 @@ export async function POST(request: Request) {
       metadata: { leadId },
     });
 
-    // Recupera prezzo/valuta dal Price ID (unica fonte di verità per l'importo),
-    // ma mostra al cliente il nome dell'evento nel checkout.
-    const price = await stripe.prices.retrieve(stripePriceId);
-    if (price.unit_amount == null) {
-      throw new Error("Il prezzo Stripe non ha un importo fisso.");
-    }
-
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      customer: customer.id,
-      phone_number_collection: { enabled: true },
-      line_items: [
+    // Mostra al cliente il nome dell'evento: per farlo serve l'importo, che leggiamo
+    // dal Price ID (unica fonte di verità). Se la chiave non ha "Prices Read", o il
+    // prezzo non ha un importo fisso, ripieghiamo sul Price ID fisso: il checkout
+    // funziona comunque, solo con il nome prodotto generico.
+    let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[];
+    try {
+      const price = await stripe.prices.retrieve(stripePriceId);
+      if (price.unit_amount == null) throw new Error("Prezzo senza importo fisso.");
+      lineItems = [
         {
           price_data: {
             currency: price.currency,
@@ -184,7 +181,17 @@ export async function POST(request: Request) {
           },
           quantity: validation.data.people,
         },
-      ],
+      ];
+    } catch (priceError) {
+      console.error("Prezzo non leggibile, uso il Price ID fisso.", priceError instanceof Error ? priceError.message : "unknown");
+      lineItems = [{ price: stripePriceId, quantity: validation.data.people }];
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      customer: customer.id,
+      phone_number_collection: { enabled: true },
+      line_items: lineItems,
       success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}${validation.data.page}`,
       metadata: {
@@ -201,11 +208,9 @@ export async function POST(request: Request) {
     if (!session.url) throw new Error("Stripe non ha restituito un URL di checkout.");
     checkoutUrl = session.url;
   } catch (error) {
-    const detail = error instanceof Error ? error.message : "unknown";
-    console.error("Errore Stripe.", detail);
-    // DEBUG TEMPORANEO: espone il messaggio Stripe per diagnosi (i log Vercel sono off).
+    console.error("Errore Stripe.", error instanceof Error ? error.message : "unknown");
     return Response.json(
-      { error: `Pagamento non avviato. [debug: ${detail}]` },
+      { error: "Non siamo riusciti ad avviare il pagamento. Riprova tra poco." },
       { status: 502, headers },
     );
   }
