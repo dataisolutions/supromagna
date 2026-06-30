@@ -150,7 +150,7 @@ const STD_WEATHER =
   "L'uscita dipende dalle condizioni del mare e dal meteo. Se le condizioni non sono sicure rimandiamo o annulliamo, e ti avvisiamo su WhatsApp con il massimo anticipo possibile. La tua richiesta resta valida per la data alternativa.";
 
 const ALBA_FAQ: FaqItem[] = [
-  { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 4.30. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge intorno alle 5.30). L'evento finisce verso le 7.15/7.30." },
+  { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 4.30. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge intorno alle 5.30). Verso le 6.20/6.30 facciamo colazione insieme e l'evento finisce intorno alle 7.00." },
   { q: "Dove ci troviamo esattamente?", a: "Il punto di ritrovo è indicato con link a Google Maps nella scheda evento. Ti mandiamo anche la posizione esatta su WhatsApp il giorno prima." },
   { q: "Non ho mai usato un SUP, posso partecipare?", a: "È caldamente consigliato avere un minimo di dimestichezza con il SUP. Se non hai mai provato puoi prenotare una lezione con noi prima dell'evento. In ogni caso facciamo sempre un briefing prima di entrare in acqua e gli istruttori ti seguono per tutta l'uscita.", link: { text: "Prenota una lezione →", href: "/lezioni" } },
   { q: "Devo saper nuotare?", a: "Sì, è importante saper nuotare e sentirsi a proprio agio in mare. Indossi sempre una cintura di galleggiamento." },
@@ -230,8 +230,8 @@ const ALBA_TIMELINE: TimelineStep[] = [
   { time: "04:30", label: "Ritrovo in spiaggia" },
   { time: "04:40", label: "Briefing e preparazione tavole" },
   { time: "05:30", label: "Alba dal mare" },
-  { time: "07:00", label: "Rientro verso riva" },
-  { time: "07:15", label: "Colazione insieme (inclusa)" },
+  { time: "06:20", label: "Rientro e colazione insieme (inclusa)" },
+  { time: "07:00", label: "Fine evento" },
 ];
 
 const ALBA_BREAKFAST =
@@ -258,7 +258,7 @@ function albaEvent(input: {
     dateLabel: input.dateLabel,
     meetingTime: "04:30",
     sunriseTime: "05:30",
-    endTime: "07:30",
+    endTime: "07:00",
     locationName: input.locationName,
     locationAddress: input.locationAddress,
     googleMapsUrl: input.googleMapsUrl,
@@ -346,7 +346,7 @@ export const events: SupEvent[] = [
     timeline: [
       { time: "20:30", label: "Ritrovo a Polo Est Village" },
       { time: "20:45", label: "Briefing sicurezza notturna" },
-      { time: "21:00", label: "Uscita in mare: Venere e le prime stelle" },
+      { time: "21:00", label: "Venere e le prime stelle" },
       { time: "21:30", label: "Costellazioni e passaggi di satelliti" },
       { time: "22:04", label: "Passaggio della I.S.S. (magnitudine -4.1)" },
       { time: "22:45", label: "Rientro a terra" },
