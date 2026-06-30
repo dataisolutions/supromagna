@@ -210,7 +210,7 @@ export function BookingForm({
                 id="tables"
                 name="tables"
                 type="number"
-                min={1}
+                min={0}
                 max={Number(numPeople) || 10}
                 placeholder="Decidiamo insieme"
                 className={cn(inputCls, tablesError && "border-coral")}
@@ -218,7 +218,7 @@ export function BookingForm({
                   const t = parseInt(e.target.value, 10);
                   const p = parseInt(numPeople, 10) || 1;
                   if (e.target.value && t > p) {
-                    setTablesError(`Max ${p} tavol${p === 1 ? "a" : "e"} per ${p} participant${p === 1 ? "e" : "i"}`);
+                    setTablesError(`Max ${p} tavol${p === 1 ? "a" : "e"} per ${p} partecipant${p === 1 ? "e" : "i"}`);
                   } else {
                     setTablesError("");
                   }

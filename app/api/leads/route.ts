@@ -238,7 +238,7 @@ function validateLead(body: LeadPayload):
   if (!Number.isInteger(people) || people < 1 || people > 10) {
     return { ok: false, error: "Il numero di partecipanti deve essere compreso tra 1 e 10." };
   }
-  if (!Number.isInteger(tables) || tables < 1 || tables > 50) {
+  if (!Number.isInteger(tables) || tables < 0 || tables > 50) {
     return { ok: false, error: "Inserisci un numero di tavole valido." };
   }
   if (tables > people) {
