@@ -30,8 +30,12 @@ type LeadPayload = {
   notes?: unknown;
   eventSlug?: unknown;
   page?: unknown;
+  source?: unknown;
   utmSource?: unknown;
+  utmMedium?: unknown;
   utmCampaign?: unknown;
+  referrer?: unknown;
+  landing?: unknown;
   consent?: unknown;
   website?: unknown;
   startedAt?: unknown;
@@ -124,8 +128,12 @@ export async function POST(request: Request) {
         eventDate: event.date,
         eventSlug: event.slug,
         page: validation.data.page,
+        source: validation.data.source || "diretto",
         utmSource: validation.data.utmSource || null,
+        utmMedium: validation.data.utmMedium || null,
         utmCampaign: validation.data.utmCampaign || null,
+        referrer: validation.data.referrer || null,
+        landing: validation.data.landing || null,
         status: "Checkout avviato",
         privacyConsent: true,
       }),
@@ -186,6 +194,7 @@ export async function POST(request: Request) {
         eventSlug: validation.data.eventSlug,
         tables: String(validation.data.tables),
         people: String(validation.data.people),
+        source: validation.data.source || "diretto",
       },
     });
 
@@ -215,8 +224,12 @@ function validateLead(body: LeadPayload):
         notes: string;
         eventSlug: string;
         page: string;
+        source: string;
         utmSource: string;
+        utmMedium: string;
         utmCampaign: string;
+        referrer: string;
+        landing: string;
       };
     } {
   const name = asString(body.name, 100);
@@ -225,8 +238,12 @@ function validateLead(body: LeadPayload):
   const notes = asString(body.notes, 1_000);
   const eventSlug = asString(body.eventSlug, 160);
   const page = asString(body.page, 300);
+  const source = asString(body.source, 100);
   const utmSource = asString(body.utmSource, 100);
+  const utmMedium = asString(body.utmMedium, 100);
   const utmCampaign = asString(body.utmCampaign, 150);
+  const referrer = asString(body.referrer, 300);
+  const landing = asString(body.landing, 300);
   const people = asInteger(body.people);
   const tables = asInteger(body.tables);
 
@@ -250,7 +267,7 @@ function validateLead(body: LeadPayload):
 
   return {
     ok: true,
-    data: { name, phone, email, people, tables, notes, eventSlug, page, utmSource, utmCampaign },
+    data: { name, phone, email, people, tables, notes, eventSlug, page, source, utmSource, utmMedium, utmCampaign, referrer, landing },
   };
 }
 

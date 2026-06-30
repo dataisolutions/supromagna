@@ -5,6 +5,7 @@ import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/BottomNav";
+import { AttributionTracker } from "@/components/Attribution";
 
 const baloo = Baloo_2({
   variable: "--font-baloo",
@@ -86,6 +87,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
+        <AttributionTracker />
         <Header />
         <main className="flex-1 pb-32 md:pb-0">{children}</main>
         <Footer />

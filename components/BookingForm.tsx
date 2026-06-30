@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { site, whatsappLink } from "@/lib/site";
 import { Icon } from "@/components/icons";
 import { cn } from "@/components/ui";
+import { readAttribution, provenanceLabel } from "@/components/Attribution";
 
 type Variant = "event" | "lezioni" | "contatti";
 
@@ -33,7 +34,15 @@ export function BookingForm({
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [meta, setMeta] = useState({ page: "", utmSource: "", utmCampaign: "" });
+  const [meta, setMeta] = useState({
+    page: "",
+    utmSource: "",
+    utmMedium: "",
+    utmCampaign: "",
+    referrer: "",
+    landing: "",
+    source: "",
+  });
   const [numPeople, setNumPeople] = useState<string>("1");
   const [tablesError, setTablesError] = useState("");
   const startedAt = useRef(0);
@@ -41,10 +50,19 @@ export function BookingForm({
   useEffect(() => {
     startedAt.current = Date.now();
     const params = new URLSearchParams(window.location.search);
+    const stored = readAttribution();
+    // UTM dell'URL corrente (last-touch) con fallback sull'attribuzione salvata (first-touch).
+    const pick = (key: "utm_source" | "utm_medium" | "utm_campaign") =>
+      params.get(key) || stored[key] || "";
+    const utmSource = pick("utm_source");
     setMeta({
       page: window.location.pathname,
-      utmSource: params.get("utm_source") ?? "",
-      utmCampaign: params.get("utm_campaign") ?? "",
+      utmSource,
+      utmMedium: pick("utm_medium"),
+      utmCampaign: pick("utm_campaign"),
+      referrer: stored.referrer ?? "",
+      landing: stored.landing ?? "",
+      source: provenanceLabel(stored, utmSource || undefined),
     });
   }, []);
 
@@ -82,8 +100,12 @@ export function BookingForm({
             notes,
             eventSlug,
             page: meta.page,
+            source: meta.source,
             utmSource: meta.utmSource,
+            utmMedium: meta.utmMedium,
             utmCampaign: meta.utmCampaign,
+            referrer: meta.referrer,
+            landing: meta.landing,
             consent: data.get("consent") === "yes",
             website: data.get("website"),
             startedAt: startedAt.current,
@@ -140,8 +162,12 @@ export function BookingForm({
       <input type="hidden" name="event_slug" value={eventSlug ?? ""} />
       <input type="hidden" name="event_date" value={eventDate ?? ""} />
       <input type="hidden" name="page" value={meta.page} />
+      <input type="hidden" name="source" value={meta.source} />
       <input type="hidden" name="utm_source" value={meta.utmSource} />
+      <input type="hidden" name="utm_medium" value={meta.utmMedium} />
       <input type="hidden" name="utm_campaign" value={meta.utmCampaign} />
+      <input type="hidden" name="referrer" value={meta.referrer} />
+      <input type="hidden" name="landing" value={meta.landing} />
       <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="website">Sito web</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
