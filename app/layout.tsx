@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/BottomNav";
 import { AttributionTracker } from "@/components/Attribution";
+import { CookieConsent } from "@/components/CookieConsent";
 
 // ID container Google Tag Manager (pubblico). Override possibile via env.
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-NHZBRWWP";
@@ -87,6 +88,12 @@ export default function RootLayout({
   return (
     <html lang="it" className={`${baloo.variable} ${jakarta.variable} h-full`}>
       <head>
+        {/* Google Consent Mode v2: default "denied" PRIMA di GTM */}
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){dataLayer.push(arguments);};
+gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});
+try{if(localStorage.getItem('cookie_consent')==='granted'){gtag('consent','update',{ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});}}catch(e){}`}
+        </Script>
         {/* Google Tag Manager */}
         <Script id="gtm" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -118,6 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <main className="flex-1 pb-32 md:pb-0">{children}</main>
         <Footer />
         <BottomNav />
+        <CookieConsent />
       </body>
     </html>
   );
