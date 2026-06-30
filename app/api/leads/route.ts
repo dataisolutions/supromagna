@@ -161,6 +161,20 @@ export async function POST(request: Request) {
       metadata: { leadId },
     });
 
+    // Stessi metadata su Session e su PaymentIntent: la vista "Transazione" di
+    // Stripe mostra quelli del PaymentIntent, che non eredita quelli della Session.
+    const metadata = {
+      leadId,
+      name: validation.data.name,
+      phone: validation.data.phone,
+      eventTitle: event.title,
+      eventDate: event.dateLabel,
+      eventSlug: validation.data.eventSlug,
+      tables: String(validation.data.tables),
+      people: String(validation.data.people),
+      source: validation.data.source || "diretto",
+    };
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer: customer.id,
@@ -168,16 +182,10 @@ export async function POST(request: Request) {
       line_items: [{ price: stripePriceId, quantity: validation.data.people }],
       success_url: `${baseUrl}/grazie?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}${validation.data.page}`,
-      metadata: {
-        leadId,
-        name: validation.data.name,
-        phone: validation.data.phone,
-        eventTitle: event.title,
-        eventDate: event.dateLabel,
-        eventSlug: validation.data.eventSlug,
-        tables: String(validation.data.tables),
-        people: String(validation.data.people),
-        source: validation.data.source || "diretto",
+      metadata,
+      payment_intent_data: {
+        metadata,
+        description: `${event.title} — ${event.dateLabel} (${validation.data.people} persone)`,
       },
     });
 
