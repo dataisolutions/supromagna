@@ -201,9 +201,11 @@ export async function POST(request: Request) {
     if (!session.url) throw new Error("Stripe non ha restituito un URL di checkout.");
     checkoutUrl = session.url;
   } catch (error) {
-    console.error("Errore Stripe.", error instanceof Error ? error.message : "unknown");
+    const detail = error instanceof Error ? error.message : "unknown";
+    console.error("Errore Stripe.", detail);
+    // DEBUG TEMPORANEO: espone il messaggio Stripe per diagnosi (i log Vercel sono off).
     return Response.json(
-      { error: "Non siamo riusciti ad avviare il pagamento. Riprova tra poco." },
+      { error: `Pagamento non avviato. [debug: ${detail}]` },
       { status: 502, headers },
     );
   }
