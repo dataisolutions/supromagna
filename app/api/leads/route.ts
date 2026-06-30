@@ -172,6 +172,8 @@ export async function POST(request: Request) {
         leadId,
         name: validation.data.name,
         phone: validation.data.phone,
+        eventTitle: event.title,
+        eventDate: event.dateLabel,
         eventSlug: validation.data.eventSlug,
         tables: String(validation.data.tables),
         people: String(validation.data.people),
