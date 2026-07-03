@@ -99,9 +99,11 @@ export async function POST(request: Request) {
   const webhookApiKey = process.env.MAKE_WEBHOOK_API_KEY;
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
   const stripePriceId = process.env.STRIPE_PRICE_ID;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  // I redirect Stripe tornano sullo stesso dominio da cui arriva la richiesta
+  // (già validato: origin === requestOrigin). Niente dipendenza da NEXT_PUBLIC_BASE_URL.
+  const baseUrl = requestOrigin;
 
-  if (!webhookUrl || !stripeSecretKey || !stripePriceId || !baseUrl) {
+  if (!webhookUrl || !stripeSecretKey || !stripePriceId) {
     console.error("Lead API non configurata: mancano variabili ambiente server-side.");
     return Response.json(
       { error: "Prenotazione temporaneamente non disponibile. Riprova più tardi." },
