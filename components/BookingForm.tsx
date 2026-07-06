@@ -44,6 +44,7 @@ export function BookingForm({
     source: "",
   });
   const [numPeople, setNumPeople] = useState<string>("1");
+  const [numTables, setNumTables] = useState<string>("1");
   const [tablesError, setTablesError] = useState("");
   const startedAt = useRef(0);
 
@@ -212,7 +213,7 @@ export function BookingForm({
                 type="number"
                 min={0}
                 max={Number(numPeople) || 10}
-                placeholder="Decidiamo insieme"
+                value={numTables}
                 className={cn(inputCls, tablesError && "border-coral")}
                 onBlur={(e) => {
                   const t = parseInt(e.target.value, 10);
@@ -223,7 +224,10 @@ export function BookingForm({
                     setTablesError("");
                   }
                 }}
-                onChange={() => setTablesError("")}
+                onChange={(e) => {
+                  setNumTables(e.target.value);
+                  setTablesError("");
+                }}
               />
               {tablesError && <p className="mt-1 text-xs text-coral-deep">{tablesError}</p>}
             </Field>
