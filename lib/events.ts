@@ -161,17 +161,6 @@ const ALBA_FAQ: FaqItem[] = [
   { q: "Come funziona la prenotazione?", a: "La prenotazione è obbligatoria fino a esaurimento posti. Lasci i tuoi dati nel form e prosegui sulla pagina di pagamento sicura Stripe. Il posto è confermato dopo l'acquisto." },
 ];
 
-/** FAQ AstroSUP: niente colazione (notturno), orari e prezzi propri. */
-const ASTRO_FAQ: FaqItem[] = ALBA_FAQ.filter((i) => i.q !== "La colazione è inclusa?").map((i) => {
-  if (i.q === "A che ora devo arrivare?") {
-    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 20.30 a Polo Est Village. Arriva puntuale per il briefing sulla sicurezza notturna; l'evento finisce intorno alle 23.00." };
-  }
-  if (i.q === "Quanto costa e la tavola è inclusa?") {
-    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 38€ singola (1 persona), 50€ doppia (2 persone). Se hai la tua tavola: 18€ singola, 28€ doppia." };
-  }
-  return i;
-});
-
 /** FAQ Fantini: colazione non inclusa (menu in loco), prezzi e orari propri. */
 const FANTINI_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
   if (i.q === "A che ora devo arrivare?") {
@@ -193,13 +182,6 @@ const ALBA_TABLE_OPTIONS: TableOption[] = [
   { name: "Tavola doppia", forWho: "Noleggio per 2 persone.", price: "45€" },
   { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "15€" },
   { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "25€" },
-];
-
-const ASTRO_TABLE_OPTIONS: TableOption[] = [
-  { name: "Tavola singola", forWho: "Noleggio per 1 persona.", price: "38€" },
-  { name: "Tavola doppia", forWho: "Noleggio per 2 persone.", price: "50€" },
-  { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "18€" },
-  { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "28€" },
 ];
 
 const FANTINI_TABLE_OPTIONS: TableOption[] = [
@@ -301,63 +283,6 @@ export const events: SupEvent[] = [
     googleMapsUrl: "https://maps.google.com/?q=Bagno+Adriatico+Cesenatico",
     photo: "/media/alba-1.jpg",
   }),
-  {
-    title: "AstroSUP — Dal Sistema Solare alle Costellazioni",
-    slug: "astro-sup-polo-est-7-luglio-2026",
-    category: "astro-sup",
-    status: "Posti limitati",
-    date: "2026-07-07",
-    dateLabel: "Martedì 7 luglio 2026",
-    meetingTime: "20:30",
-    startTime: "21:00",
-    endTime: "23:00",
-    locationName: "Polo Est Village",
-    locationAddress: "Bellaria-Igea Marina (RN)",
-    googleMapsUrl: "https://maps.google.com/?q=Polo+Est+Village+Bellaria+Igea+Marina",
-    photo: "/media/astrosup.jpg",
-    descriptionShort:
-      "Una notturna in SUP guidata da un astrofilo: dal pianeta Venere alle costellazioni, fino al passaggio della Stazione Spaziale. Mare piatto e cielo stellato.",
-    experienceStory:
-      "Una notturna in SUP che è anche un viaggio nel cielo. Scivoliamo sul mare piatto illuminati solo dalla luce delle stelle, mentre l'astrofilo Emanuele Cambiotti ci guida dal sistema solare alle costellazioni. Si parte da Venere, che ci accompagna fino alle prime stelle; poi riconosciamo le costellazioni della volta celeste e osserviamo i numerosi passaggi dei satelliti artificiali — uno spunto per parlare delle \"costellazioni satellitari\", della loro funzione, utilità e controindicazioni. Alle 22.04 guardiamo tutti insieme il luminosissimo passaggio della Stazione Spaziale Internazionale (I.S.S., magnitudine -4.1). Al rientro a terra, intorno alle 22.45-23, chi vuole può osservare alcuni oggetti deep sky con un semplice binocolo, guidato dall'astrofilo in battigia. Evento aperto a tutti e adatto a tutte le età: se non hai mai usato un SUP, te lo insegniamo noi.",
-    difficulty: "Adatto a tutti e a tutte le età, mare calmo",
-    duration: "circa 2 ore",
-    beginnerFriendly: true,
-    swimmingRequired: true,
-    instructors: "Astrofilo Emanuele Cambiotti + istruttori SUP",
-    included: [
-      "Guida astrofila (Emanuele Cambiotti)",
-      "Istruttori SUP in acqua",
-      "Tavola SUP con luce (se a noleggio)",
-      "Pagaia e cintura di galleggiamento",
-      "Briefing sicurezza notturna",
-      "Osservazione deep sky col binocolo a fine evento",
-    ],
-    breakfastStatus: "non inclusa",
-    tableOptions: ASTRO_TABLE_OPTIONS,
-    whatToBring: [
-      "Costume già indossato",
-      "Una felpa: di notte rinfresca",
-      "Telo e cambio asciutto",
-      "Ciabatte",
-      "Acqua",
-    ],
-    priceFrom: "38€",
-    capacityNote: "Prenotazione obbligatoria fino a esaurimento posti.",
-    timeline: [
-      { time: "20:30", label: "Ritrovo a Polo Est Village" },
-      { time: "20:45", label: "Briefing sicurezza notturna" },
-      { time: "21:00", label: "Venere e le prime stelle" },
-      { time: "21:30", label: "Costellazioni e passaggi di satelliti" },
-      { time: "22:04", label: "Passaggio della I.S.S. (magnitudine -4.1)" },
-      { time: "22:45", label: "Rientro a terra" },
-      { time: "23:00", label: "Deep sky col binocolo in battigia" },
-    ],
-    faq: ASTRO_FAQ,
-    weatherPolicy: STD_WEATHER,
-    seoTitle: "AstroSUP a Polo Est Village — SUP notturno con astrofilo",
-    seoDescription:
-      "SUP in notturna a Bellaria-Igea Marina guidato dall'astrofilo Emanuele Cambiotti: dal pianeta Venere alle costellazioni, passaggio della Stazione Spaziale e deep sky col binocolo. Posti limitati.",
-  },
   albaEvent({
     title: "Alba in SUP — 11 Luglio",
     slug: "alba-in-sup-11-luglio-2026",
