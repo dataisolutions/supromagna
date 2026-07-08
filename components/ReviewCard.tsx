@@ -26,9 +26,9 @@ export const reviews: Review[] = [
   {
     name: "Federico T.",
     origin: "Rimini",
-    text: "Gli istruttori ti mettono a tuo agio dal primo secondo. Sicurezza, calma e zero stress. La notte di San Lorenzo in SUP è stata magica.",
+    text: "Gli istruttori ti mettono a tuo agio dal primo secondo. Sicurezza, calma e zero stress. Un'alba in mare che rifarei subito.",
     rating: 5,
-    event: "AstroSUP",
+    event: "Alba in SUP",
   },
   {
     name: "Anna R.",

@@ -13,7 +13,6 @@ export type EventStatus =
 
 export type CategorySlug =
   | "alba-in-sup"
-  | "astro-sup"
   | "yoga-sup"
   | "aperisup"
   | "eventi-speciali";
@@ -95,17 +94,6 @@ export const categories: Category[] = [
     emoji: "🌅",
     filterLabel: "Alba",
     photo: "/media/alba-1.jpg",
-  },
-  {
-    slug: "astro-sup",
-    name: "AstroSUP / Notturni",
-    short: "Pagaia sotto le stelle, con il mare nero e il cielo aperto sopra di te.",
-    tagline: "Il mare di notte è un altro mare.",
-    intro:
-      "Quando cala il buio l'Adriatico diventa silenzioso e profondo. Usciamo con luci e guida, alziamo lo sguardo e ci godiamo il cielo lontano dalle luci della costa, accompagnati da un astrofilo che ci racconta stelle, costellazioni e satelliti.",
-    emoji: "✨",
-    filterLabel: "Notturni",
-    photo: "/media/astrosup.jpg",
   },
   {
     slug: "yoga-sup",
