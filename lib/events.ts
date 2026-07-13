@@ -370,6 +370,28 @@ export const events: SupEvent[] = [
       faq: CERVIAMARE_FAQ,
     },
   ),
+  albaEvent({
+    title: "Alba in SUP — 25 Luglio",
+    slug: "alba-in-sup-25-luglio-2026",
+    status: "In programma",
+    date: "2026-07-25",
+    dateLabel: "Sabato 25 luglio 2026",
+    locationName: "Bagno Selene",
+    locationAddress: "Valverde di Cesenatico (FC)",
+    googleMapsUrl: "https://maps.google.com/?q=Bagno+Selene+Valverde+Cesenatico",
+    photo: "/media/alba-3.jpg",
+  }),
+  albaEvent({
+    title: "Alba in SUP — 26 Luglio",
+    slug: "alba-in-sup-26-luglio-2026",
+    status: "In programma",
+    date: "2026-07-26",
+    dateLabel: "Domenica 26 luglio 2026",
+    locationName: "Cala Romeo",
+    locationAddress: "Cesenatico (FC)",
+    googleMapsUrl: "https://maps.google.com/?q=Cala+Romeo+Cesenatico",
+    photo: "/media/alba-4.jpg",
+  }),
 ];
 
 /* ---------- Helper di accesso ---------- */
