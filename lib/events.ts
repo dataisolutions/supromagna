@@ -179,6 +179,24 @@ const FANTINI_TABLE_OPTIONS: TableOption[] = [
   { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "20€" },
 ];
 
+const CERVIAMARE_TABLE_OPTIONS: TableOption[] = [
+  { name: "Tavola singola", forWho: "Noleggio per 1 persona.", price: "40€" },
+  { name: "Tavola doppia", forWho: "Noleggio per 2 persone.", price: "60€" },
+  { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "20€" },
+  { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "30€" },
+];
+
+/** FAQ cerviAmare: colazione inclusa, ma orari propri (ritrovo 4.40, alba 5.44, fine 7.30). */
+const CERVIAMARE_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 4.40. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 5.44). Verso le 6.30 facciamo colazione insieme e l'evento finisce intorno alle 7.30." };
+  }
+  if (i.q === "Quanto costa e la tavola è inclusa?") {
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 40€ singola (1 persona), 60€ doppia (2 persone). Se hai la tua tavola: 20€ singola, 30€ doppia. La colazione è sempre compresa." };
+  }
+  return i;
+});
+
 const ALBA_INCLUDED = [
   "Istruttori e guida in mare",
   "Tavola SUP e pagaia (se a noleggio)",
@@ -322,6 +340,34 @@ export const events: SupEvent[] = [
         "Arrivi in spiaggia quando è ancora buio e l'aria sa di sale. Prepariamo le tavole insieme, ti spieghiamo le basi e usciamo in mare col gruppo. Poi il cielo si accende: prima rosa, poi arancio, poi oro. Quando il sole rompe l'orizzonte ti godi l'alba direttamente dall'acqua — in silenzio, con gli istruttori a un metro da te. Al rientro, se vuoi, puoi fermarti per la colazione al Fantini Club. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
       seoDescription:
         "Alba in SUP al Fantini Club di Cervia: uscita guidata all'alba, tavola a noleggio, colazione disponibile in loco. Adatta ai principianti, prenotazione online.",
+    },
+  ),
+  albaEvent(
+    {
+      title: "Alba in SUP — 19 Luglio",
+      slug: "alba-in-sup-19-luglio-2026",
+      status: "In programma",
+      date: "2026-07-19",
+      dateLabel: "Domenica 19 luglio 2026",
+      locationName: "cerviAmare",
+      locationAddress: "Cervia (RA)",
+      googleMapsUrl: "https://maps.google.com/?q=cerviAmare+Lungomare+Gabriele+D%27Annunzio+222%2C+48015+Cervia+RA",
+      photo: "/media/alba-6.jpg",
+    },
+    {
+      meetingTime: "04:40",
+      sunriseTime: "05:44",
+      endTime: "07:30",
+      tableOptions: CERVIAMARE_TABLE_OPTIONS,
+      priceFrom: "40€",
+      timeline: [
+        { time: "04:40", label: "Ritrovo in spiaggia" },
+        { time: "04:50", label: "Briefing e preparazione tavole" },
+        { time: "05:44", label: "Alba dal mare" },
+        { time: "06:30", label: "Rientro e colazione insieme (inclusa)" },
+        { time: "07:30", label: "Fine evento" },
+      ],
+      faq: CERVIAMARE_FAQ,
     },
   ),
 ];
