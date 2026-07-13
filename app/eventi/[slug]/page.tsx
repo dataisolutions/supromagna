@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   events,
   eventBySlug,
   categoryBySlug,
   nextEvents,
+  isUpcoming,
+  featuredEvent,
 } from "@/lib/events";
 import { site } from "@/lib/site";
 import { Container, Button, StatusBadge } from "@/components/ui";
@@ -18,6 +20,10 @@ import { EventCard } from "@/components/EventCard";
 export function generateStaticParams() {
   return events.map((e) => ({ slug: e.slug }));
 }
+
+// Rigenera la pagina periodicamente: il controllo "evento passato" si basa
+// sulla data odierna, che altrimenti resterebbe congelata al momento del build.
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
@@ -41,12 +47,27 @@ export async function generateMetadata({
 
 export default async function EventPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { slug } = await params;
   const event = eventBySlug(slug);
   if (!event) notFound();
+
+  // Evento passato (data < oggi): un vecchio link non deve mostrare la pagina
+  // (né il form di prenotazione attivo) ma portare al prossimo evento in programma,
+  // preservando eventuali UTM della campagna che ha portato il click.
+  if (!isUpcoming(event)) {
+    const next = nextEvents(1)[0] ?? featuredEvent();
+    const params2 = new URLSearchParams();
+    for (const [key, value] of Object.entries(await searchParams)) {
+      if (typeof value === "string") params2.set(key, value);
+    }
+    const qs = params2.toString();
+    redirect(`/eventi/${next.slug}${qs ? `?${qs}` : ""}`);
+  }
 
   const cat = categoryBySlug(event.category);
   const others = nextEvents(3).filter((e) => e.slug !== event.slug);
