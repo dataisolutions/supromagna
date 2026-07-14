@@ -148,7 +148,11 @@ export function BookingForm({
     router.push(`/grazie?${params.toString()}`);
   }
 
-  const { submit, intro } = labels[variant];
+  const { intro } = labels[variant];
+  const submit =
+    variant === "event"
+      ? `Prenota ora${eventShortLabel ? ` ${eventShortLabel}` : ""}`
+      : labels[variant].submit;
 
   return (
     <form
