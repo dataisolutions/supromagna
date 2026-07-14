@@ -415,6 +415,20 @@ export function eventBySlug(slug: string): SupEvent | undefined {
   return events.find((e) => e.slug === slug);
 }
 
+const MONTHS_SHORT = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
+
+/** Data breve "DD Mmm" da una data ISO (YYYY-MM-DD), es. "26 Lug". */
+export function shortDate(dateISO: string): string {
+  const [, month, day] = dateISO.split("-").map(Number);
+  return `${day} ${MONTHS_SHORT[month - 1]}`;
+}
+
+/** Etichetta breve evento per UI compatte (form, sticky CTA), es. "Alba 26 Lug". */
+export function eventShortLabel(e: SupEvent): string {
+  const cat = categoryBySlug(e.category);
+  return `${cat?.filterLabel ?? "Evento"} ${shortDate(e.date)}`;
+}
+
 /** Eventi di una categoria non ancora passati, ordinati per data crescente. */
 export function eventsByCategory(slug: CategorySlug): SupEvent[] {
   return events

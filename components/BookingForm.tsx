@@ -14,6 +14,7 @@ interface BookingFormProps {
   eventTitle?: string;
   eventDate?: string;
   eventSlug?: string;
+  eventShortLabel?: string;
   tableOptions?: { name: string }[];
   className?: string;
 }
@@ -29,6 +30,7 @@ export function BookingForm({
   eventTitle,
   eventDate,
   eventSlug,
+  eventShortLabel,
   className,
 }: BookingFormProps) {
   const router = useRouter();
@@ -68,10 +70,10 @@ export function BookingForm({
   }, []);
 
   const heading = useMemo(() => {
-    if (variant === "event") return "Prenota questo evento";
+    if (variant === "event") return eventShortLabel ? `Prenotazione ${eventShortLabel}` : "Prenota questo evento";
     if (variant === "lezioni") return "Prenota la tua lezione";
     return "Scrivici";
-  }, [variant]);
+  }, [variant, eventShortLabel]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

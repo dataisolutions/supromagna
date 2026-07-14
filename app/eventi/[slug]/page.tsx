@@ -7,6 +7,7 @@ import {
   nextEvents,
   isUpcoming,
   featuredEvent,
+  eventShortLabel,
 } from "@/lib/events";
 import { site } from "@/lib/site";
 import { Container, Button, StatusBadge } from "@/components/ui";
@@ -71,6 +72,7 @@ export default async function EventPage({
 
   const cat = categoryBySlug(event.category);
   const others = nextEvents(3).filter((e) => e.slug !== event.slug);
+  const shortLabel = eventShortLabel(event);
   const quickFacts = [
     { icon: Icon.Calendar, label: "Data", value: event.dateLabel },
     { icon: Icon.Clock, label: "Ritrovo", value: event.meetingTime },
@@ -270,6 +272,7 @@ export default async function EventPage({
             eventTitle={event.title}
             eventDate={event.dateLabel}
             eventSlug={event.slug}
+            eventShortLabel={shortLabel}
             tableOptions={event.tableOptions}
           />
           <div className="mt-4 rounded-2xl bg-white p-5 ring-1 ring-navy/8">
@@ -316,7 +319,7 @@ export default async function EventPage({
         </Container>
       </section>
 
-      <StickyCTA priceFrom={event.priceFrom} />
+      <StickyCTA priceFrom={event.priceFrom} eventLabel={shortLabel} />
     </>
   );
 }
