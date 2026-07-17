@@ -346,7 +346,7 @@ export const events: SupEvent[] = [
     {
       title: "Alba in SUP — 19 Luglio",
       slug: "alba-in-sup-19-luglio-2026",
-      status: "In programma",
+      status: "Sold out",
       date: "2026-07-19",
       dateLabel: "Domenica 19 luglio 2026",
       locationName: "cerviAmare",
