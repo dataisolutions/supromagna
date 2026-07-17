@@ -443,11 +443,14 @@ export function visibleEvents(): SupEvent[] {
 
 const ACTIVE_STATUSES: EventStatus[] = ["In programma", "Posti limitati", "In arrivo"];
 
+/** True se l'evento è ancora prenotabile: data futura e stato attivo (non Sold out/Rimandato/Passato). */
+export function isBookable(e: SupEvent): boolean {
+  return ACTIVE_STATUSES.includes(e.status) && isUpcoming(e);
+}
+
 /** Eventi attivi e non passati, ordinati per data crescente. */
 export function upcomingEvents(): SupEvent[] {
-  return [...events]
-    .filter((e) => ACTIVE_STATUSES.includes(e.status) && isUpcoming(e))
-    .sort((a, b) => a.date.localeCompare(b.date));
+  return [...events].filter(isBookable).sort((a, b) => a.date.localeCompare(b.date));
 }
 
 /** I prossimi N eventi attivi dalla data odierna (default 3). */

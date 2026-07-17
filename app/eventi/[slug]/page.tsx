@@ -5,7 +5,7 @@ import {
   eventBySlug,
   categoryBySlug,
   nextEvents,
-  isUpcoming,
+  isBookable,
   featuredEvent,
   eventShortLabel,
 } from "@/lib/events";
@@ -57,17 +57,22 @@ export default async function EventPage({
   const event = eventBySlug(slug);
   if (!event) notFound();
 
-  // Evento passato (data < oggi): un vecchio link non deve mostrare la pagina
-  // (né il form di prenotazione attivo) ma portare al prossimo evento in programma,
-  // preservando eventuali UTM della campagna che ha portato il click.
-  if (!isUpcoming(event)) {
+  // Evento non prenotabile (data passata o stato non attivo, es. Sold out): un
+  // vecchio link non deve mostrare la pagina (né il form di prenotazione attivo)
+  // ma portare all'evento in evidenza, preservando eventuali UTM della campagna
+  // che ha portato il click. Guardia anti-loop: se non c'è un'alternativa migliore
+  // (es. tutti gli eventi sono sold out), mostra comunque la pagina invece di
+  // reindirizzare all'infinito su se stessa.
+  if (!isBookable(event)) {
     const next = nextEvents(1)[0] ?? featuredEvent();
-    const params2 = new URLSearchParams();
-    for (const [key, value] of Object.entries(await searchParams)) {
-      if (typeof value === "string") params2.set(key, value);
+    if (next.slug !== event.slug) {
+      const params2 = new URLSearchParams();
+      for (const [key, value] of Object.entries(await searchParams)) {
+        if (typeof value === "string") params2.set(key, value);
+      }
+      const qs = params2.toString();
+      redirect(`/eventi/${next.slug}${qs ? `?${qs}` : ""}`);
     }
-    const qs = params2.toString();
-    redirect(`/eventi/${next.slug}${qs ? `?${qs}` : ""}`);
   }
 
   const cat = categoryBySlug(event.category);
