@@ -444,7 +444,7 @@ export const events: SupEvent[] = [
     experienceStory:
       "Il 4 agosto le Perseidi, le celebri \"lacrime di San Lorenzo\", attraversano il cielo nella notte più magica dell'estate. Usciamo in SUP con luci e guida: il mare piatto e nero sotto di te, il cielo aperto sopra. L'astrofilo Emanuele Cambiotti ci accompagna nel racconto delle stelle cadenti, tra i frammenti incandescenti che ci ricordano quanto siamo parte di qualcosa di più grande — mentre gli istruttori SUP restano con te per tutta l'uscita. Evento aperto a tutti e adatto a tutte le età: se non hai mai usato un SUP, te lo insegniamo noi.",
     difficulty: "Adatto a tutti e a tutte le età, mare calmo",
-    duration: "circa 2 ore",
+    duration: "2/3 ore",
     beginnerFriendly: true,
     swimmingRequired: true,
     instructors: "Astrofilo Emanuele Cambiotti + istruttori SUP",
