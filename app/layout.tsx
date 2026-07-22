@@ -37,6 +37,7 @@ export const metadata: Metadata = {
     "Alba in SUP Romagna",
     "SUP Romagna",
     "Eventi SUP Romagna",
+    "AstroSUP",
     "Yoga SUP",
     "Lezioni SUP Cesenatico",
     "Team building SUP",

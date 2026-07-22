@@ -13,6 +13,7 @@ type Filter = {
 const filters: Filter[] = [
   { label: "Tutti", test: () => true },
   { label: "Alba", test: (e) => e.category === "alba-in-sup" },
+  { label: "Notturni", test: (e) => e.category === "astro-sup" },
   { label: "Yoga / Pilates", test: (e) => e.category === "yoga-sup" },
   { label: "Aperitivi", test: (e) => e.category === "aperisup" },
   { label: "Speciali", test: (e) => e.category === "eventi-speciali" },

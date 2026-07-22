@@ -13,6 +13,7 @@ export type EventStatus =
 
 export type CategorySlug =
   | "alba-in-sup"
+  | "astro-sup"
   | "yoga-sup"
   | "aperisup"
   | "eventi-speciali";
@@ -94,6 +95,17 @@ export const categories: Category[] = [
     emoji: "🌅",
     filterLabel: "Alba",
     photo: "/media/alba-1.jpg",
+  },
+  {
+    slug: "astro-sup",
+    name: "AstroSUP / Notturni",
+    short: "Pagaia sotto le stelle, con il mare nero e il cielo aperto sopra di te.",
+    tagline: "Il mare di notte è un altro mare.",
+    intro:
+      "Quando cala il buio l'Adriatico diventa silenzioso e profondo. Usciamo con luci e guida, alziamo lo sguardo e ci godiamo il cielo lontano dalle luci della costa, accompagnati da un astrofilo che ci racconta stelle, costellazioni e satelliti.",
+    emoji: "✨",
+    filterLabel: "Notturni",
+    photo: "/media/astrosup.jpg",
   },
   {
     slug: "yoga-sup",
@@ -185,6 +197,24 @@ const CERVIAMARE_TABLE_OPTIONS: TableOption[] = [
   { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "20€" },
   { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "30€" },
 ];
+
+const ASTRO_TABLE_OPTIONS: TableOption[] = [
+  { name: "Tavola singola", forWho: "Noleggio per 1 persona.", price: "38€" },
+  { name: "Tavola doppia", forWho: "Noleggio per 2 persone.", price: "50€" },
+  { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "18€" },
+  { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "28€" },
+];
+
+/** FAQ AstroSUP: niente colazione (notturno), orari e prezzi propri. */
+const ASTRO_FAQ: FaqItem[] = ALBA_FAQ.filter((i) => i.q !== "La colazione è inclusa?").map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 20.30 a Polo Est Village. Arriva puntuale per il briefing sulla sicurezza notturna; l'evento finisce intorno alle 23.00." };
+  }
+  if (i.q === "Quanto costa e la tavola è inclusa?") {
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 38€ singola (1 persona), 50€ doppia (2 persone). Se hai la tua tavola: 18€ singola, 28€ doppia." };
+  }
+  return i;
+});
 
 /** FAQ cerviAmare: colazione inclusa, ma orari propri (ritrovo 4.40, alba 5.44, fine 7.30). */
 const CERVIAMARE_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
@@ -392,6 +422,64 @@ export const events: SupEvent[] = [
     googleMapsUrl: "https://maps.google.com/?q=Cala+Romeo+Cesenatico",
     photo: "/media/alba-4.jpg",
   }),
+  // N.B. Alle 22.58 possibile luna rossa sul mare: NON è menzionata nel testo
+  // pubblico dell'evento di proposito, per farne una sorpresa a sorpresa per
+  // i partecipanti durante l'uscita.
+  {
+    title: "AstroSUP — La Notte delle Stelle",
+    slug: "astro-sup-notte-delle-stelle-4-agosto-2026",
+    category: "astro-sup",
+    status: "Posti limitati",
+    date: "2026-08-04",
+    dateLabel: "Martedì 4 agosto 2026",
+    meetingTime: "20:30",
+    startTime: "21:00",
+    endTime: "23:00",
+    locationName: "Polo Est Village",
+    locationAddress: "Bellaria-Igea Marina (RN)",
+    googleMapsUrl: "https://maps.google.com/?q=Polo+Est+Village+Bellaria+Igea+Marina",
+    photo: "/media/astrosup.jpg",
+    descriptionShort:
+      "Una notturna in SUP sotto le stelle cadenti delle Perseidi, guidata da un astrofilo. Mare piatto, cielo aperto e la magia di San Lorenzo vista dall'acqua.",
+    experienceStory:
+      "Il 4 agosto le Perseidi, le celebri \"lacrime di San Lorenzo\", attraversano il cielo nella notte più magica dell'estate. Usciamo in SUP con luci e guida: il mare piatto e nero sotto di te, il cielo aperto sopra. L'astrofilo Emanuele Cambiotti ci accompagna nel racconto delle stelle cadenti, tra i frammenti incandescenti che ci ricordano quanto siamo parte di qualcosa di più grande — mentre gli istruttori SUP restano con te per tutta l'uscita. Evento aperto a tutti e adatto a tutte le età: se non hai mai usato un SUP, te lo insegniamo noi.",
+    difficulty: "Adatto a tutti e a tutte le età, mare calmo",
+    duration: "circa 2 ore",
+    beginnerFriendly: true,
+    swimmingRequired: true,
+    instructors: "Astrofilo Emanuele Cambiotti + istruttori SUP",
+    included: [
+      "Guida astrofila (Emanuele Cambiotti)",
+      "Istruttori SUP in acqua",
+      "Tavola SUP con luce (se a noleggio)",
+      "Pagaia e cintura di galleggiamento",
+      "Briefing sicurezza notturna",
+      "Racconto delle Perseidi e del cielo stellato",
+    ],
+    breakfastStatus: "non inclusa",
+    tableOptions: ASTRO_TABLE_OPTIONS,
+    whatToBring: [
+      "Costume già indossato",
+      "Una felpa: di notte rinfresca",
+      "Telo e cambio asciutto",
+      "Ciabatte",
+      "Acqua",
+    ],
+    priceFrom: "38€",
+    capacityNote: "Prenotazione obbligatoria fino a esaurimento posti.",
+    timeline: [
+      { time: "20:30", label: "Ritrovo a Polo Est Village" },
+      { time: "20:45", label: "Briefing sicurezza notturna" },
+      { time: "21:30", label: "Le Perseidi: le lacrime di San Lorenzo" },
+      { time: "22:45", label: "Rientro a terra" },
+      { time: "23:00", label: "Fine evento" },
+    ],
+    faq: ASTRO_FAQ,
+    weatherPolicy: STD_WEATHER,
+    seoTitle: "AstroSUP Perseidi a Polo Est Village — La Notte delle Stelle",
+    seoDescription:
+      "SUP notturno il 4 agosto 2026 sotto le Perseidi (lacrime di San Lorenzo), guidato dall'astrofilo Emanuele Cambiotti a Polo Est Village. Mare piatto, cielo aperto, posti limitati.",
+  },
 ];
 
 /* ---------- Helper di accesso ---------- */

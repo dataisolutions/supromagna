@@ -11,6 +11,8 @@ export function sceneForCategory(c: CategorySlug): SceneVariant {
   switch (c) {
     case "alba-in-sup":
       return "alba";
+    case "astro-sup":
+      return "astro";
     case "aperisup":
       return "aperisup";
     case "yoga-sup":
