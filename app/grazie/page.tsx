@@ -7,7 +7,7 @@ import { PurchaseTracking, type PurchaseData } from "@/components/PurchaseTracki
 
 export const metadata: Metadata = {
   title: "Prenotazione confermata",
-  description: "Pagamento ricevuto. Riceverai tutte le informazioni via email.",
+  description: "Pagamento ricevuto. Ti contatteremo su WhatsApp con tutte le informazioni.",
   robots: { index: false, follow: false },
 };
 
@@ -63,9 +63,9 @@ export default async function GraziePage({
         </h1>
         <p className="mt-4 max-w-md text-lg text-white/90">
           {eventName ? (
-            <>Prenotazione per <strong>{eventName}</strong> confermata. Riceverai via email tutte le informazioni per prepararti al meglio.</>
+            <>Prenotazione per <strong>{eventName}</strong> confermata. Ti contatteremo su WhatsApp con tutte le informazioni per prepararti al meglio.</>
           ) : (
-            <>Prenotazione confermata. Riceverai via email tutte le informazioni per prepararti al meglio.</>
+            <>Prenotazione confermata. Ti contatteremo su WhatsApp con tutte le informazioni per prepararti al meglio.</>
           )}
         </p>
         <p className="mt-2 text-sm text-white/75">
