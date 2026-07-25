@@ -414,7 +414,7 @@ export const events: SupEvent[] = [
   albaEvent({
     title: "Alba in SUP — 26 Luglio",
     slug: "alba-in-sup-26-luglio-2026",
-    status: "In programma",
+    status: "Sold out",
     date: "2026-07-26",
     dateLabel: "Domenica 26 luglio 2026",
     locationName: "Cala Romeo",
