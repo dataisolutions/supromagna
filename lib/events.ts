@@ -227,6 +227,22 @@ const CERVIAMARE_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
   return i;
 });
 
+/** FAQ Cala Romeo 1 agosto: prezzi standard, orari propri (ritrovo 4.45, alba 5.58, fine 7.30). */
+const CALAROMEO_1AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 4.45. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 5.58). L'evento finisce intorno alle 7.30." };
+  }
+  return i;
+});
+
+/** FAQ Bagno Lavanda n.72 2 agosto: prezzi standard, orari propri (ritrovo 4.50, alba 5.59, fine 7.40). */
+const LAVANDA_2AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 4.50. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 5.59). L'evento finisce intorno alle 7.40." };
+  }
+  return i;
+});
+
 const ALBA_INCLUDED = [
   "Istruttori e guida in mare",
   "Tavola SUP e pagaia (se a noleggio)",
@@ -480,6 +496,58 @@ export const events: SupEvent[] = [
     seoDescription:
       "SUP notturno il 4 agosto 2026 sotto le Perseidi (lacrime di San Lorenzo), guidato dall'astrofilo Emanuele Cambiotti a Polo Est Village. Mare piatto, cielo aperto, posti limitati.",
   },
+  albaEvent(
+    {
+      title: "Alba in SUP — 1 Agosto",
+      slug: "alba-in-sup-1-agosto-2026",
+      status: "In programma",
+      date: "2026-08-01",
+      dateLabel: "Sabato 1 agosto 2026",
+      locationName: "Cala Romeo",
+      locationAddress: "Cesenatico (FC)",
+      googleMapsUrl: "https://maps.google.com/?q=Cala+Romeo+Cesenatico",
+      photo: "/media/alba-4.jpg",
+    },
+    {
+      meetingTime: "04:45",
+      sunriseTime: "05:58",
+      endTime: "07:30",
+      timeline: [
+        { time: "04:45", label: "Ritrovo in spiaggia" },
+        { time: "04:55", label: "Briefing e preparazione tavole" },
+        { time: "05:58", label: "Alba dal mare" },
+        { time: "06:45", label: "Rientro e colazione insieme (inclusa)" },
+        { time: "07:30", label: "Fine evento" },
+      ],
+      faq: CALAROMEO_1AGO_FAQ,
+    },
+  ),
+  albaEvent(
+    {
+      title: "Alba in SUP — 2 Agosto",
+      slug: "alba-in-sup-2-agosto-2026",
+      status: "In programma",
+      date: "2026-08-02",
+      dateLabel: "Domenica 2 agosto 2026",
+      locationName: "Bagno Lavanda n.72",
+      locationAddress: "Stazione del Mare, Cesenatico (FC)",
+      googleMapsUrl: "https://maps.google.com/?q=Bagno+Lavanda+Cesenatico",
+      photo: "/media/alba-5.jpg",
+    },
+    {
+      meetingTime: "04:50",
+      sunriseTime: "05:59",
+      endTime: "07:40",
+      timeline: [
+        { time: "04:50", label: "Ritrovo in spiaggia" },
+        { time: "05:00", label: "Briefing e preparazione tavole" },
+        { time: "05:59", label: "Alba dal mare" },
+        { time: "06:50", label: "Rientro e colazione insieme (inclusa)" },
+        { time: "07:40", label: "Fine evento" },
+      ],
+      faq: LAVANDA_2AGO_FAQ,
+    },
+  ),
 ];
 
 /* ---------- Helper di accesso ---------- */
