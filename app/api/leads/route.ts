@@ -178,6 +178,8 @@ export async function POST(request: Request) {
       tables: String(validation.data.tables),
       people: String(validation.data.people),
       source: validation.data.source || "diretto",
+      // Stripe limita ogni valore metadata a 500 caratteri.
+      ...(validation.data.notes ? { notes: validation.data.notes.slice(0, 500) } : {}),
     };
 
     // Dati conversione passati a /grazie via URL: evitano di rileggere la sessione
