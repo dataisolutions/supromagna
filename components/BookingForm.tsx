@@ -7,6 +7,12 @@ import { Icon } from "@/components/icons";
 import { cn } from "@/components/ui";
 import { readAttribution, provenanceLabel } from "@/components/Attribution";
 
+declare global {
+  interface Window {
+    dataLayer?: Record<string, unknown>[];
+  }
+}
+
 type Variant = "event" | "lezioni" | "contatti";
 
 interface BookingFormProps {
@@ -118,6 +124,25 @@ export function BookingForm({
         if (!response.ok || !result.checkoutUrl) {
           throw new Error(result.error || "Non siamo riusciti a registrare la richiesta.");
         }
+
+        // Inizio checkout: l'utente sta per lasciare il sito verso Stripe.
+        // Nessun valore monetario incluso: il prezzo reale è definito solo
+        // lato Stripe (Price ID fisso), non disponibile qui.
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "initiate_checkout",
+          lead_source: meta.source,
+          ecommerce: {
+            items: [
+              {
+                item_id: eventSlug,
+                item_name: eventTitle,
+                quantity: Number(people),
+              },
+            ],
+          },
+        });
+
         window.location.assign(result.checkoutUrl);
         return;
       } catch (error) {
