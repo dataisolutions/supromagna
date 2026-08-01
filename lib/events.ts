@@ -526,7 +526,7 @@ export const events: SupEvent[] = [
     {
       title: "Alba in SUP — 2 Agosto",
       slug: "alba-in-sup-2-agosto-2026",
-      status: "In programma",
+      status: "Sold out",
       date: "2026-08-02",
       dateLabel: "Domenica 2 agosto 2026",
       locationName: "Bagno Lavanda n.72",
