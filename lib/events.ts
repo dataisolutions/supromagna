@@ -243,6 +243,38 @@ const LAVANDA_2AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
   return i;
 });
 
+/** FAQ Fantini 8 agosto: colazione non inclusa (menu al Blu Bar), orari propri (ritrovo 5.00, alba 6.06, fine 7.45). */
+const FANTINI_8AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 5.00. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 6.06). L'evento finisce verso le 7.45." };
+  }
+  if (i.q === "Quanto costa e la tavola è inclusa?") {
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 30€ singola (1 persona), 40€ doppia (2 persone). Se hai la tua tavola: 10€ singola, 20€ doppia. La colazione non è inclusa ma puoi prenderla al Blu Bar del Fantini Club." };
+  }
+  if (i.q === "La colazione è inclusa?") {
+    return { q: "La colazione è inclusa?", a: "Al Blu Bar del Fantini Club la colazione non è inclusa ma puoi prenotarla insieme all'alba: Colazione A a 4,50€ (caffè o cappuccino con pasta o fetta di crostata), oppure Colazione B a 8€ (spremuta d'arancia con toast cotto e fontina, oppure pane da toast con crema spalmabile)." };
+  }
+  return i;
+});
+
+const ADRIATICO_9AGO_TABLE_OPTIONS: TableOption[] = [
+  { name: "Tavola singola", forWho: "Noleggio per 1 persona.", price: "35€" },
+  { name: "Tavola doppia", forWho: "Noleggio per 2 persone.", price: "50€" },
+  { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "15€" },
+  { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "25€" },
+];
+
+/** FAQ Bagno Adriatico 9 agosto: colazione inclusa, prezzi e orari propri (ritrovo 5.00, alba 6.07, fine 7.45). */
+const ADRIATICO_9AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 5.00. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 6.07). L'evento finisce verso le 7.45." };
+  }
+  if (i.q === "Quanto costa e la tavola è inclusa?") {
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 35€ singola (1 persona), 50€ doppia (2 persone). Se hai la tua tavola: 15€ singola, 25€ doppia. La colazione è sempre compresa." };
+  }
+  return i;
+});
+
 const ALBA_INCLUDED = [
   "Istruttori e guida in mare",
   "Tavola SUP e pagaia (se a noleggio)",
@@ -546,6 +578,96 @@ export const events: SupEvent[] = [
         { time: "07:40", label: "Fine evento" },
       ],
       faq: LAVANDA_2AGO_FAQ,
+    },
+  ),
+  albaEvent(
+    {
+      title: "Alba in SUP — 8 Agosto",
+      slug: "alba-in-sup-8-agosto-2026",
+      status: "In programma",
+      date: "2026-08-08",
+      dateLabel: "Sabato 8 agosto 2026",
+      locationName: "Fantini Club",
+      locationAddress: "Cervia (RA)",
+      googleMapsUrl: "https://maps.google.com/?q=Fantini+Club+Cervia",
+      photo: "/media/alba-7.jpg",
+    },
+    {
+      meetingTime: "05:00",
+      sunriseTime: "06:06",
+      endTime: "07:45",
+      tableOptions: FANTINI_TABLE_OPTIONS,
+      priceFrom: "30€",
+      breakfastStatus: "opzionale",
+      breakfastDescription:
+        "La colazione non è inclusa ma puoi prenotarla insieme all'alba: verrà servita al Blu Bar del Fantini Club. Due proposte: Colazione A (4,50€) — caffè o cappuccino con una pasta, oppure con una fetta di crostata; Colazione B (8€) — spremuta d'arancia con toast cotto e fontina, oppure con pane da toast e crema spalmabile.",
+      breakfastImage: undefined,
+      included: [
+        "Istruttori certificati in acqua",
+        "Tavola SUP e pagaia (se a noleggio)",
+        "Cintura di galleggiamento",
+        "Briefing iniziale (anche per principianti)",
+        "Musica durante l'uscita",
+        "Servizio fotografico e riprese video",
+        "Possibilità di colazione al Blu Bar (a parte)",
+      ],
+      timeline: [
+        { time: "05:00", label: "Ritrovo in spiaggia" },
+        { time: "05:10", label: "Briefing e preparazione tavole" },
+        { time: "06:06", label: "Alba dal mare, in musica" },
+        { time: "07:00", label: "Rientro e colazione al Blu Bar (opzionale)" },
+        { time: "07:45", label: "Fine evento" },
+      ],
+      faq: FANTINI_8AGO_FAQ,
+      descriptionShort:
+        "Esci all'alba col gruppo al Fantini Club di Cervia: musica, passeggiata facoltativa in acqua, servizio fotografico e colazione al Blu Bar per chi vuole.",
+      experienceStory:
+        "Hai mai vissuto l'emozione di vedere il sole sorgere dal mare? Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dalla musica e con la possibilità di una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro, se vuoi, ti aspetta la colazione al Blu Bar del Fantini Club per iniziare la giornata nel modo migliore. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
+      seoDescription:
+        "Alba in SUP al Fantini Club di Cervia con musica, foto e video: uscita guidata all'alba, tavola a noleggio, colazione al Blu Bar disponibile. Adatta ai principianti, prenotazione online.",
+    },
+  ),
+  albaEvent(
+    {
+      title: "Alba in SUP — 9 Agosto",
+      slug: "alba-in-sup-9-agosto-2026",
+      status: "In programma",
+      date: "2026-08-09",
+      dateLabel: "Domenica 9 agosto 2026",
+      locationName: "Bagno Adriatico",
+      locationAddress: "Cesenatico (FC)",
+      googleMapsUrl: "https://maps.google.com/?q=Bagno+Adriatico+Cesenatico",
+      photo: "/media/alba-1.jpg",
+    },
+    {
+      meetingTime: "05:00",
+      sunriseTime: "06:07",
+      endTime: "07:45",
+      tableOptions: ADRIATICO_9AGO_TABLE_OPTIONS,
+      priceFrom: "35€",
+      included: [
+        "Istruttori certificati in acqua",
+        "Tavola SUP e pagaia (se a noleggio)",
+        "Cintura di galleggiamento",
+        "Briefing iniziale (anche per principianti)",
+        "Concerto acustico live con Sarah Jane Olog",
+        "Servizio fotografico e video",
+        "Colazione inclusa, servita direttamente in mare",
+      ],
+      timeline: [
+        { time: "05:00", label: "Ritrovo in spiaggia" },
+        { time: "05:10", label: "Briefing e preparazione tavole" },
+        { time: "06:07", label: "Alba dal mare, con concerto acustico live" },
+        { time: "07:00", label: "Colazione insieme, servita in mare (inclusa)" },
+        { time: "07:45", label: "Fine evento" },
+      ],
+      faq: ADRIATICO_9AGO_FAQ,
+      descriptionShort:
+        "Esci all'alba col gruppo al Bagno Adriatico di Cesenatico: concerto acustico live con Sarah Jane Olog, servizio fotografico e colazione servita direttamente in mare.",
+      experienceStory:
+        "Hai mai vissuto l'emozione di vedere il sole sorgere dal mare? Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dal concerto acustico live di Sarah Jane Olog e con la possibilità di una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro la colazione è compresa e viene servita direttamente in mare, per dare alla giornata uno splendido inizio. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
+      seoDescription:
+        "Alba in SUP al Bagno Adriatico di Cesenatico con concerto acustico live e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
     },
   ),
 ];
