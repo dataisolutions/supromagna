@@ -258,10 +258,10 @@ const FANTINI_8AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
 });
 
 const ADRIATICO_9AGO_TABLE_OPTIONS: TableOption[] = [
-  { name: "Tavola singola", forWho: "Noleggio per 1 persona.", price: "35€" },
-  { name: "Tavola doppia", forWho: "Noleggio per 2 persone.", price: "50€" },
-  { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "15€" },
-  { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "25€" },
+  { name: "Tavola singola", forWho: "Noleggio per 1 persona.", price: "40€" },
+  { name: "Tavola doppia", forWho: "Noleggio per 2 persone.", price: "55€" },
+  { name: "Tavola propria", forWho: "Hai la tua tavola singola? Tariffa ridotta.", price: "20€" },
+  { name: "Tavola doppia propria", forWho: "Porti la tua tavola doppia.", price: "30€" },
 ];
 
 /** FAQ Bagno Adriatico 9 agosto: colazione inclusa, prezzi e orari propri (ritrovo 5.00, alba 6.07, fine 7.45). */
@@ -270,7 +270,7 @@ const ADRIATICO_9AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
     return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 5.00. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 6.07). L'evento finisce verso le 7.45." };
   }
   if (i.q === "Quanto costa e la tavola è inclusa?") {
-    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 35€ singola (1 persona), 50€ doppia (2 persone). Se hai la tua tavola: 15€ singola, 25€ doppia. La colazione è sempre compresa." };
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 40€ singola (1 persona), 55€ doppia (2 persone). Se hai la tua tavola: 20€ singola, 30€ doppia. La colazione è sempre compresa." };
   }
   return i;
 });
@@ -644,7 +644,7 @@ export const events: SupEvent[] = [
       sunriseTime: "06:07",
       endTime: "07:45",
       tableOptions: ADRIATICO_9AGO_TABLE_OPTIONS,
-      priceFrom: "35€",
+      priceFrom: "40€",
       included: [
         "Istruttori certificati in acqua",
         "Tavola SUP e pagaia (se a noleggio)",
