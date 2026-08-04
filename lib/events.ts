@@ -584,7 +584,7 @@ export const events: SupEvent[] = [
     {
       title: "Alba in SUP — 8 Agosto",
       slug: "alba-in-sup-8-agosto-2026",
-      status: "Sold out",
+      status: "In programma",
       date: "2026-08-08",
       dateLabel: "Sabato 8 agosto 2026",
       locationName: "Fantini Club",
@@ -640,6 +640,7 @@ export const events: SupEvent[] = [
       photo: "/media/alba-1.jpg",
     },
     {
+      featured: true,
       meetingTime: "05:00",
       sunriseTime: "06:07",
       endTime: "07:45",
@@ -736,9 +737,10 @@ export function nextEvents(limit = 3): SupEvent[] {
   return upcomingEvents().slice(0, limit);
 }
 
-/** Evento in evidenza per la home: il prossimo per data. */
+/** Evento in evidenza per la home: quello marcato "featured" se ancora prenotabile, altrimenti il prossimo per data. */
 export function featuredEvent(): SupEvent {
-  return upcomingEvents()[0] ?? visibleEvents()[0] ?? events[0];
+  const upcoming = upcomingEvents();
+  return upcoming.find((e) => e.featured) ?? upcoming[0] ?? visibleEvents()[0] ?? events[0];
 }
 
 export function statusTone(status: EventStatus): "live" | "warn" | "muted" {
