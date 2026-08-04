@@ -584,7 +584,7 @@ export const events: SupEvent[] = [
     {
       title: "Alba in SUP — 8 Agosto",
       slug: "alba-in-sup-8-agosto-2026",
-      status: "In programma",
+      status: "Sold out",
       date: "2026-08-08",
       dateLabel: "Sabato 8 agosto 2026",
       locationName: "Fantini Club",
