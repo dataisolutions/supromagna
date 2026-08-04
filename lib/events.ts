@@ -477,7 +477,7 @@ export const events: SupEvent[] = [
     title: "AstroSUP — La Notte delle Stelle",
     slug: "astro-sup-notte-delle-stelle-4-agosto-2026",
     category: "astro-sup",
-    status: "Posti limitati",
+    status: "Sold out",
     date: "2026-08-04",
     dateLabel: "Martedì 4 agosto 2026",
     meetingTime: "20:30",
