@@ -37,6 +37,7 @@ type LeadPayload = {
   utmSource?: unknown;
   utmMedium?: unknown;
   utmCampaign?: unknown;
+  utmContent?: unknown;
   referrer?: unknown;
   landing?: unknown;
   consent?: unknown;
@@ -137,6 +138,7 @@ export async function POST(request: Request) {
         utmSource: validation.data.utmSource || null,
         utmMedium: validation.data.utmMedium || null,
         utmCampaign: validation.data.utmCampaign || null,
+        utmContent: validation.data.utmContent || null,
         referrer: validation.data.referrer || null,
         landing: validation.data.landing || null,
         status: "Checkout avviato",
@@ -235,6 +237,7 @@ function validateLead(body: LeadPayload):
         utmSource: string;
         utmMedium: string;
         utmCampaign: string;
+        utmContent: string;
         referrer: string;
         landing: string;
       };
@@ -249,6 +252,7 @@ function validateLead(body: LeadPayload):
   const utmSource = asString(body.utmSource, 100);
   const utmMedium = asString(body.utmMedium, 100);
   const utmCampaign = asString(body.utmCampaign, 150);
+  const utmContent = asString(body.utmContent, 150);
   const referrer = asString(body.referrer, 300);
   const landing = asString(body.landing, 300);
   const people = asInteger(body.people);
@@ -274,7 +278,7 @@ function validateLead(body: LeadPayload):
 
   return {
     ok: true,
-    data: { name, phone, email, people, tables, notes, eventSlug, page, source, utmSource, utmMedium, utmCampaign, referrer, landing },
+    data: { name, phone, email, people, tables, notes, eventSlug, page, source, utmSource, utmMedium, utmCampaign, utmContent, referrer, landing },
   };
 }
 

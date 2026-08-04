@@ -47,6 +47,7 @@ export function BookingForm({
     utmSource: "",
     utmMedium: "",
     utmCampaign: "",
+    utmContent: "",
     referrer: "",
     landing: "",
     source: "",
@@ -61,7 +62,7 @@ export function BookingForm({
     const params = new URLSearchParams(window.location.search);
     const stored = readAttribution();
     // UTM dell'URL corrente (last-touch) con fallback sull'attribuzione salvata (first-touch).
-    const pick = (key: "utm_source" | "utm_medium" | "utm_campaign") =>
+    const pick = (key: "utm_source" | "utm_medium" | "utm_campaign" | "utm_content") =>
       params.get(key) || stored[key] || "";
     const utmSource = pick("utm_source");
     setMeta({
@@ -69,6 +70,7 @@ export function BookingForm({
       utmSource,
       utmMedium: pick("utm_medium"),
       utmCampaign: pick("utm_campaign"),
+      utmContent: pick("utm_content"),
       referrer: stored.referrer ?? "",
       landing: stored.landing ?? "",
       source: provenanceLabel(stored, utmSource || undefined),
@@ -113,6 +115,7 @@ export function BookingForm({
             utmSource: meta.utmSource,
             utmMedium: meta.utmMedium,
             utmCampaign: meta.utmCampaign,
+            utmContent: meta.utmContent,
             referrer: meta.referrer,
             landing: meta.landing,
             consent: data.get("consent") === "yes",
@@ -198,6 +201,7 @@ export function BookingForm({
       <input type="hidden" name="utm_source" value={meta.utmSource} />
       <input type="hidden" name="utm_medium" value={meta.utmMedium} />
       <input type="hidden" name="utm_campaign" value={meta.utmCampaign} />
+      <input type="hidden" name="utm_content" value={meta.utmContent} />
       <input type="hidden" name="referrer" value={meta.referrer} />
       <input type="hidden" name="landing" value={meta.landing} />
       <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
