@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 export function StickyCTA({
   priceFrom,
   eventLabel,
+  soldOut = false,
 }: {
   priceFrom?: string;
   eventLabel?: string;
+  soldOut?: boolean;
 }) {
   const [formVisible, setFormVisible] = useState(false);
 
@@ -31,18 +33,24 @@ export function StickyCTA({
       <div className="mx-auto flex max-w-md items-center gap-3 pb-[env(safe-area-inset-bottom)]">
         <div className="flex flex-col leading-tight">
           <span className="text-[11px] font-medium uppercase tracking-wide text-navy/50">
-            {priceFrom ? "A partire da" : "Posto"}
+            {soldOut ? "Posti" : priceFrom ? "A partire da" : "Posto"}
           </span>
           <span className="font-display text-lg font-semibold text-navy">
-            {priceFrom ?? "Su richiesta"}
+            {soldOut ? "Esauriti" : (priceFrom ?? "Su richiesta")}
           </span>
         </div>
-        <a
-          href="#prenota"
-          className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-coral px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-coral)] transition-transform active:scale-[0.98]"
-        >
-          Prenota ora{eventLabel ? ` ${eventLabel}` : ""}
-        </a>
+        {soldOut ? (
+          <span className="ml-auto inline-flex flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-full bg-navy/30 px-5 py-3.5 text-sm font-semibold text-white">
+            SOLD OUT
+          </span>
+        ) : (
+          <a
+            href="#prenota"
+            className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-coral px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-coral)] transition-transform active:scale-[0.98]"
+          >
+            Prenota ora{eventLabel ? ` ${eventLabel}` : ""}
+          </a>
+        )}
       </div>
     </div>
   );

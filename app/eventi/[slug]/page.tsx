@@ -58,14 +58,14 @@ export default async function EventPage({
   if (!event) notFound();
 
   // Evento non prenotabile (data passata o stato non attivo, es. Sold out): un
-  // vecchio link non deve mostrare la pagina (né il form di prenotazione attivo)
-  // ma portare all'evento in evidenza, preservando eventuali UTM della campagna
-  // che ha portato il click. Guardia anti-loop: se non c'è un'alternativa migliore
-  // (es. tutti gli eventi sono sold out), mostra comunque la pagina invece di
-  // reindirizzare all'infinito su se stessa.
+  // vecchio link non deve mostrare la pagina con un form apparentemente attivo,
+  // ma portare a un'ALTERNATIVA REALMENTE PRENOTABILE, preservando eventuali UTM
+  // della campagna. Se non esiste alcuna alternativa prenotabile (es. tutti gli
+  // eventi sono sold out, oppure questo è l'unico rimasto), niente redirect:
+  // la pagina resta raggiungibile con il bottone "SOLD OUT" al posto del form.
   if (!isBookable(event)) {
     const next = nextEvents(1)[0] ?? featuredEvent();
-    if (next.slug !== event.slug) {
+    if (isBookable(next) && next.slug !== event.slug) {
       const params2 = new URLSearchParams();
       for (const [key, value] of Object.entries(await searchParams)) {
         if (typeof value === "string") params2.set(key, value);
@@ -78,6 +78,10 @@ export default async function EventPage({
   const cat = categoryBySlug(event.category);
   const others = nextEvents(3).filter((e) => e.slug !== event.slug);
   const shortLabel = eventShortLabel(event);
+  // Se siamo arrivati qui senza redirect ma l'evento non è prenotabile, è l'unica
+  // alternativa rimasta (guardia anti-loop sopra): mostra la pagina con "SOLD OUT"
+  // invece di un form apparentemente funzionante.
+  const soldOut = !isBookable(event);
   const quickFacts = [
     { icon: Icon.Calendar, label: "Data", value: event.dateLabel },
     { icon: Icon.Clock, label: "Ritrovo", value: event.meetingTime },
@@ -279,6 +283,7 @@ export default async function EventPage({
             eventSlug={event.slug}
             eventShortLabel={shortLabel}
             tableOptions={event.tableOptions}
+            soldOut={soldOut}
           />
           <div className="mt-4 rounded-2xl bg-white p-5 ring-1 ring-navy/8">
             <p className="text-sm font-semibold text-navy">{event.capacityNote}</p>
@@ -324,7 +329,7 @@ export default async function EventPage({
         </Container>
       </section>
 
-      <StickyCTA priceFrom={event.priceFrom} eventLabel={shortLabel} />
+      <StickyCTA priceFrom={event.priceFrom} eventLabel={shortLabel} soldOut={soldOut} />
     </>
   );
 }

@@ -631,7 +631,7 @@ export const events: SupEvent[] = [
     {
       title: "Alba in SUP — Concerto all'Alba — 9 Agosto",
       slug: "alba-in-sup-9-agosto-2026",
-      status: "In programma",
+      status: "Sold out",
       date: "2026-08-09",
       dateLabel: "Domenica 9 agosto 2026",
       locationName: "Bagno Adriatico",

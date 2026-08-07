@@ -23,6 +23,8 @@ interface BookingFormProps {
   eventShortLabel?: string;
   tableOptions?: { name: string }[];
   className?: string;
+  /** Evento sold out senza alternativa a cui reindirizzare: form disabilitato, bottone "SOLD OUT". */
+  soldOut?: boolean;
 }
 
 const labels: Record<Variant, { submit: string; intro: string }> = {
@@ -38,6 +40,7 @@ export function BookingForm({
   eventSlug,
   eventShortLabel,
   className,
+  soldOut = false,
 }: BookingFormProps) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
@@ -191,7 +194,11 @@ export function BookingForm({
       )}
     >
       <h3 className="font-display text-2xl font-semibold text-navy">{heading}</h3>
-      <p className="mt-1.5 text-sm leading-relaxed text-navy/65">{intro}</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-navy/65">
+        {soldOut ? "I posti per questo evento sono esauriti. Seguici su Instagram per non perderti le prossime date." : intro}
+      </p>
+
+      <fieldset disabled={soldOut} className="contents">
 
       {/* Campi nascosti (cap. 10 brief) */}
       <input type="hidden" name="event_slug" value={eventSlug ?? ""} />
@@ -290,6 +297,7 @@ export function BookingForm({
           </span>
         </label>
       </div>
+      </fieldset>
 
       {submitError && (
         <p role="alert" className="mt-4 rounded-xl bg-coral/10 px-4 py-3 text-sm font-medium text-coral-deep">
@@ -299,18 +307,28 @@ export function BookingForm({
 
       <button
         type="submit"
-        disabled={submitting}
+        disabled={submitting || soldOut}
         className={cn(
-          "mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold text-white shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:brightness-95 disabled:cursor-wait disabled:opacity-70",
-          variant === "event" ? "bg-coral" : "bg-[#25D366]",
+          "mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold text-white shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:brightness-95 disabled:cursor-not-allowed",
+          soldOut
+            ? "bg-navy/30 hover:translate-y-0 hover:brightness-100"
+            : cn(variant === "event" ? "bg-coral" : "bg-[#25D366]", "disabled:cursor-wait disabled:opacity-70"),
         )}
       >
-        {variant === "event" ? <Icon.ArrowRight /> : <Icon.Whatsapp />} {submitting ? "Invio in corso…" : submit}
+        {soldOut ? (
+          "SOLD OUT"
+        ) : (
+          <>
+            {variant === "event" ? <Icon.ArrowRight /> : <Icon.Whatsapp />} {submitting ? "Invio in corso…" : submit}
+          </>
+        )}
       </button>
       <p className="mt-3 text-center text-xs text-navy/45">
-        {variant === "event"
-          ? "Il pagamento avviene sulla pagina sicura di Stripe."
-          : "Nessun pagamento ora. Confermiamo tutto insieme su WhatsApp."}
+        {soldOut
+          ? "Le prenotazioni per questa data sono chiuse."
+          : variant === "event"
+            ? "Il pagamento avviene sulla pagina sicura di Stripe."
+            : "Nessun pagamento ora. Confermiamo tutto insieme su WhatsApp."}
       </p>
     </form>
   );
