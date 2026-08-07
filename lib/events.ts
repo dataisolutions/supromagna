@@ -671,6 +671,28 @@ export const events: SupEvent[] = [
         "Alba in SUP al Bagno Adriatico di Cesenatico con concerto acustico live e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
     },
   ),
+  albaEvent({
+    title: "Alba in SUP — 15 Agosto",
+    slug: "alba-in-sup-15-agosto-2026",
+    status: "In programma",
+    date: "2026-08-15",
+    dateLabel: "Sabato 15 agosto 2026",
+    locationName: "Bagno 65",
+    locationAddress: "Torre Pedrera (RN)",
+    googleMapsUrl: "https://maps.google.com/?q=Bagno+65+Torre+Pedrera",
+    photo: "/media/alba-2.jpg",
+  }),
+  albaEvent({
+    title: "Alba in SUP — 16 Agosto",
+    slug: "alba-in-sup-16-agosto-2026",
+    status: "In programma",
+    date: "2026-08-16",
+    dateLabel: "Domenica 16 agosto 2026",
+    locationName: "Bagno Romano",
+    locationAddress: "Igea Marina (RN)",
+    googleMapsUrl: "https://maps.google.com/?q=Bagno+Romano+Igea+Marina",
+    photo: "/media/alba-6.jpg",
+  }),
 ];
 
 /* ---------- Helper di accesso ---------- */
