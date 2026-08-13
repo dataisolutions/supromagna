@@ -688,9 +688,9 @@ export const events: SupEvent[] = [
     status: "In programma",
     date: "2026-08-16",
     dateLabel: "Domenica 16 agosto 2026",
-    locationName: "Bagno Romano",
-    locationAddress: "Igea Marina (RN)",
-    googleMapsUrl: "https://maps.google.com/?q=Bagno+Romano+Igea+Marina",
+    locationName: "Kennedy Beach",
+    locationAddress: "Via Alfonso Pinzon 277, Bellaria-Igea Marina (RN)",
+    googleMapsUrl: "https://www.google.com/maps?q=Kennedy+beach,+Via+Alfonso+Pinzon,+277,+47814+Bellaria-Igea+Marina+RN&ftid=0x132cc74b320ed3e1:0xc404189525d3b6ec",
     photo: "/media/alba-6.jpg",
   }),
 ];
