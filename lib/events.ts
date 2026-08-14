@@ -674,7 +674,7 @@ export const events: SupEvent[] = [
   albaEvent({
     title: "Alba in SUP — 15 Agosto",
     slug: "alba-in-sup-15-agosto-2026",
-    status: "In programma",
+    status: "Sold out",
     date: "2026-08-15",
     dateLabel: "Sabato 15 agosto 2026",
     locationName: "Bagno 65",
