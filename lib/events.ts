@@ -712,6 +712,28 @@ export function isUpcoming(e: SupEvent): boolean {
   return e.date >= todayISO();
 }
 
+/** Ora attuale a Roma come stringa "YYYY-MM-DDTHH:mm" (confrontabile lessicograficamente). */
+function nowInRome(): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Rome",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(new Date());
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "00";
+  return `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}`;
+}
+
+/** Le prenotazioni per un'alba chiudono alle 16:00 del giorno prima (partenza all'alba: niente prenotazioni last-minute). */
+function albaBookingCutoff(dateISO: string): string {
+  const d = new Date(`${dateISO}T12:00:00Z`); // mezzogiorno UTC: evita ambiguità di fuso/DST sul cambio giorno
+  d.setUTCDate(d.getUTCDate() - 1);
+  return `${d.toISOString().slice(0, 10)}T16:00`;
+}
+
 export function eventBySlug(slug: string): SupEvent | undefined {
   return events.find((e) => e.slug === slug);
 }
@@ -744,9 +766,15 @@ export function visibleEvents(): SupEvent[] {
 
 const ACTIVE_STATUSES: EventStatus[] = ["In programma", "Posti limitati", "In arrivo"];
 
-/** True se l'evento è ancora prenotabile: data futura e stato attivo (non Sold out/Rimandato/Passato). */
+/**
+ * True se l'evento è ancora prenotabile: data futura e stato attivo (non Sold
+ * out/Rimandato/Passato). Per le albe, le prenotazioni chiudono automaticamente
+ * alle 16:00 del giorno prima (partenza all'alba, niente last-minute).
+ */
 export function isBookable(e: SupEvent): boolean {
-  return ACTIVE_STATUSES.includes(e.status) && isUpcoming(e);
+  if (!ACTIVE_STATUSES.includes(e.status) || !isUpcoming(e)) return false;
+  if (e.category === "alba-in-sup" && nowInRome() >= albaBookingCutoff(e.date)) return false;
+  return true;
 }
 
 /** Eventi attivi e non passati, ordinati per data crescente. */

@@ -16,6 +16,10 @@ export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
 }
 
+// Rigenera periodicamente: la lista dipende da data/ora (es. chiusura
+// prenotazioni albe alle 16:00 del giorno prima), non solo dal contenuto statico.
+export const revalidate = 3600;
+
 export async function generateMetadata({
   params,
 }: {

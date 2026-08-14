@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/eventi-sup" },
 };
 
+// Rigenera periodicamente: la lista dipende da data/ora (es. chiusura
+// prenotazioni albe alle 16:00 del giorno prima), non solo dal contenuto statico.
+export const revalidate = 3600;
+
 export default function EventiPage() {
   // Solo i prossimi 3 eventi dalla data odierna, ordinati per data crescente.
   const ordered = nextEvents(3);

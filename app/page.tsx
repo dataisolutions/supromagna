@@ -14,6 +14,10 @@ import { FAQAccordion } from "@/components/FAQAccordion";
 import { Photo } from "@/components/Photo";
 import { Icon } from "@/components/icons";
 
+// Rigenera periodicamente: l'evento in evidenza dipende da data/ora (es. chiusura
+// prenotazioni albe alle 16:00 del giorno prima), non solo dal contenuto statico.
+export const revalidate = 3600;
+
 const whyItems = [
   { icon: Icon.Board, title: "Anche se parti da zero", text: "Il 70% di chi viene è alla prima volta. Briefing prima di entrare in acqua e istruttori sempre vicini." },
   { icon: Icon.Shield, title: "Sicurezza prima di tutto", text: "Cintura di galleggiamento, gruppi piccoli e guida in mare. Esci solo se le condizioni sono giuste." },
