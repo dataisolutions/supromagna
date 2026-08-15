@@ -727,11 +727,11 @@ function nowInRome(): string {
   return `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}`;
 }
 
-/** Le prenotazioni per un'alba chiudono alle 16:00 del giorno prima (partenza all'alba: niente prenotazioni last-minute). */
+/** Le prenotazioni per un'alba chiudono alle 17:00 del giorno prima (partenza all'alba: niente prenotazioni last-minute). */
 function albaBookingCutoff(dateISO: string): string {
   const d = new Date(`${dateISO}T12:00:00Z`); // mezzogiorno UTC: evita ambiguità di fuso/DST sul cambio giorno
   d.setUTCDate(d.getUTCDate() - 1);
-  return `${d.toISOString().slice(0, 10)}T16:00`;
+  return `${d.toISOString().slice(0, 10)}T17:00`;
 }
 
 export function eventBySlug(slug: string): SupEvent | undefined {
@@ -769,7 +769,7 @@ const ACTIVE_STATUSES: EventStatus[] = ["In programma", "Posti limitati", "In ar
 /**
  * True se l'evento è ancora prenotabile: data futura e stato attivo (non Sold
  * out/Rimandato/Passato). Per le albe, le prenotazioni chiudono automaticamente
- * alle 16:00 del giorno prima (partenza all'alba, niente last-minute).
+ * alle 17:00 del giorno prima (partenza all'alba, niente last-minute).
  */
 export function isBookable(e: SupEvent): boolean {
   if (!ACTIVE_STATUSES.includes(e.status) || !isUpcoming(e)) return false;
