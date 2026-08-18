@@ -1001,8 +1001,8 @@ export function upcomingEvents(): SupEvent[] {
   return [...events].filter(isBookable).sort((a, b) => a.date.localeCompare(b.date));
 }
 
-/** I prossimi N eventi attivi dalla data odierna (default 3). */
-export function nextEvents(limit = 3): SupEvent[] {
+/** I prossimi N eventi attivi dalla data odierna (default 4). */
+export function nextEvents(limit = 4): SupEvent[] {
   return upcomingEvents().slice(0, limit);
 }
 

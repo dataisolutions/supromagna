@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default function EventiPage() {
-  // Solo i prossimi 3 eventi dalla data odierna, ordinati per data crescente.
-  const ordered = nextEvents(3);
+  // Solo i prossimi 4 eventi dalla data odierna, ordinati per data crescente.
+  const ordered = nextEvents(4);
 
   return (
     <>

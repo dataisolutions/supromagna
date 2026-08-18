@@ -44,8 +44,8 @@ export default async function CategoryPage({
   const cat = categoryBySlug(category);
   if (!cat) notFound();
 
-  // Solo gli eventi di questa categoria che rientrano nei prossimi 3 globali.
-  const list = nextEvents(3).filter((e) => e.category === cat.slug);
+  // Solo gli eventi di questa categoria che rientrano nei prossimi 4 globali.
+  const list = nextEvents(4).filter((e) => e.category === cat.slug);
 
   return (
     <>

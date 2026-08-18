@@ -76,7 +76,7 @@ export default async function EventPage({
   }
 
   const cat = categoryBySlug(event.category);
-  const others = nextEvents(3).filter((e) => e.slug !== event.slug);
+  const others = nextEvents(4).filter((e) => e.slug !== event.slug);
   const shortLabel = eventShortLabel(event);
   // Se siamo arrivati qui senza redirect ma l'evento non è prenotabile, è l'unica
   // alternativa rimasta (guardia anti-loop sopra): mostra la pagina con "SOLD OUT"

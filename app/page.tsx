@@ -38,8 +38,8 @@ const homeFaq = [
 export default function HomePage() {
   const featured = featuredEvent();
   const featCat = categoryBySlug(featured.category);
-  // Mostriamo in totale i prossimi 3 eventi: l'evidenza + gli altri 2 nella griglia.
-  const next = nextEvents(3).filter((e) => e.slug !== featured.slug);
+  // Mostriamo in totale i prossimi 4 eventi: l'evidenza + gli altri 3 nella griglia.
+  const next = nextEvents(4).filter((e) => e.slug !== featured.slug);
 
   const heroMsg = `Ciao ${site.shortName}, vorrei informazioni per "${featured.title}" (${featured.dateLabel}).`;
 
