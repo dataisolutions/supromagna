@@ -294,6 +294,28 @@ const CERVIAMARE_23AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
   return i;
 });
 
+/** FAQ Fantini 29 agosto: colazione non inclusa (menu al Blu Bar), orari propri (ritrovo 5.25, alba 6.31, fine 8.00). */
+const FANTINI_29AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 5.25. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 6.31). L'evento finisce verso le 8.00." };
+  }
+  if (i.q === "Quanto costa e la tavola è inclusa?") {
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 30€ singola (1 persona), 40€ doppia (2 persone). Se hai la tua tavola: 10€ singola, 20€ doppia. La colazione non è inclusa ma puoi prenderla al Blu Bar del Fantini Club." };
+  }
+  if (i.q === "La colazione è inclusa?") {
+    return { q: "La colazione è inclusa?", a: "Al Blu Bar del Fantini Club la colazione non è inclusa ma puoi prenotarla insieme all'alba: Colazione A a 4,50€ (caffè o cappuccino con pasta o fetta di crostata), oppure Colazione B a 8€ (spremuta d'arancia con toast cotto e fontina, oppure pane da toast con crema spalmabile)." };
+  }
+  return i;
+});
+
+/** FAQ Cala Romeo 30 agosto: prezzi standard, orari propri (ritrovo 5.25, alba 6.31, fine 8.00). */
+const CALAROMEO_30AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 5.25. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 6.31). L'evento finisce verso le 8.00." };
+  }
+  return i;
+});
+
 const ALBA_INCLUDED = [
   "Istruttori e guida in mare",
   "Tavola SUP e pagaia (se a noleggio)",
@@ -798,6 +820,96 @@ export const events: SupEvent[] = [
         "Hai mai vissuto l'emozione di vedere il sole sorgere dal mare? Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dalla musica e da una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro ci fermiamo tutti insieme in mare per la colazione: crostata di grano saraceno ai frutti di bosco, bomboloncino alla crema, spremuta d'arancia e caffè americano. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
       seoDescription:
         "Alba in SUP a cerviAmare (Cervia) con musica e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
+    },
+  ),
+  albaEvent(
+    {
+      title: "Alba in SUP — 29 Agosto",
+      slug: "alba-in-sup-29-agosto-2026",
+      status: "In programma",
+      date: "2026-08-29",
+      dateLabel: "Sabato 29 agosto 2026",
+      locationName: "Fantini Club",
+      locationAddress: "Cervia (RA)",
+      googleMapsUrl: "https://maps.google.com/?q=Fantini+Club+Cervia",
+      photo: "/media/alba-7.jpg",
+    },
+    {
+      meetingTime: "05:25",
+      sunriseTime: "06:31",
+      endTime: "08:00",
+      tableOptions: FANTINI_TABLE_OPTIONS,
+      priceFrom: "30€",
+      breakfastStatus: "opzionale",
+      breakfastDescription:
+        "La colazione non è inclusa ma puoi prenotarla insieme all'alba: verrà servita al Blu Bar del Fantini Club. Due proposte: Colazione A (4,50€) — caffè o cappuccino con una pasta, oppure con una fetta di crostata; Colazione B (8€) — spremuta d'arancia con toast cotto e fontina, oppure con pane da toast e crema spalmabile.",
+      breakfastImage: undefined,
+      included: [
+        "Istruttori certificati in acqua",
+        "Tavola SUP e pagaia (se a noleggio)",
+        "Cintura di galleggiamento",
+        "Briefing iniziale (anche per principianti)",
+        "Musica durante l'uscita",
+        "Passeggiata facoltativa in acqua guidata dagli istruttori",
+        "Servizio fotografico e riprese video",
+        "Possibilità di colazione al Blu Bar (a parte)",
+      ],
+      timeline: [
+        { time: "05:25", label: "Ritrovo in spiaggia" },
+        { time: "05:35", label: "Briefing e preparazione tavole" },
+        { time: "06:31", label: "Alba dal mare, in musica" },
+        { time: "07:15", label: "Rientro e colazione al Blu Bar (opzionale)" },
+        { time: "08:00", label: "Fine evento" },
+      ],
+      faq: FANTINI_29AGO_FAQ,
+      descriptionShort:
+        "Esci all'alba col gruppo al Fantini Club di Cervia: musica, passeggiata facoltativa in acqua, servizio fotografico e colazione al Blu Bar per chi vuole.",
+      experienceStory:
+        "Hai mai vissuto l'emozione di vedere il sole sorgere dal mare? Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dalla musica e con la possibilità di una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro, se vuoi, ti aspetta la colazione al Blu Bar del Fantini Club per iniziare la giornata nel modo migliore. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
+      seoDescription:
+        "Alba in SUP al Fantini Club di Cervia con musica, foto e video: uscita guidata all'alba, tavola a noleggio, colazione al Blu Bar disponibile. Adatta ai principianti, prenotazione online.",
+    },
+  ),
+  albaEvent(
+    {
+      title: "Alba in SUP — 30 Agosto",
+      slug: "alba-in-sup-30-agosto-2026",
+      status: "In programma",
+      date: "2026-08-30",
+      dateLabel: "Domenica 30 agosto 2026",
+      locationName: "Cala Romeo",
+      locationAddress: "Cesenatico (FC)",
+      googleMapsUrl: "https://maps.google.com/?q=Cala+Romeo+Cesenatico",
+      photo: "/media/alba-4.jpg",
+    },
+    {
+      meetingTime: "05:25",
+      sunriseTime: "06:31",
+      endTime: "08:00",
+      included: [
+        "Istruttori certificati in acqua",
+        "Tavola SUP e pagaia (se a noleggio)",
+        "Cintura di galleggiamento",
+        "Briefing iniziale (anche per principianti)",
+        "Musica durante l'uscita",
+        "Passeggiata facoltativa in acqua guidata dagli istruttori",
+        "Servizio fotografico e video",
+        "Colazione inclusa, servita direttamente in mare",
+      ],
+      timeline: [
+        { time: "05:25", label: "Ritrovo in spiaggia" },
+        { time: "05:35", label: "Briefing e preparazione tavole" },
+        { time: "06:31", label: "Alba dal mare, in musica" },
+        { time: "07:15", label: "Colazione insieme, servita in mare (inclusa)" },
+        { time: "08:00", label: "Fine evento" },
+      ],
+      faq: CALAROMEO_30AGO_FAQ,
+      descriptionShort:
+        "Esci all'alba col gruppo a Cala Romeo, Cesenatico: musica, passeggiata facoltativa in acqua, servizio fotografico e colazione servita in mare.",
+      experienceStory:
+        "Hai mai vissuto l'emozione di vedere il sole sorgere dal mare? Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dalla musica e con la possibilità di una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro la colazione è compresa e viene servita direttamente in mare, per dare alla giornata uno splendido inizio. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
+      seoDescription:
+        "Alba in SUP a Cala Romeo, Cesenatico con musica e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
     },
   ),
 ];
