@@ -316,6 +316,17 @@ const CALAROMEO_30AGO_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
   return i;
 });
 
+/** FAQ cerviAmare 5 settembre: prezzi propri, orari propri (ritrovo 5.20/5.30, alba 6.38, fine 8.00). */
+const CERVIAMARE_5SET_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 5.20/5.30. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 6.38). L'evento finisce verso le 8.00." };
+  }
+  if (i.q === "Quanto costa e la tavola è inclusa?") {
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 40€ singola (1 persona), 60€ doppia (2 persone). Se hai la tua tavola: 20€ singola, 30€ doppia. La colazione è sempre compresa." };
+  }
+  return i;
+});
+
 const ALBA_INCLUDED = [
   "Istruttori e guida in mare",
   "Tavola SUP e pagaia (se a noleggio)",
@@ -910,6 +921,52 @@ export const events: SupEvent[] = [
         "Hai mai vissuto l'emozione di vedere il sole sorgere dal mare? Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dalla musica e con la possibilità di una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro la colazione è compresa e viene servita direttamente in mare, per dare alla giornata uno splendido inizio. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
       seoDescription:
         "Alba in SUP a Cala Romeo, Cesenatico con musica e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
+    },
+  ),
+  albaEvent(
+    {
+      title: "Alba in SUP — 5 Settembre",
+      slug: "alba-in-sup-5-settembre-2026",
+      status: "In programma",
+      date: "2026-09-05",
+      dateLabel: "Sabato 5 settembre 2026",
+      locationName: "cerviAmare",
+      locationAddress: "Cervia (RA)",
+      googleMapsUrl: "https://maps.google.com/?q=cerviAmare+Lungomare+Gabriele+D%27Annunzio+222%2C+48015+Cervia+RA",
+      photo: "/media/alba-6.jpg",
+    },
+    {
+      meetingTime: "05:20",
+      sunriseTime: "06:38",
+      endTime: "08:00",
+      tableOptions: CERVIAMARE_TABLE_OPTIONS,
+      priceFrom: "40€",
+      breakfastDescription:
+        "La colazione è compresa: crostata di grano saraceno ai frutti di bosco, bomboloncino alla crema, spremuta d'arancia e caffè americano, tutti insieme in mare al rientro dell'uscita.",
+      included: [
+        "Istruttori certificati in acqua",
+        "Tavola SUP e pagaia (se a noleggio)",
+        "Cintura di galleggiamento",
+        "Briefing iniziale (anche per principianti)",
+        "Musica durante l'uscita",
+        "Passeggiata in acqua guidata dagli istruttori",
+        "Servizio fotografico e video",
+        "Colazione inclusa, servita in mare",
+      ],
+      timeline: [
+        { time: "05:20", label: "Ritrovo in spiaggia" },
+        { time: "05:35", label: "Briefing e preparazione tavole" },
+        { time: "06:38", label: "Alba dal mare, in musica" },
+        { time: "07:15", label: "Colazione insieme, servita in mare (inclusa)" },
+        { time: "08:00", label: "Fine evento" },
+      ],
+      faq: CERVIAMARE_5SET_FAQ,
+      descriptionShort:
+        "Esci all'alba col gruppo a cerviAmare, Cervia: musica, passeggiata in acqua, servizio fotografico e colazione servita in mare.",
+      experienceStory:
+        "Hai mai vissuto l'emozione di vedere il sole sorgere dal mare? Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dalla musica e da una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro ci fermiamo tutti insieme in mare per la colazione: crostata di grano saraceno ai frutti di bosco, bomboloncino alla crema, spremuta d'arancia e caffè americano. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
+      seoDescription:
+        "Alba in SUP a cerviAmare (Cervia) con musica e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
     },
   ),
 ];
