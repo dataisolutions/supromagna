@@ -992,7 +992,7 @@ export const events: SupEvent[] = [
     locationName: "Club Ippodromo",
     locationAddress: "Cesena (FC)",
     googleMapsUrl: "https://maps.google.com/?q=Club+Ippodromo+Cesena",
-    photo: "/media/alba-2.jpg",
+    photo: "/media/pilates-piscina-3set.jpg",
     descriptionShort:
       "Lezione di pilates in SUP nella piscina del Club Ippodromo di Cesena, seguita da un apericena tutti insieme.",
     experienceStory:
@@ -1011,6 +1011,7 @@ export const events: SupEvent[] = [
     breakfastStatus: "inclusa",
     breakfastDescription:
       "Alle 19:40 apericena tutti insieme: pasta fredda, pizza, Club sandwich, birra/spritz o bibita analcolica.",
+    breakfastImage: "/media/pilates-apericena.jpg",
     tableOptions: [
       {
         name: "Tavola singola (inclusa)",
@@ -1049,8 +1050,7 @@ export const events: SupEvent[] = [
       "Lezione di pilates in SUP nella piscina del Club Ippodromo di Cesena: tavola inclusa, istruttori certificati e apericena insieme. Prenotazione online.",
     mealLabel: "Apericena",
     mealBlockTitle: "L'apericena",
-    // TODO: sostituire con il link esterno di iscrizione una volta ricevuto.
-    externalBookingUrl: undefined,
+    stripePriceId: "price_1U8zQSKDGuHE2Qwk3m928a7b",
   },
 ];
 
