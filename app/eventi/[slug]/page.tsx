@@ -82,6 +82,8 @@ export default async function EventPage({
   // alternativa rimasta (guardia anti-loop sopra): mostra la pagina con "SOLD OUT"
   // invece di un form apparentemente funzionante.
   const soldOut = !isBookable(event);
+  const mealLabel = event.mealLabel ?? "Colazione";
+  const mealBlockTitle = event.mealBlockTitle ?? "La colazione";
   const quickFacts = [
     { icon: Icon.Calendar, label: "Data", value: event.dateLabel },
     { icon: Icon.Clock, label: "Ritrovo", value: event.meetingTime },
@@ -89,7 +91,7 @@ export default async function EventPage({
     { icon: Icon.Pin, label: "Luogo", value: `${event.locationName}, ${event.locationAddress}` },
     { icon: Icon.Timer, label: "Durata", value: event.duration },
     { icon: Icon.Board, label: "Livello", value: event.difficulty },
-    { icon: Icon.Coffee, label: "Colazione", value: `Colazione ${event.breakfastStatus}` },
+    { icon: Icon.Coffee, label: mealLabel, value: `${mealLabel} ${event.breakfastStatus}` },
     { icon: Icon.Users, label: "Prenotazione", value: "Obbligatoria" },
   ];
 
@@ -219,11 +221,11 @@ export default async function EventPage({
           </Block>
 
           {event.breakfastStatus !== "non inclusa" && event.breakfastDescription && (
-            <Block title="La colazione">
+            <Block title={mealBlockTitle}>
               <div className="overflow-hidden rounded-2xl bg-sand/50 ring-1 ring-navy/8">
                 {event.breakfastImage && (
                   <div className="relative aspect-[16/10]">
-                    <Photo src={event.breakfastImage} alt={`Colazione di ${event.title}`} sizes="(max-width: 1024px) 100vw, 55vw" />
+                    <Photo src={event.breakfastImage} alt={`${mealLabel} di ${event.title}`} sizes="(max-width: 1024px) 100vw, 55vw" />
                   </div>
                 )}
                 <div className="flex items-start gap-4 p-5">
@@ -231,7 +233,7 @@ export default async function EventPage({
                     <Icon.Coffee className="h-5 w-5" />
                   </span>
                   <div>
-                    <p className="font-semibold text-navy">Colazione {event.breakfastStatus}</p>
+                    <p className="font-semibold text-navy">{mealLabel} {event.breakfastStatus}</p>
                     <p className="mt-1 text-sm leading-relaxed text-navy/70">{event.breakfastDescription}</p>
                   </div>
                 </div>
@@ -276,15 +278,35 @@ export default async function EventPage({
 
         {/* ===== Colonna prenotazione (sticky desktop) ===== */}
         <aside id="prenota" className="lg:sticky lg:top-24 scroll-mt-24">
-          <BookingForm
-            variant="event"
-            eventTitle={event.title}
-            eventDate={event.dateLabel}
-            eventSlug={event.slug}
-            eventShortLabel={shortLabel}
-            tableOptions={event.tableOptions}
-            soldOut={soldOut}
-          />
+          {event.externalBookingUrl ? (
+            <div className="rounded-[var(--radius-card)] bg-white p-6 text-center ring-1 ring-navy/8 shadow-[var(--shadow-soft)]">
+              <h3 className="font-display text-2xl font-semibold text-navy">
+                {shortLabel ? `Prenotazione ${shortLabel}` : "Prenota questo evento"}
+              </h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-navy/65">
+                L'iscrizione a questo evento avviene su un modulo dedicato.
+              </p>
+              <Button
+                href={event.externalBookingUrl}
+                variant="primary"
+                size="lg"
+                className="mt-5 w-full"
+                external
+              >
+                Prenota ora{shortLabel ? ` ${shortLabel}` : ""}
+              </Button>
+            </div>
+          ) : (
+            <BookingForm
+              variant="event"
+              eventTitle={event.title}
+              eventDate={event.dateLabel}
+              eventSlug={event.slug}
+              eventShortLabel={shortLabel}
+              tableOptions={event.tableOptions}
+              soldOut={soldOut}
+            />
+          )}
           <div className="mt-4 rounded-2xl bg-white p-5 ring-1 ring-navy/8">
             <p className="text-sm font-semibold text-navy">{event.capacityNote}</p>
             <a

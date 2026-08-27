@@ -82,6 +82,15 @@ export interface SupEvent {
   weatherPolicy: string;
   seoTitle: string;
   seoDescription: string;
+  /** Etichetta breve per il pasto incluso (default "Colazione"): usata per eventi non all'alba, es. "Apericena". */
+  mealLabel?: string;
+  /** Titolo del blocco pasto in pagina (default "La colazione"), es. "L'apericena". */
+  mealBlockTitle?: string;
+  /**
+   * Se presente, la prenotazione punta a questo link esterno (nuova scheda)
+   * invece del form interno con checkout Stripe.
+   */
+  externalBookingUrl?: string;
 }
 
 export const categories: Category[] = [
@@ -969,6 +978,78 @@ export const events: SupEvent[] = [
         "Alba in SUP a cerviAmare (Cervia) con musica e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
     },
   ),
+  {
+    title: "SUP Pilates in piscina — 3 Settembre",
+    slug: "sup-pilates-piscina-3-settembre-2026",
+    category: "yoga-sup",
+    status: "In programma",
+    date: "2026-09-03",
+    dateLabel: "Giovedì 3 settembre 2026",
+    meetingTime: "18:30",
+    endTime: "21:00",
+    locationName: "Club Ippodromo",
+    locationAddress: "Cesena (FC)",
+    googleMapsUrl: "https://maps.google.com/?q=Club+Ippodromo+Cesena",
+    photo: "/media/alba-2.jpg",
+    descriptionShort:
+      "Lezione di pilates in SUP nella piscina del Club Ippodromo di Cesena, seguita da un apericena tutti insieme.",
+    experienceStory:
+      "Un pilates diverso dal solito: lo pratichi in equilibrio su una tavola SUP, in piscina, con gli istruttori certificati di Functional Sup Tribe al tuo fianco. Lavori su core, equilibrio e respiro in un ambiente controllato, poi ci fermiamo tutti insieme per un apericena. Non hai mai provato il SUP? Nessun problema, la tavola te la forniamo noi e ti seguiamo passo passo.",
+    difficulty: "Adatto anche ai principianti",
+    duration: "circa 3 ore (lezione + apericena)",
+    beginnerFriendly: true,
+    swimmingRequired: true,
+    instructors: "Istruttori certificati Functional Sup Tribe",
+    included: [
+      "Tavola SUP singola inclusa (fornita da Functional Sup Tribe)",
+      "Istruttori certificati per la lezione di pilates in SUP",
+      "Apericena inclusa alle 19:40",
+      "Spogliatoi e docce a disposizione",
+    ],
+    breakfastStatus: "inclusa",
+    breakfastDescription:
+      "Alle 19:40 apericena tutti insieme: pasta fredda, pizza, Club sandwich, birra/spritz o bibita analcolica.",
+    tableOptions: [
+      {
+        name: "Tavola singola (inclusa)",
+        forWho: "Fornita direttamente da Functional Sup Tribe per la lezione di pilates in SUP.",
+        price: "40€",
+      },
+    ],
+    whatToBring: [
+      "Costume da bagno",
+      "Telo o asciugamano",
+      "Ciabatte",
+      "Un cambio per dopo la doccia",
+    ],
+    priceFrom: "40€",
+    capacityNote: "Prenotazione obbligatoria fino a esaurimento posti.",
+    timeline: [
+      { time: "18:30", label: "Ritrovo in piscina, Club Ippodromo" },
+      { time: "18:40", label: "Briefing e lezione di pilates in SUP" },
+      { time: "19:40", label: "Apericena insieme" },
+      { time: "21:00", label: "Fine evento" },
+    ],
+    faq: [
+      { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 18.30 in piscina al Club Ippodromo di Cesena. Alle 19.40 ci fermiamo per l'apericena e l'evento finisce verso le 21.00." },
+      { q: "Dove ci troviamo esattamente?", a: "Il punto di ritrovo è la piscina del Club Ippodromo, Cesena (FC) — link a Google Maps nella scheda evento." },
+      { q: "Non ho mai fatto pilates o usato un SUP, posso partecipare?", a: "Sì, è pensata anche per chi parte da zero: facciamo un briefing iniziale e gli istruttori ti seguono per tutta la lezione." },
+      { q: "Devo saper nuotare?", a: "È importante sentirsi a proprio agio in acqua, anche se si tratta di una piscina e non del mare aperto." },
+      { q: "Quanto costa e cosa include?", a: "40€ a persona: include la tavola SUP singola (fornita da noi), la lezione di pilates e l'apericena delle 19.40." },
+      { q: "L'apericena è inclusa?", a: "Sì, è compresa nel prezzo: pasta fredda, pizza, Club sandwich, birra/spritz o bibita analcolica." },
+      { q: "Ci sono spogliatoi e docce?", a: "Sì, spogliatoi e docce del Club Ippodromo sono a disposizione dei partecipanti." },
+      { q: "Come funziona la prenotazione?", a: "La prenotazione è obbligatoria fino a esaurimento posti. Lasci i tuoi dati e confermiamo il posto." },
+    ],
+    weatherPolicy:
+      "L'evento si svolge in piscina al Club Ippodromo e non dipende dalle condizioni del mare. In caso di imprevisti organizzativi ti avvisiamo su WhatsApp con il massimo anticipo possibile.",
+    seoTitle: "SUP Pilates in piscina a Cesena — Club Ippodromo",
+    seoDescription:
+      "Lezione di pilates in SUP nella piscina del Club Ippodromo di Cesena: tavola inclusa, istruttori certificati e apericena insieme. Prenotazione online.",
+    mealLabel: "Apericena",
+    mealBlockTitle: "L'apericena",
+    // TODO: sostituire con il link esterno di iscrizione una volta ricevuto.
+    externalBookingUrl: undefined,
+  },
 ];
 
 /* ---------- Helper di accesso ---------- */

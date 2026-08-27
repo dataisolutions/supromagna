@@ -49,7 +49,7 @@ export function EventCard({ event }: { event: SupEvent; seed?: number }) {
           <Quick icon={<Icon.Timer className="h-3.5 w-3.5" />} label={event.duration} />
           <Quick icon={<Icon.Board className="h-3.5 w-3.5" />} label={event.beginnerFriendly ? "Anche principianti" : event.difficulty} />
           {event.breakfastStatus !== "non inclusa" && (
-            <Quick icon={<Icon.Coffee className="h-3.5 w-3.5" />} label={`Colazione ${event.breakfastStatus}`} />
+            <Quick icon={<Icon.Coffee className="h-3.5 w-3.5" />} label={`${event.mealLabel ?? "Colazione"} ${event.breakfastStatus}`} />
           )}
         </div>
 
