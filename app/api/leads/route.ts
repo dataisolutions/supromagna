@@ -99,7 +99,9 @@ export async function POST(request: Request) {
   const webhookUrl = process.env.MAKE_WEBHOOK_URL;
   const webhookApiKey = process.env.MAKE_WEBHOOK_API_KEY;
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-  const stripePriceId = process.env.STRIPE_PRICE_ID;
+  // Ogni evento può avere un Price ID Stripe dedicato (event.stripePriceId);
+  // altrimenti si usa quello globale (stesso importo per tutti gli altri eventi).
+  const stripePriceId = event.stripePriceId ?? process.env.STRIPE_PRICE_ID;
   // I redirect Stripe tornano sullo stesso dominio da cui arriva la richiesta
   // (già validato: origin === requestOrigin). Niente dipendenza da NEXT_PUBLIC_BASE_URL.
   const baseUrl = requestOrigin;

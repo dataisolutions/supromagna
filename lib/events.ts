@@ -91,6 +91,8 @@ export interface SupEvent {
    * invece del form interno con checkout Stripe.
    */
   externalBookingUrl?: string;
+  /** Se presente, il checkout Stripe usa questo Price ID invece di quello globale (STRIPE_PRICE_ID). */
+  stripePriceId?: string;
 }
 
 export const categories: Category[] = [
