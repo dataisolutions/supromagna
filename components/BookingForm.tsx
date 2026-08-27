@@ -22,6 +22,8 @@ interface BookingFormProps {
   eventSlug?: string;
   eventShortLabel?: string;
   tableOptions?: { name: string }[];
+  /** Mostra il campo "Quante tavole?" (default true). Disattiva per eventi senza scelta di tavola. */
+  showTables?: boolean;
   className?: string;
   /** Evento sold out senza alternativa a cui reindirizzare: form disabilitato, bottone "SOLD OUT". */
   soldOut?: boolean;
@@ -39,6 +41,7 @@ export function BookingForm({
   eventDate,
   eventSlug,
   eventShortLabel,
+  showTables = true,
   className,
   soldOut = false,
 }: BookingFormProps) {
@@ -230,7 +233,7 @@ export function BookingForm({
           </Field>
         </div>
 
-        <div className={variant === "event" ? "grid gap-4 sm:grid-cols-2" : ""}>
+        <div className={variant === "event" && showTables ? "grid gap-4 sm:grid-cols-2" : ""}>
           <Field label="Quanti siete?" htmlFor="people" icon={<Icon.Users className="h-4 w-4 text-coral" />}>
             <input
               id="people"
@@ -247,7 +250,7 @@ export function BookingForm({
               className={inputCls}
             />
           </Field>
-          {variant === "event" && (
+          {variant === "event" && showTables && (
             <Field label="Quante tavole?" htmlFor="tables" icon={<Icon.Board className="h-4 w-4 text-coral" />}>
               <input
                 id="tables"

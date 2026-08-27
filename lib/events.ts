@@ -120,13 +120,13 @@ export const categories: Category[] = [
   },
   {
     slug: "yoga-sup",
-    name: "Yoga / Pilates in SUP",
+    name: "Pilates in SUP",
     short: "Movimento lento sull'acqua: equilibrio, respiro e un sorriso quando cadi.",
     tagline: "Il tappetino più bello è galleggiante.",
     intro:
       "Una pratica dolce sulla tavola, cullati dal mare. Niente performance: solo respiro, equilibrio e la libertà di ridere quando perdi la posa. Adatta a tutti i livelli, istruttori certificati al tuo fianco.",
     emoji: "🧘",
-    filterLabel: "Yoga / Pilates",
+    filterLabel: "Pilates",
     photo: "/media/alba-3.jpg",
   },
   {

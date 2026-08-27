@@ -304,6 +304,7 @@ export default async function EventPage({
               eventSlug={event.slug}
               eventShortLabel={shortLabel}
               tableOptions={event.tableOptions}
+              showTables={event.tableOptions.length > 1}
               soldOut={soldOut}
             />
           )}
