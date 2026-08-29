@@ -338,6 +338,17 @@ const CERVIAMARE_5SET_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
   return i;
 });
 
+/** FAQ Bagno Adriatico 6 settembre (The Last Dance, finale stagione): prezzi Adriatico, orari propri (ritrovo 5.30, alba 6.39, fine 8.15). */
+const ADRIATICO_6SET_FAQ: FaqItem[] = ALBA_FAQ.map((i) => {
+  if (i.q === "A che ora devo arrivare?") {
+    return { q: "A che ora devo arrivare?", a: "Il ritrovo è alle 5.30. Arriva puntuale: partiamo presto per non perdere l'alba (che sorge alle 6.39). L'evento finisce verso le 8.15." };
+  }
+  if (i.q === "Quanto costa e la tavola è inclusa?") {
+    return { q: "Quanto costa la tavola?", a: "Noleggio tavola: 40€ singola (1 persona), 55€ doppia (2 persone). Se hai la tua tavola: 20€ singola, 30€ doppia. La colazione è sempre compresa." };
+  }
+  return i;
+});
+
 const ALBA_INCLUDED = [
   "Istruttori e guida in mare",
   "Tavola SUP e pagaia (se a noleggio)",
@@ -1052,6 +1063,50 @@ export const events: SupEvent[] = [
     mealBlockTitle: "L'apericena",
     stripePriceId: "price_1U8zQSKDGuHE2Qwk3m928a7b",
   },
+  albaEvent(
+    {
+      title: "Alba in SUP — The Last Dance — 6 Settembre",
+      slug: "alba-in-sup-6-settembre-2026",
+      status: "In programma",
+      date: "2026-09-06",
+      dateLabel: "Domenica 6 settembre 2026",
+      locationName: "Bagno Adriatico",
+      locationAddress: "Cesenatico (FC)",
+      googleMapsUrl: "https://maps.google.com/?q=Bagno+Adriatico+Cesenatico",
+      photo: "/media/alba-1.jpg",
+    },
+    {
+      meetingTime: "05:30",
+      sunriseTime: "06:39",
+      endTime: "08:15",
+      tableOptions: ADRIATICO_9AGO_TABLE_OPTIONS,
+      priceFrom: "40€",
+      included: [
+        "Istruttori certificati in acqua",
+        "Tavola SUP e pagaia (se a noleggio)",
+        "Cintura di galleggiamento",
+        "Briefing iniziale (anche per principianti)",
+        "Dj set in mare con Dj Flow",
+        "Passeggiata facoltativa in acqua guidata dagli istruttori",
+        "Servizio fotografico e video",
+        "Colazione inclusa, servita direttamente in mare",
+      ],
+      timeline: [
+        { time: "05:30", label: "Ritrovo in spiaggia" },
+        { time: "05:40", label: "Briefing e preparazione tavole" },
+        { time: "06:39", label: "Alba dal mare, con Dj set di Dj Flow" },
+        { time: "07:30", label: "Colazione insieme, servita in mare (inclusa)" },
+        { time: "08:15", label: "Fine evento" },
+      ],
+      faq: ADRIATICO_6SET_FAQ,
+      descriptionShort:
+        "L'ultima alba della stagione al Bagno Adriatico di Cesenatico: Dj set in mare con Dj Flow, passeggiata facoltativa in acqua, servizio fotografico e colazione servita direttamente in mare.",
+      experienceStory:
+        "The Last Dance: il finale di stagione col botto. Usciamo in SUP col gruppo mentre il cielo si accende, accompagnati dal Dj set in mare di Dj Flow e con la possibilità di una passeggiata in acqua guidata dagli istruttori certificati. Un fotografo cattura i momenti più belli dell'uscita, foto e video compresi. Al rientro la colazione è compresa e viene servita direttamente in mare, per chiudere la stagione nel modo più magico. Non hai mai usato un SUP? Nessun problema, te lo insegniamo noi.",
+      seoDescription:
+        "Ultima alba in SUP della stagione al Bagno Adriatico di Cesenatico con Dj set e colazione servita in mare: uscita guidata all'alba, tavola a noleggio, colazione inclusa. Adatta ai principianti, prenotazione online.",
+    },
+  ),
 ];
 
 /* ---------- Helper di accesso ---------- */
