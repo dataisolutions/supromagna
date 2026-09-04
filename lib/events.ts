@@ -1067,7 +1067,7 @@ export const events: SupEvent[] = [
     {
       title: "Alba in SUP — The Last Dance — 6 Settembre",
       slug: "alba-in-sup-6-settembre-2026",
-      status: "In programma",
+      status: "Sold out",
       date: "2026-09-06",
       dateLabel: "Domenica 6 settembre 2026",
       locationName: "Bagno Adriatico",
